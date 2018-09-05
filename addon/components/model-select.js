@@ -5,6 +5,7 @@ import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
 import { computed, set } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { assign } from '@ember/polyfills';
 
 import { task, timeout } from 'ember-concurrency';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
@@ -207,7 +208,7 @@ export default Component.extend({
     }
 
     const query = {
-      filter: this.get('filter')
+      filter: assign({}, this.get('filter'))
     };
     if(this.get('filterKey') && !isEmpty(this.get('filterValue'))){
       query.filter[this.get('filterKey')] = this.get('filterValue');

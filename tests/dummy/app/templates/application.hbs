@@ -7,8 +7,10 @@
     modelName='user'
     selectedModelId=user.id
     labelProperty='name'
+    searchProperty='filter'
+    searchKey='search'
+    query=customQuery
     onChange=(action (mut user))
-    infiniteScroll=false
   }}
 
   <h5>Selected user:</h5>

@@ -52,6 +52,15 @@ export default Component.extend({
   searchProperty: fallbackIfUndefined('s'),
 
   /**
+   * Optional key to search on. Will default to `labelProperty` if unset
+   *
+   * @argument searchKey
+   * @type String
+   * @default null
+   */
+  searchKey: null,
+
+  /**
    * Whether or not search is enabled.
    *
    * @argument searchEnabled
@@ -104,6 +113,15 @@ export default Component.extend({
    * @default null
    */
   filter: fallbackIfUndefined(null),
+
+  /**
+   * An optional query which will be merged with the rest of the query done to the API. Can be used to sort etc.
+   *
+   * @argument query
+   * @type Object
+   * @default null
+   */
+  query: fallbackIfUndefined(null),
 
   /**
    * An optional filter key. Can be used when just a single property needs to be filtered. Will work together with
@@ -207,17 +225,15 @@ export default Component.extend({
       yield timeout(this.get('debounceDuration'));
     }
 
-    const query = {
-      filter: assign({}, this.get('filter'))
-    };
+    const query = assign({}, this.get('query'));
+    query.filter = assign({}, this.get('filter'));
+
     if(this.get('filterKey') && !isEmpty(this.get('filterValue'))){
       query.filter[this.get('filterKey')] = this.get('filterValue');
     }
 
     if(term){
-      const searchQuery = {};
-      searchQuery[this.get('labelProperty')] = term;
-      query[this.get('searchProperty')] = searchQuery;
+      set(query, [this.get('searchProperty'), this.get('searchKey') || this.get('labelProperty')].join('.'), term);
     }
 
     if(this.get('infiniteScroll')){

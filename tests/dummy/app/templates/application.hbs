@@ -1,3 +1,23 @@
 <h2 id="title">Welcome to Ember</h2>
 
 {{outlet}}
+
+<div style="width: 20rem">
+  {{model-select
+    modelName='user'
+    selectedModelId=user.id
+    labelProperty='name'
+    onChange=(action (mut user))
+    infiniteScroll=false
+  }}
+
+  <h5>Selected user:</h5>
+
+  <p>
+    {{#if user}}
+      {{user.name}}
+    {{else}}
+      <i>No user selected.</i>
+    {{/if}}
+  </p>
+</div>

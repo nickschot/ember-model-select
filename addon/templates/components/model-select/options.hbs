@@ -1,0 +1,52 @@
+{{!-- Default ember-power-select/components/power-select/options template --}}
+{{!--#if select.loading}}
+  {{#if loadingMessage}}
+    <li class="ember-power-select-option ember-power-select-option--loading-message" role="option">{{loadingMessage}}</li>
+  {{/if}}
+{{/if--}}
+{{#each options as |opt index|}}
+  {{#if (ember-power-select-is-group opt)}}
+    {{#component groupComponent
+                 group=(readonly opt)
+                 select=(readonly select)
+                 extra=(readonly extra)
+    }}
+      {{#component optionsComponent
+                   options=(readonly opt.options)
+                   select=(readonly select)
+                   groupIndex=(concat groupIndex index ".")
+                   optionsComponent=(readonly optionsComponent)
+                   groupComponent=(readonly groupComponent)
+                   extra=(readonly extra)
+                   role="group"
+                   class="ember-power-select-options" as |option|}}
+        {{yield option select}}
+      {{/component}}
+    {{/component}}
+  {{else}}
+    <li class="ember-power-select-option"
+        aria-selected="{{ember-power-select-is-selected opt select.selected}}"
+        aria-disabled={{ember-power-select-true-string-if-present opt.disabled}}
+        aria-current="{{eq opt select.highlighted}}"
+        data-option-index="{{groupIndex}}{{index}}"
+        role="option">
+      {{yield opt select}}
+    </li>
+  {{/if}}
+{{/each}}
+
+{{!-- Add infinity-loader for infinite-scroll support --}}
+{{#if _infiniteScroll}}
+  {{#unless select.loading}}
+    {{#infinity-loader
+      tagName='li'
+      infinityModel=infiniteModel
+      hideOnInfinity=true
+      scrollable=(concat '#ember-basic-dropdown-content-' select.uniqueId)
+    }}
+      <div class="text-center p-1">
+        {{fa-icon 'spinner-third' spin=true size='2x' class='text-primary'}}
+      </div>
+    {{/infinity-loader}}
+  {{/unless}}
+{{/if}}

@@ -239,6 +239,7 @@ export default Component.extend({
     if(this.get('infiniteScroll')){
       // ember-infinity configuration
       query.perPage         = this.get('pageSize');
+
       query.perPageParam    = this.get('perPageParam');
       query.pageParam       = this.get('pageParam');
       query.totalPagesParam = this.get('totalPagesParam');

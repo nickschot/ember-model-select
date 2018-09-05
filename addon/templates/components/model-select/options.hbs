@@ -44,9 +44,7 @@
       hideOnInfinity=true
       scrollable=(concat '#ember-basic-dropdown-content-' select.uniqueId)
     }}
-      <div class="text-center p-1">
-        {{fa-icon 'spinner-third' spin=true size='2x' class='text-primary'}}
-      </div>
+      {{model-select/spinner}}
     {{/infinity-loader}}
   {{/unless}}
 {{/if}}

@@ -184,6 +184,7 @@ export default Component.extend({
   model: null,
 
   init(){
+    console.log('ARGS: ', ...arguments);
     this._super(...arguments);
 
     assert('You must pass a valid `modelName`.', !isEmpty(this.get('modelName')));

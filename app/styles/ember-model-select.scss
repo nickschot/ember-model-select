@@ -11,6 +11,14 @@ $ember-model-select__loading-mask-bg: #FFF !default;
 
 .ember-model-select__dropdown {
   min-height: calc(2.25rem + #{2px + 40px});
+
+  .infinity-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
+    overflow: hidden;
+  }
 }
 
 .ember-model-select__loading-mask {
@@ -32,21 +40,21 @@ $ember-model-select__loading-mask-bg: #FFF !default;
     height: 100%;
     width: 100%;
   }
-
-  .ember-model-select__loading-mask__spinner {
-    position: relative;
-    z-index: 2001;
-    stroke: $ember-model-select__spinner-color;
-
-    animation: ember-model-select-spin $ember-model-select__spinner-duration infinite linear;
-
-    circle {
-      stroke-opacity: $ember-model-select__spinner-opacity;
-    }
-  }
 }
 
 .ember-power-select-dropdown .ember-power-select-search ~ .ember-model-select__loading-mask {
   height: calc(100% - #{$power-select-search-input-height} - 4px);
   top: $power-select-search-input-height;
+}
+
+.ember-model-select__spinner {
+  position: relative;
+  z-index: 2001;
+  stroke: $ember-model-select__spinner-color;
+
+  animation: ember-model-select-spin $ember-model-select__spinner-duration infinite linear;
+
+  circle {
+    stroke-opacity: $ember-model-select__spinner-opacity;
+  }
 }

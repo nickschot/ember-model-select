@@ -184,7 +184,6 @@ export default Component.extend({
   model: null,
 
   init(){
-    console.log('ARGS: ', ...arguments);
     this._super(...arguments);
 
     assert('You must pass a valid `modelName`.', !isEmpty(this.get('modelName')));
@@ -223,9 +222,7 @@ export default Component.extend({
 
     if(this.get('infiniteScroll')){
       // ember-infinity configuration
-      query.perPage = this.get('pageSize');
-
-      // ember-infinity configuration
+      query.perPage         = this.get('pageSize');
       query.perPageParam    = this.get('perPageParam');
       query.pageParam       = this.get('pageParam');
       query.totalPagesParam = this.get('totalPagesParam');

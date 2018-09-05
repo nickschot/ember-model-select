@@ -43,7 +43,7 @@ $ember-model-select__loading-mask-bg: #FFF !default;
 }
 
 .ember-power-select-dropdown .ember-power-select-search ~ .ember-model-select__loading-mask {
-  height: calc(100% - #{$power-select-search-input-height} - 4px);
+  height: calc(100% - #{$power-select-search-input-height});
   top: $power-select-search-input-height;
 }
 

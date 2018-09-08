@@ -2,8 +2,9 @@
   search=(perform searchModels)
   searchEnabled=searchEnabled
   selected=selectedModel
-  options=defaultOptions
-  onopen=(action 'open')
+  options=_options
+  onopen=(action 'loadDefaultOptions')
+  oninput=(action 'onInput')
   onclose=(cancel-all searchModels)
   onchange=(action 'change')
   allowClear=allowClear
@@ -13,7 +14,7 @@
   loadingMessage=false
   dropdownClass='ember-model-select__dropdown'
   renderInPlace=renderInPlace
-as |model|
+as |model select|
 }}
   {{get model labelProperty}}
 {{/power-select}}

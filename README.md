@@ -16,6 +16,15 @@ Usage
 
 TBD
 
+```
+{{model-select
+  modelName='user'
+  labelProperty='name'
+  selectedModelId=selectedModel.id
+  onChange=(action (mut selectedModel))
+}}
+```
+
 ## Copyright and license
 
 Code and documentation copyright 2018 [Wedding Shoppe Inc.](http://www.weddingshoppeinc.com) and contributors. Code released under [the MIT license](LICENSE.md).

@@ -16,7 +16,7 @@ Usage
 
 TBD
 
-```
+```hbs
 {{model-select
   modelName='user'
   labelProperty='name'

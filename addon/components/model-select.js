@@ -194,7 +194,7 @@ export default Component.extend({
   /**
    * @private
    */
-  defaultOptions: null,
+  _options: null,
 
   /**
    * @private
@@ -246,19 +246,24 @@ export default Component.extend({
 
       this.set('model', this.get('infinity').model(this.get('modelName'), query));
 
-      return this.get('model');
+      this.set('_options', this.get('model'));
     } else {
       set(query, this.get('pageParam'), 1);
       set(query, this.get('perPageParam'), this.get('optionAmount'));
 
-      return this.get('store').query(this.get('modelName'), query);
+      this.set('_options', this.get('store').query(this.get('modelName'), query));
     }
   }).restartable(),
 
   actions: {
-    async open(){
+    loadDefaultOptions(){
       if(this.get('loadDefaultOptions')){
-        this.set('defaultOptions', this.get('searchModels').perform(null, null, true));
+        this.get('searchModels').perform(null, null, true);
+      }
+    },
+    onInput(term){
+      if(isEmpty(term)){
+        this.send('loadDefaultOptions');
       }
     },
     change(model){

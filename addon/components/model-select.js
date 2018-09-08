@@ -3,7 +3,7 @@ import layout from '../templates/components/model-select';
 
 import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
-import { computed, set } from '@ember/object';
+import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { assign } from '@ember/polyfills';
 
@@ -233,7 +233,12 @@ export default Component.extend({
     }
 
     if(term){
-      set(query, [this.get('searchProperty'), this.get('searchKey') || this.get('labelProperty')].join('.'), term);
+      const searchProperty = this.get('searchProperty');
+      const searchKey = this.get('searchKey') || this.get('labelProperty');
+
+      const searchObj = get(query, `${searchProperty}.${searchKey}`) || {};
+      set(searchObj, searchKey, term);
+      set(query, searchProperty, searchObj);
     }
 
     if(this.get('infiniteScroll')){

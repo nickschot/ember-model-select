@@ -10,8 +10,6 @@ $ember-model-select__loading-mask-bg: #FFF !default;
 }
 
 .ember-model-select__dropdown {
-  min-height: calc(2.25rem + #{2px + 40px});
-
   .infinity-loader {
     display: flex;
     justify-content: center;
@@ -19,6 +17,11 @@ $ember-model-select__loading-mask-bg: #FFF !default;
     padding: 0.25rem;
     overflow: hidden;
   }
+}
+
+.ember-power-select-options-wrapper {
+  position: relative;
+  min-height: 2.25rem;
 }
 
 .ember-model-select__loading-mask {
@@ -40,11 +43,6 @@ $ember-model-select__loading-mask-bg: #FFF !default;
     height: 100%;
     width: 100%;
   }
-}
-
-.ember-power-select-dropdown .ember-power-select-search ~ .ember-model-select__loading-mask {
-  height: calc(100% - #{$power-select-search-input-height});
-  top: $power-select-search-input-height;
 }
 
 .ember-model-select__spinner {

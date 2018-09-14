@@ -3,6 +3,15 @@
 {{outlet}}
 
 <div style="width: 20rem">
+  <h5>Selected user:</h5>
+  <p>
+    {{#if user}}
+      {{user.name}}
+    {{else}}
+      <i>No user selected.</i>
+    {{/if}}
+  </p>
+
   {{model-select
     modelName='user'
     selectedModelId=user.id
@@ -16,14 +25,4 @@
 
     onChange=(action (mut user))
   }}
-
-  <h5>Selected user:</h5>
-
-  <p>
-    {{#if user}}
-      {{user.name}}
-    {{else}}
-      <i>No user selected.</i>
-    {{/if}}
-  </p>
 </div>

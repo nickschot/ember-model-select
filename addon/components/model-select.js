@@ -19,7 +19,7 @@ export default Component.extend({
   infinity: service(),
 
   /**
-   * Name of the model to be searched
+   * Name of the model to be searched.
    *
    * @argument modelName
    * @type String
@@ -27,12 +27,12 @@ export default Component.extend({
   modelName: fallbackIfUndefined(''),
 
   /**
-   * Id of the selected model
+   * The selected model or it's id.
    *
-   * @argument selectedModelId
-   * @type Number|null
+   * @argument selectedModel
+   * @type Model|Number|null
    */
-  selectedModelId: fallbackIfUndefined(null),
+  selectedModel: fallbackIfUndefined(null),
 
   /**
    * Name of the model key which will be used to display the options.
@@ -52,7 +52,7 @@ export default Component.extend({
   searchProperty: fallbackIfUndefined('s'),
 
   /**
-   * Optional key to search on. Will default to `labelProperty` if unset
+   * Optional key to search on. Will default to `labelProperty` if unset.
    *
    * @argument searchKey
    * @type String
@@ -70,7 +70,7 @@ export default Component.extend({
   searchEnabled: fallbackIfUndefined(true),
 
   /**
-   * Whether or not the list is populated by default
+   * Whether or not the list is populated by default.
    *
    * @argument loadDefaultOptions
    * @type Boolean
@@ -170,7 +170,7 @@ export default Component.extend({
   debounceDuration: fallbackIfUndefined(250),
 
   /**
-   * Whether or not the dropdown is rendered in place (or in a wormhole)
+   * Whether or not the dropdown is rendered in place (or in a wormhole).
    *
    * @argument renderInPlace
    * @type Boolean
@@ -212,12 +212,19 @@ export default Component.extend({
   /**
    * The model selected by the user
    *
-   * @property
+   * @property _selectedModel
    * @private
    */
-  selectedModel: computed('selectedModelId', function(){
-    const id = parseInt(this.get('selectedModelId'), 10);
-    return !isNaN(id) ? this.get('store').findRecord(this.get('modelName'), id) : null;
+  _selectedModel: computed('selectedModel', function(){
+    const selectedModel = this.get('selectedModel');
+
+    if(typeof selectedModel === Number){
+      const id = parseInt(this.get('selectedModel'), 10);
+      return !isNaN(id) ? this.get('store').findRecord(this.get('modelName'), id) : null;
+    } else {
+      return selectedModel;
+    }
+
   }),
 
   searchModels: task(function* (term, options, initialLoad = false) {

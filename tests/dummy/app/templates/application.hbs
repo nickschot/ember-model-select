@@ -13,16 +13,14 @@
   </p>
 
   {{model-select
-    modelName='user'
+    modelName="user"
     selectedModelId=user.id
-    labelProperty='name'
-    searchProperty='filter'
-    searchKey='search'
+    labelProperty="name"
+    searchProperty="filter"
+    searchKey="search"
     query=customQuery
-
-    totalPagesParam='meta.pages'
-    countParam='meta.total'
-
+    totalPagesParam="meta.pages"
+    countParam="meta.total"
     onChange=(action (mut user))
   }}
 </div>

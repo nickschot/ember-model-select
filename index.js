@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-model-select',
+  name: require('./package').name,
 
   contentFor(type, config) {
     let emberPowerSelect = this.addons.find((a) => a.name === 'ember-power-select');

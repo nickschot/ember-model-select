@@ -7,6 +7,7 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { selectChoose } from 'ember-power-select/test-support';
 import { clickTrigger, typeInSearch } from 'ember-power-select/test-support/helpers';
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';
+import { timeout } from 'ember-concurrency';
 
 module('Integration | Component | model-select', function(hooks) {
   setupRenderingTest(hooks);
@@ -55,5 +56,21 @@ module('Integration | Component | model-select', function(hooks) {
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
     assert.ok(handleClick.calledOnce, 'onChange hook has been called');
+  });
+
+  test('it loads more options when scrolling down', async function(assert) {
+    assert.expect(1);
+    defaultScenario(this.server);
+
+    await render(hbs`{{model-select modelName='user' labelProperty='name' renderInPlace=true}}`);
+    await clickTrigger('.ember-model-select');
+
+    this.element.querySelector('.ember-power-select-options').scrollTop = 999;
+
+    //TODO: see if we can do this in a neater way
+    await timeout(1);
+    await settled();
+
+    assert.dom('.ember-power-select-option').exists({ count: 50 });
   });
 });

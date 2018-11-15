@@ -50,6 +50,8 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-mirage-sauce": "git+https://github.com/nickschot/ember-mirage-sauce.git#fixes",
     "ember-resolver": "^4.0.0",
+    "ember-sinon": "^3.0.0",
+    "ember-sinon-qunit": "^3.3.0",
     "ember-source": "~3.4.0",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",

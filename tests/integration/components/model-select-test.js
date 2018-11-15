@@ -67,10 +67,29 @@ module('Integration | Component | model-select', function(hooks) {
 
     this.element.querySelector('.ember-power-select-options').scrollTop = 999;
 
+
+    //TODO: test if spinner appears
+
     //TODO: see if we can do this in a neater way
     await timeout(1);
     await settled();
 
     assert.dom('.ember-power-select-option').exists({ count: 50 });
+  });
+
+  test('it does not load more options when scrolling down and infiniteLoading is false', async function(assert) {
+    assert.expect(1);
+    defaultScenario(this.server);
+
+    await render(hbs`{{model-select modelName='user' labelProperty='name' renderInPlace=true infiniteScroll=false}}`);
+    await clickTrigger('.ember-model-select');
+
+    this.element.querySelector('.ember-power-select-options').scrollTop = 999;
+
+    //TODO: see if we can do this in a neater way
+    await timeout(1);
+    await settled();
+
+    assert.dom('.ember-power-select-option').exists({ count: 10 });
   });
 });

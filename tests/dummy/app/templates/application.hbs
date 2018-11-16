@@ -3,22 +3,7 @@
 {{outlet}}
 
 <div style="width: 20rem">
-  {{model-select
-    modelName='user'
-    selectedModelId=user.id
-    labelProperty='name'
-    searchProperty='filter'
-    searchKey='search'
-    query=customQuery
-
-    totalPagesParam='meta.pages'
-    countParam='meta.total'
-
-    onChange=(action (mut user))
-  }}
-
   <h5>Selected user:</h5>
-
   <p>
     {{#if user}}
       {{user.name}}
@@ -26,4 +11,16 @@
       <i>No user selected.</i>
     {{/if}}
   </p>
+
+  {{model-select
+    modelName="user"
+    selectedModelId=user.id
+    labelProperty="name"
+    searchProperty="filter"
+    searchKey="search"
+    query=customQuery
+    totalPagesParam="meta.pages"
+    countParam="meta.total"
+    onChange=(action (mut user))
+  }}
 </div>

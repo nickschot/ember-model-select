@@ -6,21 +6,9 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Component | model-select/spinner', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
+  test('it renders the spinner element', async function(assert) {
     await render(hbs`{{model-select/spinner}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#model-select/spinner}}
-        template block text
-      {{/model-select/spinner}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('.ember-model-select__spinner').exists();
   });
 });

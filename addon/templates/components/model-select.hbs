@@ -3,18 +3,18 @@
   searchEnabled=searchEnabled
   selected=_selectedModel
   options=_options
-  onopen=(action 'loadDefaultOptions')
-  oninput=(action 'onInput')
+  onopen=(action "loadDefaultOptions")
+  oninput=(action "onInput")
   onclose=(cancel-all searchModels)
-  onchange=(action 'change')
+  onchange=(action "change")
   allowClear=allowClear
   disabled=disabled
-  optionsComponent=(component 'model-select/options' infiniteScroll=infiniteScroll infiniteModel=model)
-  afterOptionsComponent=(component 'model-select/loading-mask')
+  optionsComponent=(component "model-select/options" infiniteScroll=infiniteScroll infiniteModel=model)
+  afterOptionsComponent=(component "model-select/loading-mask")
   loadingMessage=false
-  dropdownClass='ember-model-select__dropdown'
+  dropdownClass="ember-model-select__dropdown"
   renderInPlace=renderInPlace
-as |model select|
+as |model|
 }}
   {{get model labelProperty}}
 {{/power-select}}

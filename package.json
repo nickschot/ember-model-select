@@ -31,6 +31,7 @@
     "ember-power-select": "^2.0.9"
   },
   "devDependencies": {
+    "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.1.0",
@@ -52,6 +53,8 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-mirage-sauce": "git+https://github.com/nickschot/ember-mirage-sauce.git#fixes",
     "ember-resolver": "^5.0.1",
+    "ember-sinon": "^3.0.0",
+    "ember-sinon-qunit": "^3.3.0",
     "ember-source": "~3.4.6",
     "ember-source-channel-url": "^1.1.0",
     "ember-try": "^1.0.0",

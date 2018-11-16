@@ -79,15 +79,6 @@ export default Component.extend({
   loadDefaultOptions: fallbackIfUndefined(true),
 
   /**
-   * The amount of items that is requested from the API. This is disregarded when `infiniteScroll` is enabled.
-   *
-   * @argument optionAmount
-   * @type Number
-   * @default 10
-   */
-  optionAmount: fallbackIfUndefined(10),
-
-  /**
    * Whether or not to use infinite scroll.
    *
    * @argument infiniteScroll
@@ -261,7 +252,7 @@ export default Component.extend({
       this.set('_options', this.get('model'));
     } else {
       set(query, this.get('pageParam'), 1);
-      set(query, this.get('perPageParam'), this.get('optionAmount'));
+      set(query, this.get('perPageParam'), this.get('pageSize'));
 
       this.set('_options', this.get('store').query(this.get('modelName'), query));
     }

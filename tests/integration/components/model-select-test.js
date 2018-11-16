@@ -90,6 +90,6 @@ module('Integration | Component | model-select', function(hooks) {
     await timeout(1);
     await settled();
 
-    assert.dom('.ember-power-select-option').exists({ count: 10 });
+    assert.dom('.ember-power-select-option').exists({ count: 25 });
   });
 });

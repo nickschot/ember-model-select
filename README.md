@@ -1,6 +1,6 @@
 ember-model-select
 ==============================================================================
-[![Build Status](https://travis-ci.org/weddingshoppe/ember-model-select.svg?branch=master)](https://travis-ci.org/weddingshoppe/ember-model-select)
+[![Build Status](https://travis-ci.org/weddingshoppe/ember-model-select.svg?branch=master)](https://travis-ci.org/weddingshoppe/ember-model-select) [![Ember Observer Score](https://emberobserver.com/badges/ember-model-select.svg)](https://emberobserver.com/addons/ember-model-select)
 
 An [ember-cli](http://www.ember-cli.com) addon to provide a searchable model select box with infinite scroll support.
 

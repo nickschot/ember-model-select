@@ -5,7 +5,6 @@ import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { assign } from '@ember/polyfills';
 
 import { task, timeout } from 'ember-concurrency';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
@@ -195,7 +194,8 @@ export default Component.extend({
       yield timeout(this.get('debounceDuration'));
     }
 
-    const query = assign({}, this.get('query'));
+    // query might be an EmptyObject/{{hash}}, make it a normal Object
+    const query = JSON.parse(JSON.stringify(this.get('query')));
 
     if(term){
       const searchProperty = this.get('searchProperty');

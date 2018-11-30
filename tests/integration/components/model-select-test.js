@@ -71,11 +71,8 @@ module('Integration | Component | model-select', function(hooks) {
 
     this.element.querySelector('.ember-power-select-options').scrollTop = 999;
 
-
-    //TODO: test if spinner appears
-
     //TODO: see if we can do this in a neater way
-    await timeout(1);
+    await timeout(100);
     await settled();
 
     assert.dom('.ember-power-select-option').exists({ count: 50 });

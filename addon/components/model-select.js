@@ -49,7 +49,7 @@ export default Component.extend({
    * @type String
    * @default 's'
    */
-  searchProperty: fallbackIfUndefined('s'),
+  searchProperty: fallbackIfUndefined('search'),
 
   /**
    * Optional key to search on. Will default to `labelProperty` if unset.

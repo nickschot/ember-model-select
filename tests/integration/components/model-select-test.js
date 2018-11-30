@@ -14,6 +14,8 @@ module('Integration | Component | model-select', function(hooks) {
   setupMirage(hooks);
 
   test('it renders', async function(assert) {
+    assert.expect(1);
+
     defaultScenario(this.server);
 
     await render(hbs`{{model-select modelName='user' labelProperty='name'}}`);
@@ -24,6 +26,7 @@ module('Integration | Component | model-select', function(hooks) {
 
   test('it respects the page size option', async function(assert) {
     assert.expect(1);
+
     defaultScenario(this.server);
 
     await render(hbs`{{model-select modelName='user' labelProperty='name' pageSize=10}}`);
@@ -34,19 +37,19 @@ module('Integration | Component | model-select', function(hooks) {
 
   test('it limits shown results based on search', async function(assert) {
     assert.expect(1);
+
     defaultScenario(this.server);
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name'}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter"}}`);
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
-
-    await settled();
 
     assert.dom('.ember-power-select-option').exists({ count: 1 });
   });
 
   test('it triggers the onChange hook when an option is selected', async function(assert) {
     assert.expect(1);
+
     defaultScenario(this.server);
 
     let handleClick = this.spy();
@@ -60,6 +63,7 @@ module('Integration | Component | model-select', function(hooks) {
 
   test('it loads more options when scrolling down', async function(assert) {
     assert.expect(1);
+
     defaultScenario(this.server);
 
     await render(hbs`{{model-select modelName='user' labelProperty='name' renderInPlace=true}}`);
@@ -67,11 +71,8 @@ module('Integration | Component | model-select', function(hooks) {
 
     this.element.querySelector('.ember-power-select-options').scrollTop = 999;
 
-
-    //TODO: test if spinner appears
-
     //TODO: see if we can do this in a neater way
-    await timeout(1);
+    await timeout(500);
     await settled();
 
     assert.dom('.ember-power-select-option').exists({ count: 50 });
@@ -79,6 +80,7 @@ module('Integration | Component | model-select', function(hooks) {
 
   test('it does not load more options when scrolling down and infiniteLoading is false', async function(assert) {
     assert.expect(1);
+
     defaultScenario(this.server);
 
     await render(hbs`{{model-select modelName='user' labelProperty='name' renderInPlace=true infiniteScroll=false}}`);
@@ -86,8 +88,6 @@ module('Integration | Component | model-select', function(hooks) {
 
     this.element.querySelector('.ember-power-select-options').scrollTop = 999;
 
-    //TODO: see if we can do this in a neater way
-    await timeout(1);
     await settled();
 
     assert.dom('.ember-power-select-option').exists({ count: 25 });

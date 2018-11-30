@@ -5,7 +5,6 @@ import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { assign } from '@ember/polyfills';
 
 import { task, timeout } from 'ember-concurrency';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
@@ -97,15 +96,6 @@ export default Component.extend({
   pageSize: fallbackIfUndefined(25),
 
   /**
-   * An optional filter which will be added to the query done to the API. Can be used to limit query results.
-   *
-   * @argument filter
-   * @type Object
-   * @default null
-   */
-  filter: fallbackIfUndefined(null),
-
-  /**
    * An optional query which will be merged with the rest of the query done to the API. Can be used to sort etc.
    *
    * @argument query
@@ -113,25 +103,6 @@ export default Component.extend({
    * @default null
    */
   query: fallbackIfUndefined(null),
-
-  /**
-   * An optional filter key. Can be used when just a single property needs to be filtered. Will work together with
-   * `filter` and also takes precedence over it.
-   *
-   * @argument filterKey
-   * @type String
-   * @default null
-   */
-  filterKey: fallbackIfUndefined(null),
-
-  /**
-   * An optional filter value. Used as the value for the `filterKey`.
-   *
-   * @argument filterValue
-   * @type String|Number
-   * @default null
-   */
-  filterValue: fallbackIfUndefined(null),
 
   /**
    * Whether or not the model-search-box is disabled.
@@ -223,12 +194,8 @@ export default Component.extend({
       yield timeout(this.get('debounceDuration'));
     }
 
-    const query = assign({}, this.get('query'));
-    query.filter = assign({}, this.get('filter'));
-
-    if(this.get('filterKey') && !isEmpty(this.get('filterValue'))){
-      query.filter[this.get('filterKey')] = this.get('filterValue');
-    }
+    // query might be an EmptyObject/{{hash}}, make it a normal Object
+    const query = JSON.parse(JSON.stringify(this.get('query'))) || {};
 
     if(term){
       const searchProperty = this.get('searchProperty');

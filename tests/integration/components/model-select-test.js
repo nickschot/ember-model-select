@@ -72,7 +72,7 @@ module('Integration | Component | model-select', function(hooks) {
     this.element.querySelector('.ember-power-select-options').scrollTop = 999;
 
     //TODO: see if we can do this in a neater way
-    await timeout(100);
+    await timeout(500);
     await settled();
 
     assert.dom('.ember-power-select-option').exists({ count: 50 });

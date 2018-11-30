@@ -195,7 +195,7 @@ export default Component.extend({
     }
 
     // query might be an EmptyObject/{{hash}}, make it a normal Object
-    const query = JSON.parse(JSON.stringify(this.get('query')));
+    const query = JSON.parse(JSON.stringify(this.get('query'))) || {};
 
     if(term){
       const searchProperty = this.get('searchProperty');

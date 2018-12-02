@@ -17,7 +17,7 @@ ember install ember-model-select
 Usage
 ------------------------------------------------------------------------------
 
-TBD
+An example page can be found [here](https://weddingshoppe.github.io/ember-model-select/).
 
 ```hbs
 {{model-select
@@ -27,6 +27,8 @@ TBD
   onChange=(action (mut selectedModel))
 }}
 ```
+
+*NOTE: Extensive documentation is TBD. For now usage is documented in the [main component file](https://github.com/weddingshoppe/ember-model-select/blob/master/addon/components/model-select.js).*
 
 ## Related addons
  - [ember-bootstrap-model-select](https://github.com/weddingshoppe/ember-bootstrap-model-select) - [ember-bootstrap](https://www.ember-bootstrap.com) form integration for ember-model-select

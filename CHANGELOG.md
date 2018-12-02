@@ -1,4 +1,19 @@
 
+## 0.1.0-beta.2 (2018-12-02)
+
+#### :rocket: Enhancement
+* [#22](https://github.com/weddingshoppe/ember-model-select/pull/22) add scss import when ember-cli-sass is present ([@nickschot](https://github.com/nickschot))
+* [#21](https://github.com/weddingshoppe/ember-model-select/pull/21) add support for precompiled css ([@nickschot](https://github.com/nickschot))
+* [#20](https://github.com/weddingshoppe/ember-model-select/pull/20) support global config ([@nickschot](https://github.com/nickschot))
+* [#18](https://github.com/weddingshoppe/ember-model-select/pull/18) add support for full ember-power-select API ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#19](https://github.com/weddingshoppe/ember-model-select/pull/19) update dependencies within range ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## v0.1.0-beta.1 (2018-11-30)
 
 #### :boom: Breaking Change

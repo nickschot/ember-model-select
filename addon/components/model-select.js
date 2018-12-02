@@ -60,15 +60,6 @@ export default Component.extend({
   searchKey: null,
 
   /**
-   * Whether or not search is enabled.
-   *
-   * @argument searchEnabled
-   * @type Boolean
-   * @default true
-   */
-  searchEnabled: fallbackIfUndefined(true),
-
-  /**
    * Whether or not the list is populated by default.
    *
    * @argument loadDefaultOptions
@@ -105,24 +96,6 @@ export default Component.extend({
   query: fallbackIfUndefined(null),
 
   /**
-   * Whether or not the model-search-box is disabled.
-   *
-   * @argument disabled
-   * @type Boolean
-   * @default false
-   */
-  disabled: fallbackIfUndefined(false),
-
-  /**
-   * Whether or not the select can be cleared.
-   *
-   * @argument allowClear
-   * @type Boolean
-   * @default true
-   */
-  allowClear: fallbackIfUndefined(true),
-
-  /**
    * Debounce duration in ms used when searching.
    *
    * @argument debounceDuration
@@ -131,19 +104,11 @@ export default Component.extend({
    */
   debounceDuration: fallbackIfUndefined(250),
 
-  /**
-   * Whether or not the dropdown is rendered in place (or in a wormhole).
-   *
-   * @argument renderInPlace
-   * @type Boolean
-   * @default false
-   */
-  renderInPlace: fallbackIfUndefined(false),
-
   //TODO: global config?
-  perPageParam: fallbackIfUndefined('page[size]'),
-  pageParam: fallbackIfUndefined('page[number]'),
-  totalPagesParam: fallbackIfUndefined('meta.total'),
+  // ember-infinity options
+  perPageParam:             fallbackIfUndefined('page[size]'),
+  pageParam:                fallbackIfUndefined('page[number]'),
+  totalPagesParam:          fallbackIfUndefined('meta.total'),
 
   /**
    * Hook called when a model is selected.
@@ -152,6 +117,9 @@ export default Component.extend({
    * @type Function
    */
   onChange(){},
+
+  // NOTE: apart from the arguments above, ember-model-select supports the full
+  // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
 
   /**
    * @private

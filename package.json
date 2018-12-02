@@ -21,7 +21,8 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "test:all": "ember try:each"
+    "test:all": "ember try:each",
+    "prepublish": "node ./compile-css.js"
   },
   "dependencies": {
     "ember-cli-babel": "^6.17.2",

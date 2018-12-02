@@ -8,6 +8,7 @@ import { inject as service } from '@ember/service';
 
 import { task, timeout } from 'ember-concurrency';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
+import getConfigOption from '../utils/get-config-option';
 
 export default Component.extend({
   layout,
@@ -104,11 +105,10 @@ export default Component.extend({
    */
   debounceDuration: fallbackIfUndefined(250),
 
-  //TODO: global config?
   // ember-infinity options
-  perPageParam:             fallbackIfUndefined('page[size]'),
-  pageParam:                fallbackIfUndefined('page[number]'),
-  totalPagesParam:          fallbackIfUndefined('meta.total'),
+  perPageParam:             getConfigOption('perPageParam', 'page[size]'),
+  pageParam:                getConfigOption('pageParam', 'page[number]'),
+  totalPagesParam:          getConfigOption('totalPagesParam', 'meta.total'),
 
   /**
    * Hook called when a model is selected.

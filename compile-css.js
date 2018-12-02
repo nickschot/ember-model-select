@@ -1,4 +1,4 @@
-const sass = require('sass');
+const sass = require('sass'); // eslint-disable-line node/no-unpublished-require
 const fs = require('fs');
 const path = require('path');
 

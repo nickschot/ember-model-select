@@ -6,6 +6,12 @@ const fs = require('fs');
 module.exports = {
   description: 'Adds style imports for the ember-model-select addon.',
 
+  normalizeEntityName() {
+    // this prevents an error when the entityName is
+    // not specified (since that doesn't actually matter
+    // to us
+  },
+
   afterInstall() {
     let dependencies = this.project.dependencies();
     let importStatement = '\n@import "ember-model-select";\n';

@@ -26,9 +26,9 @@
   "dependencies": {
     "ember-cli-babel": "^6.17.2",
     "ember-cli-htmlbars": "^3.0.0",
-    "ember-concurrency": "^0.8.22",
-    "ember-infinity": "^1.2.6",
-    "ember-power-select": "^2.0.9"
+    "ember-concurrency": "^0.8.23",
+    "ember-infinity": "^1.3.0",
+    "ember-power-select": "^2.2.0"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
@@ -40,7 +40,7 @@
     "ember-cli-eslint": "^4.2.3",
     "ember-cli-htmlbars-inline-precompile": "^1.0.5",
     "ember-cli-inject-live-reload": "^1.10.2",
-    "ember-cli-mirage": "^0.4.9",
+    "ember-cli-mirage": "^0.4.10",
     "ember-cli-qunit": "^4.4.0",
     "ember-cli-sass": "^8.0.1",
     "ember-cli-sri": "^2.1.1",
@@ -62,7 +62,7 @@
     "eslint-plugin-node": "^7.0.1",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.7.1",
-    "sass": "^1.15.0"
+    "sass": "^1.15.1"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"

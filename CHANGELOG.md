@@ -1,4 +1,13 @@
 
+## 0.1.0-beta.3 (2018-12-02)
+
+#### :bug: Bug Fix
+* [#23](https://github.com/weddingshoppe/ember-model-select/pull/23) fix blueprint generation ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.2 (2018-12-02)
 
 #### :rocket: Enhancement

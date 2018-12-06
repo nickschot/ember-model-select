@@ -47,6 +47,9 @@ module.exports = function(environment) {
     ENV.locationType = 'hash';
     ENV.rootURL = '/ember-model-select/';
     // here you can enable a production-specific feature
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    };
   }
 
   return ENV;

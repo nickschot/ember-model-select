@@ -1,4 +1,16 @@
 
+## 0.1.0-beta.4 (2018-12-06)
+
+#### :rocket: Enhancement
+* [#27](https://github.com/weddingshoppe/ember-model-select/pull/27) custom power select component template ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#26](https://github.com/weddingshoppe/ember-model-select/pull/26) add github-pages support ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.3 (2018-12-02)
 
 #### :bug: Bug Fix

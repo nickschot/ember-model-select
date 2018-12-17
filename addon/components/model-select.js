@@ -105,6 +105,24 @@ export default Component.extend({
    */
   debounceDuration: fallbackIfUndefined(250),
 
+  /**
+   * Whether or not a create option will be added to the options list. Triggers the `onCreate` hook on selection.
+   *
+   * @argument withCreate
+   * @type Boolean
+   * @default false
+   */
+  withCreate: false,
+
+  /**
+   * Option function which outputs the label to be shown for the create option when `withCreate` is set to `true`.
+   *
+   * @argument buildSuggestion
+   * @type Function
+   * @default null
+   */
+  buildSuggestion: null,
+
   // ember-infinity options
   perPageParam:             getConfigOption('perPageParam', 'page[size]'),
   pageParam:                getConfigOption('pageParam', 'page[number]'),
@@ -209,7 +227,7 @@ export default Component.extend({
       };
       createOption[this.get('labelProperty')] = this.get('buildSuggestion')
         ? this.get('buildSuggestion')(term)
-        : `Add ${term}...`;
+        : `Add "${term}"...`;
 
       _options.unshiftObjects([createOption]);
     }

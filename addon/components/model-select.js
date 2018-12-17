@@ -118,6 +118,14 @@ export default Component.extend({
    */
   onChange(){},
 
+  /**
+   * Hook called when a model is created.
+   *
+   * @argument onCreate
+   * @type Function
+   */
+  onCreate(){},
+
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
 
@@ -174,6 +182,8 @@ export default Component.extend({
       set(query, searchProperty, searchObj);
     }
 
+    let _options;
+
     if(this.get('infiniteScroll')){
       // ember-infinity configuration
       query.perPage         = this.get('pageSize');
@@ -184,13 +194,27 @@ export default Component.extend({
 
       this.set('model', this.get('infinity').model(this.get('modelName'), query));
 
-      this.set('_options', this.get('model'));
+      _options = yield this.get('model');
     } else {
       set(query, this.get('pageParam'), 1);
       set(query, this.get('perPageParam'), this.get('pageSize'));
 
-      this.set('_options', this.get('store').query(this.get('modelName'), query));
+      _options = yield this.get('store').query(this.get('modelName'), query);
     }
+
+    if(this.get('withCreate') && term){
+      const createOption = {
+        __value__: term,
+        __isSuggestion__: true
+      };
+      createOption[this.get('labelProperty')] = this.get('buildSuggestion')
+        ? this.get('buildSuggestion')(term)
+        : `Add ${term}...`;
+
+      _options.unshiftObjects([createOption]);
+    }
+
+    this.set('_options', _options);
   }).restartable(),
 
   actions: {
@@ -205,7 +229,11 @@ export default Component.extend({
       }
     },
     change(model){
-      this.get('onChange')(model);
+      if(model.__isSuggestion__){
+        this.get('onCreate')(model.__value__);
+      } else {
+        this.get('onChange')(model);
+      }
     }
   }
 

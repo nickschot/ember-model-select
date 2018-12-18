@@ -7,6 +7,7 @@ import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 import { task, timeout } from 'ember-concurrency';
+import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
 import getConfigOption from '../utils/get-config-option';
 
@@ -183,7 +184,7 @@ export default Component.extend({
 
   }),
 
-  searchModels: task(function* (term, options, initialLoad = false) {
+  searchModels: withTestWaiter(task(function* (term, options, initialLoad = false) {
     if(!initialLoad){
       yield timeout(this.get('debounceDuration'));
     }
@@ -233,7 +234,7 @@ export default Component.extend({
     }
 
     this.set('_options', _options);
-  }).restartable(),
+  }).restartable()),
 
   actions: {
     loadDefaultOptions(){

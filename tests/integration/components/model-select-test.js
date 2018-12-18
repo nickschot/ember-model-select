@@ -4,7 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { selectChoose } from 'ember-power-select/test-support';
+import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import { clickTrigger, typeInSearch } from 'ember-power-select/test-support/helpers';
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';
 import { timeout } from 'ember-concurrency';
@@ -91,5 +91,29 @@ module('Integration | Component | model-select', function(hooks) {
     await settled();
 
     assert.dom('.ember-power-select-option').exists({ count: 25 });
+  });
+
+  test('it shows an Add "<term>"... option when withCreate is true', async function(assert) {
+    assert.expect(2);
+
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true}}`);
+    await selectSearch('.ember-model-select', 'test');
+
+    assert.dom('.ember-power-select-option').exists({ count: 1 });
+    assert.dom('.ember-power-select-option').hasText(`Add "test"...`);
+  });
+
+  test('it fires the onCreate hook when the create option is selected', async function(assert) {
+    assert.expect(2);
+
+    let handleCreate = this.spy();
+    this.actions = { handleCreate };
+
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true onCreate=(action 'handleCreate')}}`);
+    await selectSearch('.ember-model-select', 'test');
+    await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
+
+    assert.ok(handleCreate.calledOnce, 'onCreate hook has been called once');
+    assert.ok(handleCreate.calledWith('test'), 'onCreate hook has been called with the correct argument');
   });
 });

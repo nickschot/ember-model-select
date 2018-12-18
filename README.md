@@ -28,6 +28,20 @@ An example page can be found [here](https://weddingshoppe.github.io/ember-model-
 }}
 ```
 
+There is also a withCreate option which can be enabled by passing `withCreate=true`. The `onCreate` hook is called with the search term. An optional `buildSuggestion` function can be passed to construct the text shown in the create option. This defaults to `Add "<term>"...`.
+
+```hbs
+{{model-select
+  modelName='user'
+  labelProperty='name'
+  selectedModel=selectedModel
+  onChange=(action (mut selectedModel))
+  
+  withCreate=true
+  onCreate(action 'createModel')
+}}
+```
+
 *NOTE: Extensive documentation is TBD. For now usage is documented in the [main component file](https://github.com/weddingshoppe/ember-model-select/blob/master/addon/components/model-select.js).*
 
 ## Related addons

@@ -32,7 +32,7 @@
   onkeydown=onkeydown
   onopen=(action "loadDefaultOptions")
   options=_options
-  optionsComponent=(component "model-select/options" infiniteScroll=infiniteScroll infiniteModel=model)
+  optionsComponent=(component "model-select/options" infiniteScroll=infiniteScroll infiniteModel=model withCreate=withCreate)
   placeholder=placeholder
   placeholderComponent=placeholderComponent
   preventScroll=preventScroll
@@ -52,6 +52,8 @@
   triggerRole=triggerRole
   typeAheadMatcher=typeAheadMatcher
   verticalPosition=verticalPosition
+
+  withCreate=withCreate
 as |model|
 }}
   {{get model labelProperty}}

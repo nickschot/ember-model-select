@@ -7,6 +7,7 @@ import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 import { task, timeout } from 'ember-concurrency';
+import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
 import getConfigOption from '../utils/get-config-option';
 
@@ -105,6 +106,24 @@ export default Component.extend({
    */
   debounceDuration: fallbackIfUndefined(250),
 
+  /**
+   * Whether or not a create option will be added to the options list. Triggers the `onCreate` hook on selection.
+   *
+   * @argument withCreate
+   * @type Boolean
+   * @default false
+   */
+  withCreate: false,
+
+  /**
+   * Option function which outputs the label to be shown for the create option when `withCreate` is set to `true`.
+   *
+   * @argument buildSuggestion
+   * @type Function
+   * @default null
+   */
+  buildSuggestion: null,
+
   // ember-infinity options
   perPageParam:             getConfigOption('perPageParam', 'page[size]'),
   pageParam:                getConfigOption('pageParam', 'page[number]'),
@@ -117,6 +136,14 @@ export default Component.extend({
    * @type Function
    */
   onChange(){},
+
+  /**
+   * Hook called when a model is created.
+   *
+   * @argument onCreate
+   * @type Function
+   */
+  onCreate(){},
 
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
@@ -157,7 +184,7 @@ export default Component.extend({
 
   }),
 
-  searchModels: task(function* (term, options, initialLoad = false) {
+  searchModels: withTestWaiter(task(function* (term, options, initialLoad = false) {
     if(!initialLoad){
       yield timeout(this.get('debounceDuration'));
     }
@@ -174,6 +201,8 @@ export default Component.extend({
       set(query, searchProperty, searchObj);
     }
 
+    let _options;
+
     if(this.get('infiniteScroll')){
       // ember-infinity configuration
       query.perPage         = this.get('pageSize');
@@ -184,14 +213,28 @@ export default Component.extend({
 
       this.set('model', this.get('infinity').model(this.get('modelName'), query));
 
-      this.set('_options', this.get('model'));
+      _options = yield this.get('model');
     } else {
       set(query, this.get('pageParam'), 1);
       set(query, this.get('perPageParam'), this.get('pageSize'));
 
-      this.set('_options', this.get('store').query(this.get('modelName'), query));
+      _options = yield this.get('store').query(this.get('modelName'), query);
     }
-  }).restartable(),
+
+    if(this.get('withCreate') && term){
+      const createOption = {
+        __value__: term,
+        __isSuggestion__: true
+      };
+      createOption[this.get('labelProperty')] = this.get('buildSuggestion')
+        ? this.get('buildSuggestion')(term)
+        : `Add "${term}"...`;
+
+      _options.unshiftObjects([createOption]);
+    }
+
+    this.set('_options', _options);
+  }).restartable()),
 
   actions: {
     loadDefaultOptions(){
@@ -205,7 +248,11 @@ export default Component.extend({
       }
     },
     change(model){
-      this.get('onChange')(model);
+      if(model.__isSuggestion__){
+        this.get('onCreate')(model.__value__);
+      } else {
+        this.get('onChange')(model);
+      }
     }
   }
 

@@ -1,4 +1,20 @@
 
+## 0.1.0-beta.5 (2018-12-18)
+
+#### :rocket: Enhancement
+* [#29](https://github.com/weddingshoppe/ember-model-select/pull/29) add with-create functionality ([@nickschot](https://github.com/nickschot))
+* [#28](https://github.com/weddingshoppe/ember-model-select/pull/28) ember cli 3.6.0 ([@nickschot](https://github.com/nickschot))
+
+#### :bug: Bug Fix
+* [#32](https://github.com/weddingshoppe/ember-model-select/pull/32) aria-current wasn't set to true resulting in broken highlight of options ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#33](https://github.com/weddingshoppe/ember-model-select/pull/33) move prepublish hook to prepare hook ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.4 (2018-12-06)
 
 #### :rocket: Enhancement

@@ -55,7 +55,7 @@ module('Integration | Component | model-select', function(hooks) {
     let handleClick = this.spy();
     this.actions = { handleClick };
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' onChange=(action 'handleClick')}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' onchange=(action 'handleClick')}}`);
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
     assert.ok(handleClick.calledOnce, 'onChange hook has been called');
@@ -103,13 +103,13 @@ module('Integration | Component | model-select', function(hooks) {
     assert.dom('.ember-power-select-option').hasText(`Add "test"...`);
   });
 
-  test('it fires the onCreate hook when the create option is selected', async function(assert) {
+  test('it fires the oncreate hook when the create option is selected', async function(assert) {
     assert.expect(2);
 
     let handleCreate = this.spy();
     this.actions = { handleCreate };
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true onCreate=(action 'handleCreate')}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true oncreate=(action 'handleCreate')}}`);
     await selectSearch('.ember-model-select', 'test');
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 

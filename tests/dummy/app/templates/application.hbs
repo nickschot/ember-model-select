@@ -4,30 +4,57 @@
 
 <div style="width: 20rem">
   <h3>Single select</h3>
-
   {{model-select
+    allowClear=true
     modelName="user"
-    selectedModel=user
+    selectedModel=user1
     labelProperty="name"
     searchProperty="filter"
     searchKey="search"
     query=customQuery
     totalPagesParam="meta.pages"
-    onchange=(action (mut user))
+    onchange=(action (mut user1))
   }}
-</div>
 
-<div style="width: 20rem">
   <h3>Multiple select</h3>
-
   {{model-select-multiple
     modelName="user"
-    selectedModel=users
+    selectedModel=users1
     labelProperty="name"
     searchProperty="filter"
     searchKey="search"
     query=customQuery
     totalPagesParam="meta.pages"
-    onchange=(action (mut users))
+    onchange=(action (mut users1))
+  }}
+
+  <h3>With create</h3>
+  {{model-select
+    withCreate=true
+    oncreate=(action "createUser")
+
+    modelName="user"
+    selectedModel=user2
+    labelProperty="name"
+    searchProperty="filter"
+    searchKey="search"
+    query=customQuery
+    totalPagesParam="meta.pages"
+    onchange=(action (mut user2))
+  }}
+
+  <h3>Multiple select with create</h3>
+  {{model-select-multiple
+    withCreate=true
+    oncreate=(action "createUser")
+
+    modelName="user"
+    selectedModel=users2
+    labelProperty="name"
+    searchProperty="filter"
+    searchKey="search"
+    query=customQuery
+    totalPagesParam="meta.pages"
+    onchange=(action (mut users2))
   }}
 </div>

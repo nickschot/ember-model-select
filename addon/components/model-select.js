@@ -129,13 +129,18 @@ export default Component.extend({
   pageParam:                fallbackIfUndefined(getConfigOption('pageParam', 'page[number]')),
   totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
 
+  // ember-power-select options
+  afterOptionsComponent: fallbackIfUndefined('model-select/loading-mask'),
+  dropdownClass: fallbackIfUndefined('ember-model-select__dropdown'),
+  optionsComponent: fallbackIfUndefined('model-select/options'),
+
   /**
    * Hook called when a model is selected.
    *
    * @argument onChange
    * @type Function
    */
-  onChange(){},
+  onChange: fallbackIfUndefined(function(){}),
 
   /**
    * Hook called when a model is created.
@@ -143,7 +148,7 @@ export default Component.extend({
    * @argument onCreate
    * @type Function
    */
-  onCreate(){},
+  onCreate: fallbackIfUndefined(function(){}),
 
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference

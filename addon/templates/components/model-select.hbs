@@ -1,5 +1,5 @@
 {{#model-select/power-select
-  afterOptionsComponent=afterOptionsComponent
+  afterOptionsComponent=(component afterOptionsComponent loading=searchModels.isRunning)
   allowClear=allowClear
   animationEnabled=animationEnabled
   ariaDescribedBy=ariaDescribedBy

@@ -113,7 +113,7 @@ export default Component.extend({
    * @type Boolean
    * @default false
    */
-  withCreate: false,
+  withCreate: fallbackIfUndefined(false),
 
   /**
    * Option function which outputs the label to be shown for the create option when `withCreate` is set to `true`.
@@ -122,12 +122,17 @@ export default Component.extend({
    * @type Function
    * @default null
    */
-  buildSuggestion: null,
+  buildSuggestion: fallbackIfUndefined(null),
 
   // ember-infinity options
-  perPageParam:             getConfigOption('perPageParam', 'page[size]'),
-  pageParam:                getConfigOption('pageParam', 'page[number]'),
-  totalPagesParam:          getConfigOption('totalPagesParam', 'meta.total'),
+  perPageParam:             fallbackIfUndefined(getConfigOption('perPageParam', 'page[size]')),
+  pageParam:                fallbackIfUndefined(getConfigOption('pageParam', 'page[number]')),
+  totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
+
+  // ember-power-select options
+  afterOptionsComponent:    fallbackIfUndefined('model-select/loading-mask'),
+  dropdownClass:            fallbackIfUndefined('ember-model-select__dropdown'),
+  optionsComponent:         fallbackIfUndefined('model-select/options'),
 
   /**
    * Hook called when a model is selected.
@@ -135,7 +140,7 @@ export default Component.extend({
    * @argument onChange
    * @type Function
    */
-  onChange(){},
+  onChange: fallbackIfUndefined(function(){}),
 
   /**
    * Hook called when a model is created.
@@ -143,7 +148,7 @@ export default Component.extend({
    * @argument onCreate
    * @type Function
    */
-  onCreate(){},
+  onCreate: fallbackIfUndefined(function(){}),
 
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
@@ -161,9 +166,9 @@ export default Component.extend({
   init(){
     this._super(...arguments);
 
-    assert('You must pass a valid `modelName`.', !isEmpty(this.get('modelName')));
-    assert('You must pass a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
-    assert('`debounceDuration` must be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
+    assert('{{model-select}} requires a valid `modelName`.', !isEmpty(this.get('modelName')));
+    assert('{{model-select}} requires a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
+    assert('{{model-select}} requires `debounceDuration` to be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
   },
 
   /**

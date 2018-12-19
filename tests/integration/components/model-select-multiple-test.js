@@ -37,5 +37,9 @@ module('Integration | Component | model-select-multiple', function(hooks) {
 
     assert.equal(this.selected.length, 2, 'two options have been selected');
     assert.dom('.ember-power-select-multiple-option').exists({ count: 2 });
-  })
+  });
+/*
+  test('you can unselect items', async function(assert) {
+    //TODO
+  });*/
 });

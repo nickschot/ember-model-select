@@ -137,18 +137,21 @@ export default Component.extend({
   /**
    * Hook called when a model is selected.
    *
-   * @argument onChange
+   * @argument onchange
    * @type Function
    */
-  onChange: fallbackIfUndefined(function(){}),
+  onchange: fallbackIfUndefined(function(){}),
 
   /**
    * Hook called when a model is created.
    *
-   * @argument onCreate
+   * @argument oncreate
    * @type Function
    */
-  onCreate: fallbackIfUndefined(function(){}),
+  oncreate: fallbackIfUndefined(function(){}),
+
+  onopen: fallbackIfUndefined(function(){}),
+  onclose: fallbackIfUndefined(function(){}),
 
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
@@ -243,20 +246,27 @@ export default Component.extend({
 
   actions: {
     loadDefaultOptions(){
-      if(this.get('loadDefaultOptions')){
+      if(this.get('loadDefaultOptions')) {
         this.get('searchModels').perform(null, null, true);
       }
+    },
+    onOpen(){
+      this.send('loadDefaultOptions');
+
+      this.get('onopen')(...arguments);
     },
     onInput(term){
       if(isEmpty(term)){
         this.send('loadDefaultOptions');
       }
+
+      this.get('oninput', ...arguments);
     },
     change(model){
       if(model.__isSuggestion__){
-        this.get('onCreate')(model.__value__);
+        this.get('oncreate')(model.__value__);
       } else {
-        this.get('onChange')(model);
+        this.get('onchange')(model);
       }
     }
   }

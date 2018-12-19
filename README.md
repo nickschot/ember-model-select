@@ -24,7 +24,7 @@ An example page can be found [here](https://weddingshoppe.github.io/ember-model-
   modelName='user'
   labelProperty='name'
   selectedModel=selectedModel
-  onChange=(action (mut selectedModel))
+  onchange=(action (mut selectedModel))
 }}
 ```
 
@@ -38,7 +38,7 @@ There is also a withCreate option which can be enabled by passing `withCreate=tr
   onChange=(action (mut selectedModel))
   
   withCreate=true
-  onCreate(action 'createModel')
+  oncreate(action 'createModel')
 }}
 ```
 

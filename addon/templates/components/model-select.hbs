@@ -1,5 +1,5 @@
 {{#model-select/power-select
-  afterOptionsComponent=(component "model-select/loading-mask")
+  afterOptionsComponent=afterOptionsComponent
   allowClear=allowClear
   animationEnabled=animationEnabled
   ariaDescribedBy=ariaDescribedBy
@@ -13,7 +13,7 @@
   defaultHighlighted=defaultHighlighted
   destination=destination
   disabled=disabled
-  dropdownClass="ember-model-select__dropdown"
+  dropdownClass=dropdownClass
   extra=extra
   groupComponent=groupComponent
   highlightOnHover=highlightOnHover
@@ -30,9 +30,9 @@
   onfocus=onfocus
   oninput=(action "onInput")
   onkeydown=onkeydown
-  onopen=(action "loadDefaultOptions")
+  onopen=(action "onOpen")
   options=_options
-  optionsComponent=(component "model-select/options" infiniteScroll=infiniteScroll infiniteModel=model withCreate=withCreate)
+  optionsComponent=(component optionsComponent infiniteScroll=infiniteScroll infiniteModel=model withCreate=withCreate)
   placeholder=placeholder
   placeholderComponent=placeholderComponent
   preventScroll=preventScroll

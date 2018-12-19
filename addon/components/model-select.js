@@ -166,9 +166,9 @@ export default Component.extend({
   init(){
     this._super(...arguments);
 
-    assert('You must pass a valid `modelName`.', !isEmpty(this.get('modelName')));
-    assert('You must pass a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
-    assert('`debounceDuration` must be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
+    assert('{{model-select}} requires a valid `modelName`.', !isEmpty(this.get('modelName')));
+    assert('{{model-select}} requires a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
+    assert('{{model-select}} requires `debounceDuration` to be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
   },
 
   /**

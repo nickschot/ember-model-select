@@ -113,7 +113,7 @@ export default Component.extend({
    * @type Boolean
    * @default false
    */
-  withCreate: false,
+  withCreate: fallbackIfUndefined(false),
 
   /**
    * Option function which outputs the label to be shown for the create option when `withCreate` is set to `true`.
@@ -122,12 +122,12 @@ export default Component.extend({
    * @type Function
    * @default null
    */
-  buildSuggestion: null,
+  buildSuggestion: fallbackIfUndefined(null),
 
   // ember-infinity options
-  perPageParam:             getConfigOption('perPageParam', 'page[size]'),
-  pageParam:                getConfigOption('pageParam', 'page[number]'),
-  totalPagesParam:          getConfigOption('totalPagesParam', 'meta.total'),
+  perPageParam:             fallbackIfUndefined(getConfigOption('perPageParam', 'page[size]')),
+  pageParam:                fallbackIfUndefined(getConfigOption('pageParam', 'page[number]')),
+  totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
 
   /**
    * Hook called when a model is selected.

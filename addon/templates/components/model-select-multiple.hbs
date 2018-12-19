@@ -1,0 +1,163 @@
+{{#if (hasBlock "inverse")}}
+  {{#model-select
+    modelName=modelName
+    selectedModel=selectedModel
+    labelProperty=labelProperty
+    searchProperty=searchProperty
+    searchKey=searchKey
+    loadDefaultOptions=loadDefaultOptions
+    infiniteScroll=infiniteScroll
+    pageSize=pageSize
+    query=query
+    debounceDuration=debounceDuration
+    withCreate=withCreate
+    buildSuggestion=buildSuggestion
+    perPageParam=perPageParam
+    pageParam=pageParam
+    totalPagesParam=totalPagesParam
+    onChange=onChange
+    onCreate=onCreate
+
+    _triggerTagName=_triggerTagName
+    triggerRole=triggerRole
+    afterOptionsComponent=afterOptionsComponent
+    allowClear=allowClear
+    ariaDescribedBy=ariaDescribedBy
+    ariaInvalid=ariaInvalid
+    ariaLabel=ariaLabel
+    ariaLabelledBy=ariaLabelledBy
+    beforeOptionsComponent=beforeOptionsComponent
+    buildSelection=(action "buildSelection")
+    calculatePosition=calculatePosition
+    class=class
+    closeOnSelect=closeOnSelect
+    defaultHighlighted=defaultHighlighted
+    destination=destination
+    dir=dir
+    disabled=disabled
+    dropdownClass=dropdownClass
+    extra=extra
+    groupComponent=groupComponent
+    horizontalPosition=horizontalPosition
+    initiallyOpened=initiallyOpened
+    loadingMessage=loadingMessage
+    matcher=matcher
+    matchTriggerWidth=matchTriggerWidth
+    noMatchesMessage=noMatchesMessage
+    onblur=onblur
+    onchange=onchange
+    onclose=onclose
+    onfocus=(action "handleFocus")
+    oninput=oninput
+    onkeydown=(action "handleKeydown")
+    onopen=(action "handleOpen")
+    options=options
+    optionsComponent=optionsComponent
+    placeholder=placeholder
+    placeholderComponent=placeholderComponent
+    preventScroll=preventScroll
+    registerAPI=(action registerAPI)
+    renderInPlace=renderInPlace
+    required=required
+    scrollTo=scrollTo
+    search=search
+    searchEnabled=searchEnabled
+    searchField=labelProperty
+    searchMessage=searchMessage
+    searchPlaceholder=searchPlaceholder
+    selected=selected
+    selectedItemComponent=selectedItemComponent
+    tabindex=computedTabIndex
+    tagName=tagName
+    eventType=eventType
+    title=title
+    triggerClass=concatenatedTriggerClass
+    triggerComponent=(component triggerComponent tabindex=tabindex)
+    triggerId=triggerId
+    verticalPosition=verticalPosition
+  as |option select|}}
+    {{yield option select}}
+  {{else}}
+    {{yield to="inverse"}}
+  {{/model-select}}
+{{else}}
+  {{#model-select
+    modelName=modelName
+    selectedModel=selectedModel
+    labelProperty=labelProperty
+    searchProperty=searchProperty
+    searchKey=searchKey
+    loadDefaultOptions=loadDefaultOptions
+    infiniteScroll=infiniteScroll
+    pageSize=pageSize
+    query=query
+    debounceDuration=debounceDuration
+    withCreate=withCreate
+    buildSuggestion=buildSuggestion
+    perPageParam=perPageParam
+    pageParam=pageParam
+    totalPagesParam=totalPagesParam
+    onChange=onChange
+    onCreate=onCreate
+
+    _triggerTagName=_triggerTagName
+    triggerRole=triggerRole
+    afterOptionsComponent=afterOptionsComponent
+    allowClear=allowClear
+    ariaDescribedBy=ariaDescribedBy
+    ariaInvalid=ariaInvalid
+    ariaLabel=ariaLabel
+    ariaLabelledBy=ariaLabelledBy
+    beforeOptionsComponent=beforeOptionsComponent
+    buildSelection=(action "buildSelection")
+    calculatePosition=calculatePosition
+    class=class
+    closeOnSelect=closeOnSelect
+    defaultHighlighted=defaultHighlighted
+    destination=destination
+    dir=dir
+    disabled=disabled
+    dropdownClass=dropdownClass
+    extra=extra
+    groupComponent=groupComponent
+    horizontalPosition=horizontalPosition
+    initiallyOpened=initiallyOpened
+    loadingMessage=loadingMessage
+    matcher=matcher
+    matchTriggerWidth=matchTriggerWidth
+    noMatchesMessage=noMatchesMessage
+    onblur=onblur
+    onchange=onchange
+    onclose=onclose
+    onfocus=(action "handleFocus")
+    oninput=oninput
+    onkeydown=(action "handleKeydown")
+    onopen=(action "handleOpen")
+    options=options
+    optionsComponent=optionsComponent
+    placeholder=placeholder
+    placeholderComponent=placeholderComponent
+    preventScroll=preventScroll
+    registerAPI=(readonly registerAPI)
+    renderInPlace=renderInPlace
+    required=required
+    scrollTo=scrollTo
+    search=search
+    searchEnabled=searchEnabled
+    searchField=labelProperty
+    searchMessage=searchMessage
+    searchPlaceholder=searchPlaceholder
+    selected=selected
+    selectedItemComponent=selectedItemComponent
+    tabindex=computedTabIndex
+    tagName=tagName
+    eventType=eventType
+    title=title
+    triggerClass=concatenatedTriggerClass
+    triggerComponent=(component triggerComponent tabindex=tabindex)
+    triggerId=triggerId
+    verticalPosition=verticalPosition
+  as |option select|}}
+    {{yield option select}}
+  {{/model-select}}
+{{/if}}

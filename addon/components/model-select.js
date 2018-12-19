@@ -130,9 +130,9 @@ export default Component.extend({
   totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
 
   // ember-power-select options
-  afterOptionsComponent: fallbackIfUndefined('model-select/loading-mask'),
-  dropdownClass: fallbackIfUndefined('ember-model-select__dropdown'),
-  optionsComponent: fallbackIfUndefined('model-select/options'),
+  afterOptionsComponent:    fallbackIfUndefined('model-select/loading-mask'),
+  dropdownClass:            fallbackIfUndefined('ember-model-select__dropdown'),
+  optionsComponent:         fallbackIfUndefined('model-select/options'),
 
   /**
    * Hook called when a model is selected.

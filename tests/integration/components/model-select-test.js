@@ -1,13 +1,14 @@
 import { module } from 'qunit';
 import test from 'ember-sinon-qunit/test-support/test';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { render, settled, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import { clickTrigger, typeInSearch } from 'ember-power-select/test-support/helpers';
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';
 import { timeout } from 'ember-concurrency';
+import { isEmpty } from '@ember/utils';
 
 module('Integration | Component | model-select', function(hooks) {
   setupRenderingTest(hooks);
@@ -115,5 +116,22 @@ module('Integration | Component | model-select', function(hooks) {
 
     assert.ok(handleCreate.calledOnce, 'onCreate hook has been called once');
     assert.ok(handleCreate.calledWith('test'), 'onCreate hook has been called with the correct argument');
+  });
+
+  test('it can clear the selected item', async function(assert) {
+    assert.expect(2);
+
+    defaultScenario(this.server);
+
+    this.set('selected', null);
+
+    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onchange=(action (mut selected))}}`);
+    await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
+
+    assert.ok(!isEmpty(this.selected), 'selected item has been set');
+
+    await click('.ember-power-select-clear-btn');
+
+    assert.equal(this.selected, null, 'selected item has been cleared');
   });
 });

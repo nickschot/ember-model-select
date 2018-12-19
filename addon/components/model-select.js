@@ -263,7 +263,7 @@ export default Component.extend({
       this.get('oninput', ...arguments);
     },
     change(model){
-      if(model.__isSuggestion__){
+      if(!isEmpty(model) && get(model, '__isSuggestion__')){
         this.get('oncreate')(model.__value__);
       } else {
         this.get('onchange')(model);

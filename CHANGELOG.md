@@ -1,4 +1,13 @@
 
+## 0.1.0-beta.8 (2018-12-20)
+
+#### :rocket: Enhancement
+* [#48](https://github.com/weddingshoppe/ember-model-select/pull/48) reworked loading (spinner) display & immediately show create option in list ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.7 (2018-12-20)
 
 #### :bug: Bug Fix

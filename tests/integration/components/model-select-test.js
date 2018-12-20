@@ -45,7 +45,7 @@ module('Integration | Component | model-select', function(hooks) {
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
 
-    assert.dom('.ember-power-select-option').exists({ count: 1 });
+    assert.dom('.ember-power-select-option').exists({ count: 0 });
   });
 
   test('it triggers the onChange hook when an option is selected', async function(assert) {

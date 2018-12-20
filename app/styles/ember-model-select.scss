@@ -19,11 +19,6 @@ $ember-model-select__loading-mask-bg: #FFF !default;
   }
 }
 
-.ember-power-select-options-wrapper {
-  position: relative;
-  min-height: 2.25rem;
-}
-
 .ember-model-select__loading-mask {
   position: absolute;
   top: 0;
@@ -48,11 +43,23 @@ $ember-model-select__loading-mask-bg: #FFF !default;
 .ember-model-select__spinner {
   position: relative;
   z-index: 2001;
+  height: 16px;
+  width: 16px;
   stroke: $ember-model-select__spinner-color;
 
   animation: ember-model-select-spin $ember-model-select__spinner-duration infinite linear;
 
   circle {
     stroke-opacity: $ember-model-select__spinner-opacity;
+  }
+}
+
+.ember-model-select {
+  position: relative;
+
+  > .ember-model-select__spinner {
+    position: absolute;
+    right: 42px;
+    top: 7px;
   }
 }

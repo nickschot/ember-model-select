@@ -5,6 +5,7 @@ import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
 
 import { task, timeout } from 'ember-concurrency';
 import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
@@ -130,9 +131,10 @@ export default Component.extend({
   totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
 
   // ember-power-select options
-  afterOptionsComponent:    fallbackIfUndefined('model-select/loading-mask'),
   dropdownClass:            fallbackIfUndefined('ember-model-select__dropdown'),
   optionsComponent:         fallbackIfUndefined('model-select/options'),
+  loadingMessage:           fallbackIfUndefined(null),
+  noMatchesMessage:         fallbackIfUndefined(null),
 
   /**
    * Hook called when a model is selected.
@@ -193,10 +195,27 @@ export default Component.extend({
   }),
 
   searchModels: withTestWaiter(task(function* (term, options, initialLoad = false) {
+    let createOption;
+
+    if(this.get('withCreate') && term){
+      createOption = {
+        __value__: term,
+        __isSuggestion__: true
+      };
+      createOption[this.get('labelProperty')] = this.get('buildSuggestion')
+        ? this.get('buildSuggestion')(term)
+        : `Add "${term}"...`;
+      this.set('_options', A([createOption]));
+    }
+
     if(!initialLoad){
       yield timeout(this.get('debounceDuration'));
     }
 
+    yield this.get('loadModels').perform(term, createOption);
+  }).restartable()),
+
+  loadModels: withTestWaiter(task(function* (term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
     const query = JSON.parse(JSON.stringify(this.get('query'))) || {};
 
@@ -229,15 +248,7 @@ export default Component.extend({
       _options = yield this.get('store').query(this.get('modelName'), query);
     }
 
-    if(this.get('withCreate') && term){
-      const createOption = {
-        __value__: term,
-        __isSuggestion__: true
-      };
-      createOption[this.get('labelProperty')] = this.get('buildSuggestion')
-        ? this.get('buildSuggestion')(term)
-        : `Add "${term}"...`;
-
+    if(createOption){
       _options.unshiftObjects([createOption]);
     }
 

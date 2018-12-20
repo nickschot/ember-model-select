@@ -8,17 +8,19 @@ export default Controller.extend({
 
   actions: {
     createUser(name){
-      this.store.createRecord('user', { name }).save();
+      const user = this.store.createRecord('user', { name });
+      this.set('user2', user);
+      user.save();
     },
 
-    async createMultipleUser(name){
-      const user = await this.store.createRecord('user', { name }).save();
-
+    createMultipleUser(name){
       if(!Array.isArray(this.users2)){
         this.set('users2', A([]));
       }
 
+      const user = this.store.createRecord('user', { name });
       this.users2.pushObject(user);
+      user.save();
     }
   }
 });

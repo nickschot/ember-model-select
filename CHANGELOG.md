@@ -1,4 +1,13 @@
 
+## 0.1.0-beta.7 (2018-12-20)
+
+#### :bug: Bug Fix
+* [#47](https://github.com/weddingshoppe/ember-model-select/pull/47) passthrough ember infinity parameters in multiple select ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.6 (2018-12-20)
 
 #### :boom: Breaking Change

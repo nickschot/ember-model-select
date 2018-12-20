@@ -59,6 +59,6 @@ as |model|
   {{get model labelProperty}}
 {{/power-select}}
 
-{{#if _dataLoading}}
+{{#if loadModels.isRunning}}
   {{model-select/spinner}}
 {{/if}}

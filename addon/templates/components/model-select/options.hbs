@@ -44,15 +44,13 @@
 {{/each}}
 
 {{!-- Add infinity-loader for infinite-scroll support --}}
-{{#if _infiniteScroll}}
-  {{#unless select.loading}}
-    {{#infinity-loader
-      tagName="li"
-      infinityModel=infiniteModel
-      hideOnInfinity=true
-      scrollable=(concat "#ember-basic-dropdown-content-" select.uniqueId)
-    }}
-      {{model-select/spinner}}
-    {{/infinity-loader}}
-  {{/unless}}
+{{#if showLoader}}
+  {{#infinity-loader
+    tagName="li"
+    infinityModel=infiniteModel
+    hideOnInfinity=true
+    scrollable=(concat "#ember-basic-dropdown-content-" select.uniqueId)
+  }}
+    {{model-select/spinner}}
+  {{/infinity-loader}}
 {{/if}}

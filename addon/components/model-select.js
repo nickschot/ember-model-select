@@ -212,8 +212,10 @@ export default Component.extend({
       yield timeout(this.get('debounceDuration'));
     }
 
-    this.set('_dataLoading', true);
+    yield this.get('loadModels').perform(term, createOption);
+  }).restartable()),
 
+  loadModels: withTestWaiter(task(function* (term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
     const query = JSON.parse(JSON.stringify(this.get('query'))) || {};
 
@@ -251,8 +253,6 @@ export default Component.extend({
     }
 
     this.set('_options', _options);
-
-    this.set('_dataLoading', false);
   }).restartable()),
 
   actions: {

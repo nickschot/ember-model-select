@@ -1,4 +1,27 @@
 
+## 0.1.0-beta.6 (2018-12-20)
+
+#### :boom: Breaking Change
+* [#35](https://github.com/weddingshoppe/ember-model-select/pull/35) align all hooks with power-select ([@nickschot](https://github.com/nickschot))
+* [#34](https://github.com/weddingshoppe/ember-model-select/pull/34) set fallbacks for all arguments ([@nickschot](https://github.com/nickschot))
+
+#### :rocket: Enhancement
+* [#46](https://github.com/weddingshoppe/ember-model-select/pull/46) add create support to multiple-select ([@nickschot](https://github.com/nickschot))
+* [#36](https://github.com/weddingshoppe/ember-model-select/pull/36) add {{model-select-multiple}} component ([@nickschot](https://github.com/nickschot))
+* [#34](https://github.com/weddingshoppe/ember-model-select/pull/34) set fallbacks for all arguments ([@nickschot](https://github.com/nickschot))
+
+#### :bug: Bug Fix
+* [#45](https://github.com/weddingshoppe/ember-model-select/pull/45) pass the power-select public api as second arg to onchange hook ([@nickschot](https://github.com/nickschot))
+* [#42](https://github.com/weddingshoppe/ember-model-select/pull/42) clearing the model-select was not working ([@nickschot](https://github.com/nickschot))
+* [#37](https://github.com/weddingshoppe/ember-model-select/pull/37) show loading state when search task is running ([@nickschot](https://github.com/nickschot))
+
+#### :memo: Documentation
+* [#43](https://github.com/weddingshoppe/ember-model-select/pull/43) add dummy variants for all varieties of model-select ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.5 (2018-12-18)
 
 #### :rocket: Enhancement

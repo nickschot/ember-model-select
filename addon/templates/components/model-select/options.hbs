@@ -1,11 +1,11 @@
 {{! template-lint-disable no-unnecessary-concat }}
 
 {{!-- Default ember-power-select/components/power-select/options template --}}
-{{!--#if select.loading}}
+{{#if select.loading}}
   {{#if loadingMessage}}
     <li class="ember-power-select-option ember-power-select-option--loading-message" role="option">{{loadingMessage}}</li>
   {{/if}}
-{{/if--}}
+{{/if}}
 {{#each options as |opt index|}}
   {{#if (ember-power-select-is-group opt)}}
     {{#component

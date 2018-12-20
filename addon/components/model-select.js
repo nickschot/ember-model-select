@@ -130,9 +130,10 @@ export default Component.extend({
   totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
 
   // ember-power-select options
-  afterOptionsComponent:    fallbackIfUndefined('model-select/loading-mask'),
   dropdownClass:            fallbackIfUndefined('ember-model-select__dropdown'),
   optionsComponent:         fallbackIfUndefined('model-select/options'),
+  loadingMessage:           fallbackIfUndefined(null),
+  noMatchesMessage:         fallbackIfUndefined(null),
 
   /**
    * Hook called when a model is selected.
@@ -197,6 +198,8 @@ export default Component.extend({
       yield timeout(this.get('debounceDuration'));
     }
 
+    this.set('_dataLoading', true);
+
     // query might be an EmptyObject/{{hash}}, make it a normal Object
     const query = JSON.parse(JSON.stringify(this.get('query'))) || {};
 
@@ -242,6 +245,8 @@ export default Component.extend({
     }
 
     this.set('_options', _options);
+
+    this.set('_dataLoading', false);
   }).restartable()),
 
   actions: {

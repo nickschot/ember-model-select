@@ -1,5 +1,5 @@
-{{#model-select/power-select
-  afterOptionsComponent=(component afterOptionsComponent loading=searchModels.isRunning)
+{{#power-select
+  afterOptionsComponent=afterOptionsComponent
   allowClear=allowClear
   animationEnabled=animationEnabled
   ariaDescribedBy=ariaDescribedBy
@@ -19,7 +19,7 @@
   highlightOnHover=highlightOnHover
   horizontalPosition=horizontalPosition
   initiallyOpened=initiallyOpened
-  loadingMessage=false
+  loadingMessage=loadingMessage
   eventType=eventType
   matcher=matcher
   matchTriggerWidth=matchTriggerWidth
@@ -57,4 +57,8 @@
 as |model|
 }}
   {{get model labelProperty}}
-{{/model-select/power-select}}
+{{/power-select}}
+
+{{#if _dataLoading}}
+  {{model-select/spinner}}
+{{/if}}

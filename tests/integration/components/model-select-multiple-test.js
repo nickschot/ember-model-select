@@ -51,7 +51,7 @@ module('Integration | Component | model-select-multiple', function(hooks) {
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 1);
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 2);
 
-    await removeMultipleOption('.ember-model-select-multiple-trigger', this.selected[0].name);
+    await removeMultipleOption('.ember-model-select-multiple-trigger', this.selected[0].get('name'));
 
     assert.equal(this.selected.length, 1, 'one option has been selected');
     assert.dom('.ember-power-select-multiple-option').exists({ count: 1 });

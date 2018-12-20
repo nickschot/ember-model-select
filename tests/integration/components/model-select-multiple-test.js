@@ -4,7 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { selectChoose } from 'ember-power-select/test-support';
+import {selectChoose, selectSearch} from 'ember-power-select/test-support';
 import { clickTrigger, removeMultipleOption } from 'ember-power-select/test-support/helpers';
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';
 
@@ -55,5 +55,29 @@ module('Integration | Component | model-select-multiple', function(hooks) {
 
     assert.equal(this.selected.length, 1, 'one option has been selected');
     assert.dom('.ember-power-select-multiple-option').exists({ count: 1 });
+  });
+
+  test('it shows an Add "<term>"... option when withCreate is true', async function(assert) {
+    assert.expect(2);
+
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true}}`);
+    await selectSearch('.ember-model-select-multiple-trigger', 'test');
+
+    assert.dom('.ember-power-select-option').exists({ count: 1 });
+    assert.dom('.ember-power-select-option').hasText(`Add "test"...`);
+  });
+
+  test('it fires the oncreate hook when the create option is selected', async function(assert) {
+    assert.expect(2);
+
+    let handleCreate = this.spy();
+    this.actions = { handleCreate };
+
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true oncreate=(action 'handleCreate')}}`);
+    await selectSearch('.ember-model-select-multiple-trigger', 'test');
+    await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 1);
+
+    assert.ok(handleCreate.calledOnce, 'onCreate hook has been called once');
+    assert.ok(handleCreate.calledWith('test'), 'onCreate hook has been called with the correct argument');
   });
 });

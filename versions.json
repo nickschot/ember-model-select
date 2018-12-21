@@ -8,13 +8,13 @@
   "-latest": {
     "path": "",
     "name": "Latest",
-    "sha": "128d22b9b040ccb4fffe92148b24ead7a1e220f3",
+    "sha": "855e8c200eeb4a4c6a0945f6692f73e13ec90958",
     "tag": null
   },
   "master": {
     "path": "versions/master",
     "name": "master",
-    "sha": "128d22b9b040ccb4fffe92148b24ead7a1e220f3",
+    "sha": "855e8c200eeb4a4c6a0945f6692f73e13ec90958",
     "tag": null
   }
 }

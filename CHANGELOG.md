@@ -1,4 +1,16 @@
 
+## 0.1.0-beta.9 (2018-12-21)
+
+#### :memo: Documentation
+* [#49](https://github.com/weddingshoppe/ember-model-select/pull/49) addon docs ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#50](https://github.com/weddingshoppe/ember-model-select/pull/50) remove loading-mask component ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.8 (2018-12-20)
 
 #### :rocket: Enhancement

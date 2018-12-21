@@ -19,27 +19,6 @@ $ember-model-select__loading-mask-bg: #FFF !default;
   }
 }
 
-.ember-model-select__loading-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2000;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 100%;
-  width: 100%;
-
-  .ember-model-select__loading-mask__mask {
-    position: absolute;
-    background: $ember-model-select__loading-mask-bg;
-    height: 100%;
-    width: 100%;
-  }
-}
-
 .ember-model-select__spinner {
   position: relative;
   z-index: 2001;

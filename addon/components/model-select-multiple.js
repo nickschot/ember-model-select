@@ -2,6 +2,11 @@ import PowerSelectMultipleComponent from 'ember-power-select/components/power-se
 import layout from '../templates/components/model-select-multiple';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
 
+/**
+ * {{model-select-multiple}} component. This is a wrapper around the normal model-select component. The same arguments apply.
+ *
+ * @class ModelSelectMultipleComponent
+ */
 export default PowerSelectMultipleComponent.extend({
   layout,
 

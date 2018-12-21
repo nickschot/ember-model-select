@@ -32,3 +32,4 @@
 # other
 /.idea
 package-lock.json
+/config/addon-docs.js

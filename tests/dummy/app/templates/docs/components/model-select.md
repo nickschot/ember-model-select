@@ -19,6 +19,7 @@
 {{/docs-demo}}
 
 ## Single Select With create
+There is also a `withCreate` option which can be enabled by passing `withCreate=true`. The `oncreate` hook is called with the search term. An optional `buildSuggestion` function can be passed to construct the text shown in the create option. This defaults to Add "<term>"....
 
 {{#docs-demo as |demo|}}
   {{#demo.example name='single-select-with-create.hbs'}}

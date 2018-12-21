@@ -18,7 +18,7 @@
 {{/docs-demo}}
 
 ## Multiple Select With create
-There is also a `withCreate` option which can be enabled by passing `withCreate=true`. The `oncreate` hook is called with the search term. An optional `buildSuggestion` function can be passed to construct the text shown in the create option. This defaults to Add "<term>"....
+There is also a `withCreate` option which can be enabled by passing `withCreate=true`. The `oncreate` hook is called with the search term. An optional `buildSuggestion` function can be passed to construct the text shown in the create option. This defaults to `Add "term"...`.
 
 It is up to the user to implement the actual creation and addition of the model instance to the `selectedModel` Array.
 

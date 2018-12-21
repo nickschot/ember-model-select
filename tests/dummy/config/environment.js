@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'dummy',
+    modulePrefix: 'ember-model-select',
     environment,
     rootURL: '/',
     locationType: 'auto',

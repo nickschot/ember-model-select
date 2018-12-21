@@ -6,6 +6,7 @@ import { isEmpty} from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
+import { assign } from '@ember/polyfills';
 
 import { task, timeout } from 'ember-concurrency';
 import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
@@ -281,7 +282,7 @@ export default Component.extend({
 
   loadModels: withTestWaiter(task(function* (term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
-    const query = JSON.parse(JSON.stringify(this.get('query'))) || {};
+    const query = assign({}, this.get('query'));
 
     if(term){
       const searchProperty = this.get('searchProperty');

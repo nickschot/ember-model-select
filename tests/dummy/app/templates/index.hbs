@@ -2,23 +2,21 @@
   logo="ember"
   slimHeading="Ember"
   strongHeading="Model Select"
-  byline="An ember-cli addon to provide a searchable model select box with infinite scroll support."}}
-  test
+  byline="An ember-cli addon to provide a searchable model select box with infinite scroll support."
+}}
+  {{#docs-demo as |demo|}}
+    {{#demo.example name="landing-demo.hbs" class="docs-text-left docs-text-black"}}
+      {{model-select
+        placeholder="Try me!"
+        modelName="user"
+        labelProperty="name"
+        selectedModel=indexUser
+        onchange=(action (mut indexUser))
+
+        allowClear=true
+        searchProperty="filter"
+        searchKey="search"
+      }}
+    {{/demo.example}}
+  {{/docs-demo}}
 {{/docs-hero}}
-
-{{#docs-demo class="docs-w-1/4 docs-self-center" as |demo|}}
-  {{#demo.example name="landing-demo.hbs"}}
-    <h5 class="docs-block docs-text-center">Try me!</h5>
-    {{model-select
-      modelName="user"
-      labelProperty="name"
-      selectedModel=user1
-      onchange=(action (mut user1))
-
-      allowClear=true
-      searchProperty="filter"
-      searchKey="search"
-      totalPagesParam="meta.pages"
-    }}
-  {{/demo.example}}
-{{/docs-demo}}

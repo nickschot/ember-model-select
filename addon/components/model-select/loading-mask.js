@@ -13,7 +13,8 @@ export default Component.extend({
    * Passed in when used in an ember-power-select as either a before or afterOptionsComponent
    *
    * @argument select
-   * @type Object
+   * @type {Object}
+   * @default null
    */
   select: null,
 
@@ -21,7 +22,8 @@ export default Component.extend({
    * Boolean whether or not the loading-mask should show
    *
    * @argument loading
-   * @type Boolean
+   * @type {Boolean}
+   * @default false
    */
   loading: false,
 

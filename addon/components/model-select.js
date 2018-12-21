@@ -12,6 +12,9 @@ import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
 import getConfigOption from '../utils/get-config-option';
 
+/**
+ * @class ModelSelectComponent
+ */
 export default Component.extend({
   layout,
 
@@ -24,7 +27,8 @@ export default Component.extend({
    * Name of the model to be searched.
    *
    * @argument modelName
-   * @type String
+   * @type {String}
+   * @required
    */
   modelName: fallbackIfUndefined(''),
 
@@ -32,7 +36,8 @@ export default Component.extend({
    * The selected model or it's id.
    *
    * @argument selectedModel
-   * @type Model|Number|null
+   * @type {Model|Number|null}
+   * @default null
    */
   selectedModel: fallbackIfUndefined(null),
 
@@ -40,7 +45,8 @@ export default Component.extend({
    * Name of the model key which will be used to display the options.
    *
    * @argument labelProperty
-   * @type String
+   * @type {String}
+   * @required
    */
   labelProperty: fallbackIfUndefined(''),
 
@@ -48,8 +54,8 @@ export default Component.extend({
    * Name of the key in which search queries are passed.
    *
    * @argument searchProperty
-   * @type String
-   * @default 's'
+   * @type {String}
+   * @default 'search'
    */
   searchProperty: fallbackIfUndefined('search'),
 
@@ -57,7 +63,7 @@ export default Component.extend({
    * Optional key to search on. Will default to `labelProperty` if unset.
    *
    * @argument searchKey
-   * @type String
+   * @type {String}
    * @default null
    */
   searchKey: null,
@@ -66,7 +72,7 @@ export default Component.extend({
    * Whether or not the list is populated by default.
    *
    * @argument loadDefaultOptions
-   * @type Boolean
+   * @type {Boolean}
    * @default true
    */
   loadDefaultOptions: fallbackIfUndefined(true),
@@ -75,7 +81,7 @@ export default Component.extend({
    * Whether or not to use infinite scroll.
    *
    * @argument infiniteScroll
-   * @type Boolean
+   * @type {Boolean}
    * @default true
    */
   infiniteScroll: fallbackIfUndefined(true),
@@ -84,7 +90,7 @@ export default Component.extend({
    * The amount of records loaded at once when `infiniteScroll` is enabled.
    *
    * @argument pageSize
-   * @type Number
+   * @type {Number}
    * @default 25
    */
   pageSize: fallbackIfUndefined(25),
@@ -93,7 +99,7 @@ export default Component.extend({
    * An optional query which will be merged with the rest of the query done to the API. Can be used to sort etc.
    *
    * @argument query
-   * @type Object
+   * @type {Object}
    * @default null
    */
   query: fallbackIfUndefined(null),
@@ -102,7 +108,7 @@ export default Component.extend({
    * Debounce duration in ms used when searching.
    *
    * @argument debounceDuration
-   * @type Number
+   * @type {Number}
    * @default 250
    */
   debounceDuration: fallbackIfUndefined(250),
@@ -111,7 +117,7 @@ export default Component.extend({
    * Whether or not a create option will be added to the options list. Triggers the `onCreate` hook on selection.
    *
    * @argument withCreate
-   * @type Boolean
+   * @type {Boolean}
    * @default false
    */
   withCreate: fallbackIfUndefined(false),
@@ -120,27 +126,69 @@ export default Component.extend({
    * Option function which outputs the label to be shown for the create option when `withCreate` is set to `true`.
    *
    * @argument buildSuggestion
-   * @type Function
+   * @type {Function}
    * @default null
    */
   buildSuggestion: fallbackIfUndefined(null),
 
   // ember-infinity options
+  /**
+   * @argument perPageParam
+   * @type {String}
+   * @default 'page[size]'
+   */
   perPageParam:             fallbackIfUndefined(getConfigOption('perPageParam', 'page[size]')),
+
+  /**
+   * @argument pageParam
+   * @type {String}
+   * @default 'page[number]'
+   */
   pageParam:                fallbackIfUndefined(getConfigOption('pageParam', 'page[number]')),
+
+  /**
+   * @argument totalPagesParam
+   * @type {String}
+   * @default 'meta.total'
+   */
   totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
 
   // ember-power-select options
+
+  /**
+   * @argument dropdownClass
+   * @type {String}
+   * @default 'ember-model-select__dropdown'
+   */
   dropdownClass:            fallbackIfUndefined('ember-model-select__dropdown'),
+
+  /**
+   * @argument optionsComponent
+   * @type {Component}
+   * @default 'model-select/options'
+   */
   optionsComponent:         fallbackIfUndefined('model-select/options'),
+
+  /**
+   * @argument loadingMessage
+   * @type {String}
+   * @default null
+   */
   loadingMessage:           fallbackIfUndefined(null),
+
+  /**
+   * @argument noMatchesMessage
+   * @type {String}
+   * @default null
+   */
   noMatchesMessage:         fallbackIfUndefined(null),
 
   /**
    * Hook called when a model is selected.
    *
    * @argument onchange
-   * @type Function
+   * @type {Function}
+   * @default function(){}
    */
   onchange: fallbackIfUndefined(function(){}),
 
@@ -148,22 +196,36 @@ export default Component.extend({
    * Hook called when a model is created.
    *
    * @argument oncreate
-   * @type Function
+   * @type {Function}
+   * @default function(){}
    */
   oncreate: fallbackIfUndefined(function(){}),
 
+  /**
+   * @argument onopen
+   * @type {Function}
+   * @default function(){}
+   */
   onopen: fallbackIfUndefined(function(){}),
+
+  /**
+   * @argument onclose
+   * @type {Function}
+   * @default function(){}
+   */
   onclose: fallbackIfUndefined(function(){}),
 
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
 
   /**
+   * @property _options
    * @private
    */
   _options: null,
 
   /**
+   * @property model
    * @private
    */
   model: null,

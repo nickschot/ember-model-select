@@ -13,6 +13,8 @@ import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
 import getConfigOption from '../utils/get-config-option';
 
 /**
+ * The main {{model-select}} component.
+ *
  * @class ModelSelectComponent
  */
 export default Component.extend({

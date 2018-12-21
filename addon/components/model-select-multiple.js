@@ -3,6 +3,8 @@ import layout from '../templates/components/model-select-multiple';
 import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
 
 /**
+ * {{model-select-multiple}} component.
+ *
  * @class ModelSelectMultipleComponent
  */
 export default PowerSelectMultipleComponent.extend({

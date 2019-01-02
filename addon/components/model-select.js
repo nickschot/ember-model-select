@@ -239,6 +239,7 @@ export default Component.extend({
     assert('{{model-select}} requires a valid `modelName`.', !isEmpty(this.get('modelName')));
     assert('{{model-select}} requires a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
     assert('{{model-select}} requires `debounceDuration` to be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
+    assert('{{model-select}} `searchProperty` cannot be undefined or empty', !isEmpty(this.get('searchProperty')));
   },
 
   /**

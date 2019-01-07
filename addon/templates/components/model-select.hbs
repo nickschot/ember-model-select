@@ -60,5 +60,7 @@ as |model|
 {{/power-select}}
 
 {{#if loadModels.isRunning}}
-  {{model-select/spinner}}
+  <div class="ember-model-select__loading">
+    {{model-select/spinner}}
+  </div>
 {{/if}}

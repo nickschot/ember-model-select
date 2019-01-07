@@ -2,7 +2,6 @@ $power-select-search-input-height: calc(2.25rem + 2px) !default;
 $ember-model-select__spinner-color: #007bff !default;
 $ember-model-select__spinner-opacity: 0.1 !default;
 $ember-model-select__spinner-duration: 1s !default;
-$ember-model-select__loading-mask-bg: #FFF !default;
 
 @keyframes ember-model-select-spin {
   0% { transform: rotate(0deg); }
@@ -36,9 +35,16 @@ $ember-model-select__loading-mask-bg: #FFF !default;
 .ember-model-select {
   position: relative;
 
-  > .ember-model-select__spinner {
+  > .ember-model-select__loading {
     position: absolute;
-    right: 42px;
-    top: 7px;
+    right: 1px;
+    top: 1px;
+    height: calc(100% - 2px);
+    padding: 0 15px;
+    background: #FFF;
+    border-radius: 0 ($ember-power-select-trigger-default-border-radius - 1px) ($ember-power-select-trigger-default-border-radius - 1px) 0;
+
+    display: flex;
+    align-items: center;
   }
 }

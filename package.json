@@ -80,5 +80,8 @@
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
-  "homepage": "https://weddingshoppe.github.io/ember-model-select"
+  "homepage": "https://weddingshoppe.github.io/ember-model-select",
+  "resolutions": {
+    "tough-cookie": "~2.4.0"
+  }
 }

@@ -1,4 +1,18 @@
 
+## 0.1.0-beta.10 (2019-02-04)
+
+#### :rocket: Enhancement
+* [#56](https://github.com/weddingshoppe/ember-model-select/pull/56) pass through ember-power-select's onclose hook ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#57](https://github.com/weddingshoppe/ember-model-select/pull/57) switch from npm to yarn & ember-cli 3.7 ([@nickschot](https://github.com/nickschot))
+* [#55](https://github.com/weddingshoppe/ember-model-select/pull/55) run compile css in strict mode ([@nickschot](https://github.com/nickschot))
+* [#54](https://github.com/weddingshoppe/ember-model-select/pull/54) add changelog script ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.9 (2018-12-21)
 
 #### :memo: Documentation

@@ -338,6 +338,11 @@ export default Component.extend({
 
       this.get('oninput', ...arguments);
     },
+    onClose(){
+      this.get('searchModels').cancelAll();
+
+      this.get('onclose')(...arguments);
+    },
     change(model, select){
       if(!isEmpty(model) && get(model, '__isSuggestion__')){
         this.get('oncreate')(model.__value__, select);

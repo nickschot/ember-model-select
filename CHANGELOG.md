@@ -1,4 +1,16 @@
 
+## 0.1.0-rc.1 (2019-02-15)
+
+#### :bug: Bug Fix
+* [#59](https://github.com/weddingshoppe/ember-model-select/pull/59) Fix passing id as selectedModel ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#58](https://github.com/weddingshoppe/ember-model-select/pull/58) add fixed seed for mirage resulting in deterministic data ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-beta.10 (2019-02-04)
 
 #### :rocket: Enhancement

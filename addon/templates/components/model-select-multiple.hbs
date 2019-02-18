@@ -1,4 +1,4 @@
-{{model-select
+{{#model-select
   modelName=modelName
   selectedModel=selectedModel
   labelProperty=labelProperty
@@ -72,4 +72,10 @@
   triggerComponent=(component triggerComponent tabindex=tabindex)
   triggerId=triggerId
   verticalPosition=verticalPosition
-}}
+as |model|}}
+  {{#if hasBlock}}
+    {{yield model}}
+  {{else}}
+    {{get model labelProperty}}
+  {{/if}}
+{{/model-select}}

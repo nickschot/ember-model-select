@@ -17,7 +17,7 @@
   {{demo.snippet 'multiple-select.hbs'}}
 {{/docs-demo}}
 
-## Multiple Select With create
+## Multiple Select with Create
 There is also a `withCreate` option which can be enabled by passing `withCreate=true`. The `oncreate` hook is called with the search term. An optional `buildSuggestion` function can be passed to construct the text shown in the create option. This defaults to `Add "term"...`.
 
 It is up to the user to implement the actual creation and addition of the model instance to the `selectedModel` Array.
@@ -39,4 +39,23 @@ It is up to the user to implement the actual creation and addition of the model 
   {{/demo.example}}
 
   {{demo.snippet 'multiple-select-with-create.hbs'}}
+{{/docs-demo}}
+
+## Multiple Select with Block
+{{#docs-demo as |demo|}}
+  {{#demo.example name='multiple-select-with-block.hbs'}}
+    {{#model-select-multiple
+      modelName="user"
+      labelProperty="name"
+      selectedModel=users3
+      onchange=(action (mut users3))
+      
+      searchProperty="filter"
+      searchKey="search"
+    as |model|}}
+      <b>Name:</b> {{model.name}}
+    {{/model-select-multiple}}
+  {{/demo.example}}
+
+  {{demo.snippet 'multiple-select-with-block.hbs'}}
 {{/docs-demo}}

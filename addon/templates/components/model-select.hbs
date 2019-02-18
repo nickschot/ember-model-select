@@ -56,7 +56,11 @@
   withCreate=withCreate
 as |model|
 }}
-  {{get model labelProperty}}
+  {{#if hasBlock}}
+    {{yield model}}
+  {{else}}
+    {{get model labelProperty}}
+  {{/if}}
 {{/power-select}}
 
 {{#if loadModels.isRunning}}

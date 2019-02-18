@@ -80,4 +80,17 @@ module('Integration | Component | model-select-multiple', function(hooks) {
     assert.ok(handleCreate.calledOnce, 'onCreate hook has been called once');
     assert.ok(handleCreate.calledWith('test'), 'onCreate hook has been called with the correct argument');
   });
+
+
+  test('it supports block form', async function(assert) {
+    assert.expect(2);
+
+    defaultScenario(this.server);
+
+    await render(hbs`{{#model-select-multiple modelName='user' labelProperty='name' as |model|}}Test: {{model.name}}{{/model-select-multiple}}`);
+    await clickTrigger('.ember-model-select');
+
+    assert.dom('.ember-power-select-option').exists({ count: 25 });
+    assert.dom('.ember-power-select-option:first-child').hasText('Test: Kathryne Raynor');
+  });
 });

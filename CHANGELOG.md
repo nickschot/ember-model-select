@@ -1,4 +1,16 @@
 
+## 0.1.0-rc.2 (2019-02-18)
+
+#### :rocket: Enhancement
+* [#62](https://github.com/weddingshoppe/ember-model-select/pull/62) Add block support ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#61](https://github.com/weddingshoppe/ember-model-select/pull/61) update dependencies within range ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0-rc.1 (2019-02-15)
 
 #### :bug: Bug Fix

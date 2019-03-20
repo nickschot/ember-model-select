@@ -7,7 +7,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/weddingshoppe/ember-model-select"
+    "url": "https://github.com/nickschot/ember-model-select"
   },
   "license": "MIT",
   "author": "Nick Schot <nickschot@webhub.nl>",
@@ -80,5 +80,5 @@
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
-  "homepage": "https://weddingshoppe.github.io/ember-model-select"
+  "homepage": "https://nickschot.github.io/ember-model-select"
 }

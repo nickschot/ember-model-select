@@ -21,7 +21,14 @@ Related addons
 ------------------------------------------------------------------------------
  - [ember-bootstrap-model-select](https://github.com/nickschot/ember-bootstrap-model-select) - [ember-bootstrap](https://www.ember-bootstrap.com) form integration for ember-model-select
 
-Copyright and license
+
+Contributing
 ------------------------------------------------------------------------------
 
-Code and documentation copyright 2018-2019 Nick Schot and contributors. Code released under [the MIT license](LICENSE.md).
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).

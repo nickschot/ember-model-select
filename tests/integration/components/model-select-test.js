@@ -134,4 +134,28 @@ module('Integration | Component | model-select', function(hooks) {
 
     assert.equal(this.selected, null, 'selected item has been cleared');
   });
+
+  test('it accepts an id passed to `selectedModel`', async function(assert) {
+    defaultScenario(this.server);
+
+    this.set('selected', '1');
+    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onchange=(action (mut selected))}}`);
+    assert.dom('.ember-power-select-selected-item').hasText(`Kathryne Raynor`);
+
+    this.set('selected', 2);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onchange=(action (mut selected))}}`);
+    assert.dom('.ember-power-select-selected-item').hasText(`Marlen Mayert`);
+  });
+
+  test('it supports block form', async function(assert) {
+    assert.expect(2);
+
+    defaultScenario(this.server);
+
+    await render(hbs`{{#model-select modelName='user' labelProperty='name' as |model|}}Test: {{model.name}}{{/model-select}}`);
+    await clickTrigger('.ember-model-select');
+
+    assert.dom('.ember-power-select-option').exists({ count: 25 });
+    assert.dom('.ember-power-select-option:first-child').hasText('Test: Kathryne Raynor');
+  });
 });

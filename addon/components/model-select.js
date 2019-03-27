@@ -250,7 +250,7 @@ export default Component.extend({
   _selectedModel: computed('selectedModel', function(){
     const selectedModel = this.get('selectedModel');
 
-    if(typeof selectedModel === Number){
+    if(typeof selectedModel === "number" || typeof selectedModel === "string"){
       const id = parseInt(this.get('selectedModel'), 10);
       return !isNaN(id) ? this.get('store').findRecord(this.get('modelName'), id) : null;
     } else {
@@ -337,6 +337,11 @@ export default Component.extend({
       }
 
       this.get('oninput', ...arguments);
+    },
+    onClose(){
+      this.get('searchModels').cancelAll();
+
+      this.get('onclose')(...arguments);
     },
     change(model, select){
       if(!isEmpty(model) && get(model, '__isSuggestion__')){

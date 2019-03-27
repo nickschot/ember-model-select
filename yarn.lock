@@ -4493,6 +4493,11 @@ ember-cli-addon-docs@^0.6.1:
     walk-sync "^0.3.3"
     yuidocjs "^0.10.2"
 
+ember-cli-alex@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-alex/-/ember-cli-alex-0.1.1.tgz#8ff7ba31e3856d20fb56e61f20ac6e1aee04587f"
+  integrity sha512-MFYEe9pTYQ2JveIJLNR1euLQbYmM0+GIgvJrGfSF30TwZB7Lo7u2pJAvtXIATnkRRrU95uk0HGRHO5TcSWywgQ==
+
 ember-cli-autoprefixer@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/ember-cli-autoprefixer/-/ember-cli-autoprefixer-0.8.1.tgz#071dd9574451057b03dcc03b71f5bd9cb07ef332"

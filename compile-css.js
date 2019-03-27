@@ -10,7 +10,7 @@ const outputFile = path.join(__dirname, 'vendor', 'ember-model-select.css');
 // Compile main file
 var result = sass.renderSync({
   data: fs.readFileSync(inputFile, "utf8"),
-  includePaths: ['app/styles']
+  includePaths: ['app/styles', 'node_modules/ember-power-select/app/styles']
 });
 
 fs.writeFileSync(outputFile, result.css);

@@ -1,4 +1,16 @@
 
+## 0.1.1 (2019-03-27)
+
+#### :bug: Bug Fix
+* [#68](https://github.com/nickschot/ember-model-select/pull/68) fix ember-get-config import not always working due to missing dependency ([@nickschot](https://github.com/nickschot))
+
+#### :memo: Documentation
+* [#66](https://github.com/nickschot/ember-model-select/pull/66) fix minor formatting issues in docs ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.0 (2019-03-27)
 
 #### :rocket: Enhancement

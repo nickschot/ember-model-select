@@ -1,4 +1,13 @@
 
+## 0.1.2 (2019-05-10)
+
+#### :bug: Bug Fix
+* [#70](https://github.com/nickschot/ember-model-select/pull/70) lock ember-infinity to 1.4.2 ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.1 (2019-03-27)
 
 #### :bug: Bug Fix

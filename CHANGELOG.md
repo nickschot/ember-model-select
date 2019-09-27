@@ -1,4 +1,13 @@
 
+## 0.2.0 (2019-09-27)
+
+#### :bug: Bug Fix
+* [#73](https://github.com/nickschot/ember-model-select/pull/73) update to ember-cli 3.12 & update all dependencies (Closes [#69](https://github.com/nickschot/ember-model-select/issues/69) ) ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.2 (2019-05-10)
 
 #### :bug: Bug Fix

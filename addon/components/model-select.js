@@ -289,7 +289,7 @@ export default Component.extend({
       const searchProperty = this.get('searchProperty');
       const searchKey = this.get('searchKey') || this.get('labelProperty');
 
-      const searchObj = get(query, `${searchProperty}.${searchKey}`) || {};
+      const searchObj = get(query, `${searchProperty}`) || {};
       set(searchObj, searchKey, term);
       set(query, searchProperty, searchObj);
     }

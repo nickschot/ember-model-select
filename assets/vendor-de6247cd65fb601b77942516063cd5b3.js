@@ -9342,7 +9342,7 @@ return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:i
 break}return e.next=5,(0,n.timeout)(this.get("debounceDuration"))
 case 5:return e.next=7,this.get("loadModels").perform(t,i)
 case 7:case"end":return e.stop()}},e,this)})).restartable()),loadModels:(0,r.default)((0,n.task)(regeneratorRuntime.mark(function e(t,n){var r,a,i,o,s
-return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:if(r=Ember.assign({},this.get("query")),t&&(a=this.get("searchProperty"),i=this.get("searchKey")||this.get("labelProperty"),o=Ember.get(r,"".concat(a,".").concat(i))||{},Ember.set(o,i,t),Ember.set(r,a,o)),!this.get("infiniteScroll")){e.next=13
+return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:if(r=Ember.assign({},this.get("query")),t&&(a=this.get("searchProperty"),i=this.get("searchKey")||this.get("labelProperty"),o=Ember.get(r,"".concat(a))||{},Ember.set(o,i,t),Ember.set(r,a,o)),!this.get("infiniteScroll")){e.next=13
 break}return r.perPage=this.get("pageSize"),r.perPageParam=this.get("perPageParam"),r.pageParam=this.get("pageParam"),r.totalPagesParam=this.get("totalPagesParam"),this.set("model",this.get("infinity").model(this.get("modelName"),r)),e.next=10,this.get("model")
 case 10:s=e.sent,e.next=18
 break

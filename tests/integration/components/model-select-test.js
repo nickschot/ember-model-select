@@ -48,6 +48,43 @@ module('Integration | Component | model-select', function(hooks) {
     assert.dom('.ember-power-select-option').exists({ count: 0 });
   });
 
+  test('it respects the search* and query parameters', async function(assert) {
+    assert.expect(2);
+    let requestNr = 0;
+
+    this.server.get('/users', function(schema)  {
+      const queryParams = this.request.queryParams;
+
+      if(requestNr === 1) {
+        const expectedQueryParams = {
+          'filter[id_not_in]': '1,2,3',
+          'filter[name]': 'asdasdasd',
+          'page[number]': '1',
+          'page[size]': '25'
+        };
+
+        assert.deepEqual(queryParams, expectedQueryParams, "query parameters don't match the expected ones");
+      } else {
+        const expectedQueryParams = {
+          'filter[id_not_in]': '1,2,3',
+          'page[number]': '1',
+          'page[size]': '25'
+        };
+
+        assert.deepEqual(queryParams, expectedQueryParams, "query parameters don't match the expected ones");
+      }
+
+      requestNr++;
+
+      // for this test we don't need to actuallyy filter anything, so just return all
+      return schema.users.all();
+    });
+
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" searchKey="name" query=(hash filter=(hash id_not_in="1,2,3"))}}`);
+    await clickTrigger('.ember-model-select');
+    await typeInSearch('asdasdasd');
+  });
+
   test('it triggers the onChange hook when an option is selected', async function(assert) {
     assert.expect(1);
 

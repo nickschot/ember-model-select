@@ -1,6 +1,6 @@
-import { module } from 'qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
+import sinon from 'sinon';
 import { render, settled, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
@@ -48,12 +48,49 @@ module('Integration | Component | model-select', function(hooks) {
     assert.dom('.ember-power-select-option').exists({ count: 0 });
   });
 
+  test('it respects the search* and query parameters', async function(assert) {
+    assert.expect(2);
+    let requestNr = 0;
+
+    this.server.get('/users', function(schema)  {
+      const queryParams = this.request.queryParams;
+
+      if(requestNr === 1) {
+        const expectedQueryParams = {
+          'filter[id_not_in]': '1,2,3',
+          'filter[name]': 'asdasdasd',
+          'page[number]': '1',
+          'page[size]': '25'
+        };
+
+        assert.deepEqual(queryParams, expectedQueryParams, "query parameters don't match the expected ones");
+      } else {
+        const expectedQueryParams = {
+          'filter[id_not_in]': '1,2,3',
+          'page[number]': '1',
+          'page[size]': '25'
+        };
+
+        assert.deepEqual(queryParams, expectedQueryParams, "query parameters don't match the expected ones");
+      }
+
+      requestNr++;
+
+      // for this test we don't need to actuallyy filter anything, so just return all
+      return schema.users.all();
+    });
+
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" searchKey="name" query=(hash filter=(hash id_not_in="1,2,3"))}}`);
+    await clickTrigger('.ember-model-select');
+    await typeInSearch('asdasdasd');
+  });
+
   test('it triggers the onChange hook when an option is selected', async function(assert) {
     assert.expect(1);
 
     defaultScenario(this.server);
 
-    let handleClick = this.spy();
+    let handleClick = sinon.spy();
     this.actions = { handleClick };
 
     await render(hbs`{{model-select modelName='user' labelProperty='name' onchange=(action 'handleClick')}}`);
@@ -107,7 +144,7 @@ module('Integration | Component | model-select', function(hooks) {
   test('it fires the oncreate hook when the create option is selected', async function(assert) {
     assert.expect(2);
 
-    let handleCreate = this.spy();
+    let handleCreate = sinon.spy();
     this.actions = { handleCreate };
 
     await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true oncreate=(action 'handleCreate')}}`);

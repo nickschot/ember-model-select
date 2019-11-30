@@ -1,4 +1,26 @@
 
+## 0.2.1 (2019-10-03)
+
+#### :bug: Bug Fix
+* [#74](https://github.com/nickschot/ember-model-select/pull/74) Bugfix to enable usage of query and search propery at the same time ([@michaelw8](https://github.com/michaelw8))
+
+#### :house: Internal
+* [#75](https://github.com/nickschot/ember-model-select/pull/75) add test for query functionality ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 2
+- Michael ([@michaelw8](https://github.com/michaelw8))
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
+## 0.2.0 (2019-09-27)
+
+#### :bug: Bug Fix
+* [#73](https://github.com/nickschot/ember-model-select/pull/73) update to ember-cli 3.12 & update all dependencies (Closes [#69](https://github.com/nickschot/ember-model-select/issues/69) ) ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 0.1.2 (2019-05-10)
 
 #### :bug: Bug Fix

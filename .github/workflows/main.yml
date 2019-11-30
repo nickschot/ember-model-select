@@ -1,2 +1,20 @@
-- name: Setup for Ember tests
-  uses: mydea/actions-ember-testing@v1.1.1
+name: Ember CI
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: mydea/actions-ember-testing@v1
+      - name: Install dependencies
+        run: yarn install
+      - name: Run tests
+        run: yarn test
+      - name: Lint JS
+        run: yarn lint:js
+      - name: Lint HBS
+        run: yarn lint:hbs

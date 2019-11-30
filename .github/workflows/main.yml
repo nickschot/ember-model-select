@@ -1,0 +1,2 @@
+- name: Setup for Ember tests
+  uses: mydea/actions-ember-testing@v1.1.1

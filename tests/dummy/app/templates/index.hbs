@@ -1,23 +1,22 @@
-{{#docs-hero
-  logo="ember"
-  slimHeading="Ember"
-  strongHeading="Model Select"
-  byline="An ember-cli addon to provide a searchable model select box with infinite scroll support."
-}}
-  {{#docs-demo as |demo|}}
-    {{#demo.example name="landing-demo.hbs" class="docs-text-left docs-text-black"}}
-      {{model-select
-        placeholder="Try me!"
-        modelName="user"
-        labelProperty="name"
-        selectedModel=indexUser
-        onChange=(action (mut indexUser))
-
-        allowClear=true
-        searchEnabled=true
-        searchProperty="filter"
-        searchKey="search"
-      }}
-    {{/demo.example}}
-  {{/docs-demo}}
-{{/docs-hero}}
+<DocsHero
+  @logo="ember"
+  @slimHeading="Ember"
+  @strongHeading="Model Select"
+  @byline="An ember-cli addon to provide a searchable model select box with infinite scroll support."
+>
+  <DocsDemo as |demo|>
+    <demo.example @name="landing-demo.hbs" @class="docs-text-left docs-text-black">
+      <ModelSelect
+        @placeholder="Try me!"
+        @modelName="user"
+        @labelProperty="name"
+        @selectedModel={{this.indexUser}}
+        @onChange={{fn (mut this.indexUser)}}
+        @allowClear={{true}}
+        @searchEnabled={{true}}
+        @searchProperty="filter"
+        @searchKey="search"
+      />
+    </demo.example>
+  </DocsDemo>
+</DocsHero>

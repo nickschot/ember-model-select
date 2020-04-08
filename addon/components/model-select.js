@@ -1,16 +1,16 @@
-import Component from '@ember/component';
-import layout from '../templates/components/model-select';
+import Component from '@glimmer/component';
 
-import { assert} from '@ember/debug';
+// import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { assign } from '@ember/polyfills';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-import { task, timeout } from 'ember-concurrency';
-import withTestWaiter from 'ember-concurrency-test-waiter/with-test-waiter';
-import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
+import { timeout } from 'ember-concurrency';
+import { restartableTask, dropTask } from 'ember-concurrency-decorators';
 import getConfigOption from '../utils/get-config-option';
 
 /**
@@ -18,76 +18,9 @@ import getConfigOption from '../utils/get-config-option';
  *
  * @class ModelSelectComponent
  */
-export default Component.extend({
-  layout,
-
-  classNames: ['ember-model-select'],
-
-  store: service(),
-  infinity: service(),
-
-  /**
-   * Name of the model to be searched.
-   *
-   * @argument modelName
-   * @type {String}
-   * @required
-   */
-  modelName: fallbackIfUndefined(''),
-
-  /**
-   * The selected model or it's id.
-   *
-   * @argument selectedModel
-   * @type {Model|Number|null}
-   * @default null
-   */
-  selectedModel: fallbackIfUndefined(null),
-
-  /**
-   * Name of the model key which will be used to display the options.
-   *
-   * @argument labelProperty
-   * @type {String}
-   * @required
-   */
-  labelProperty: fallbackIfUndefined(''),
-
-  /**
-   * Name of the key in which search queries are passed.
-   *
-   * @argument searchProperty
-   * @type {String}
-   * @default 'search'
-   */
-  searchProperty: fallbackIfUndefined('search'),
-
-  /**
-   * Optional key to search on. Will default to `labelProperty` if unset.
-   *
-   * @argument searchKey
-   * @type {String}
-   * @default null
-   */
-  searchKey: null,
-
-  /**
-   * Whether or not the list is populated by default.
-   *
-   * @argument loadDefaultOptions
-   * @type {Boolean}
-   * @default true
-   */
-  loadDefaultOptions: fallbackIfUndefined(true),
-
-  /**
-   * Whether or not to use infinite scroll.
-   *
-   * @argument infiniteScroll
-   * @type {Boolean}
-   * @default true
-   */
-  infiniteScroll: fallbackIfUndefined(true),
+export default class ModelSelectComponent extends Component{
+  @service store;
+  @service infinity;
 
   /**
    * The amount of records loaded at once when `infiniteScroll` is enabled.
@@ -96,16 +29,9 @@ export default Component.extend({
    * @type {Number}
    * @default 25
    */
-  pageSize: fallbackIfUndefined(25),
-
-  /**
-   * An optional query which will be merged with the rest of the query done to the API. Can be used to sort etc.
-   *
-   * @argument query
-   * @type {Object}
-   * @default null
-   */
-  query: fallbackIfUndefined(null),
+  get pageSize() {
+    return this.args.pageSize || 25;
+  }
 
   /**
    * Debounce duration in ms used when searching.
@@ -114,25 +40,9 @@ export default Component.extend({
    * @type {Number}
    * @default 250
    */
-  debounceDuration: fallbackIfUndefined(250),
-
-  /**
-   * Whether or not a create option will be added to the options list. Triggers the `onCreate` hook on selection.
-   *
-   * @argument withCreate
-   * @type {Boolean}
-   * @default false
-   */
-  withCreate: fallbackIfUndefined(false),
-
-  /**
-   * Option function which outputs the label to be shown for the create option when `withCreate` is set to `true`.
-   *
-   * @argument buildSuggestion
-   * @type {Function}
-   * @default null
-   */
-  buildSuggestion: fallbackIfUndefined(null),
+  get debounceDuration() {
+    return this.args.debounceDuration || 250;
+  }
 
   // ember-infinity options
   /**
@@ -140,114 +50,57 @@ export default Component.extend({
    * @type {String}
    * @default 'page[size]'
    */
-  perPageParam:             fallbackIfUndefined(getConfigOption('perPageParam', 'page[size]')),
+  get perPageParam() {
+    return this.args.perPageParam || getConfigOption('perPageParam', 'page[size]');
+  }
 
   /**
    * @argument pageParam
    * @type {String}
    * @default 'page[number]'
    */
-  pageParam:                fallbackIfUndefined(getConfigOption('pageParam', 'page[number]')),
+  get pageParam() {
+    return this.args.pageParam || getConfigOption('pageParam', 'page[number]');
+  }
 
   /**
    * @argument totalPagesParam
    * @type {String}
    * @default 'meta.total'
    */
-  totalPagesParam:          fallbackIfUndefined(getConfigOption('totalPagesParam', 'meta.total')),
+  get totalPagesParam() {
+    return this.args.totalPagesParam || getConfigOption('totalPagesParam', 'meta.total');
+  }
 
   // ember-power-select options
-
-  /**
-   * @argument dropdownClass
-   * @type {String}
-   * @default 'ember-model-select__dropdown'
-   */
-  dropdownClass:            fallbackIfUndefined('ember-model-select__dropdown'),
 
   /**
    * @argument optionsComponent
    * @type {Component}
    * @default 'model-select/options'
    */
-  optionsComponent:         fallbackIfUndefined('model-select/options'),
+  get optionsComponent() {
+    return this.args.optionsComponent || 'model-select/options';
+  }
 
-  /**
-   * @argument loadingMessage
-   * @type {String}
-   * @default null
-   */
-  loadingMessage:           fallbackIfUndefined(null),
-
-  /**
-   * @argument noMatchesMessage
-   * @type {String}
-   * @default null
-   */
-  noMatchesMessage:         fallbackIfUndefined(null),
-
-  /**
-   * Hook called when a model is selected.
-   *
-   * @argument onChange
-   * @type {Function}
-   * @default function(){}
-   */
-  onChange: fallbackIfUndefined(function(){}),
-
-  /**
-   * Hook called when a model is created.
-   *
-   * @argument onCreate
-   * @type {Function}
-   * @default function(){}
-   */
-  onCreate: fallbackIfUndefined(function(){}),
-
-  /**
-   * @argument onOpen
-   * @type {Function}
-   * @default function(){}
-   */
-  onOpen: fallbackIfUndefined(function(){}),
-
-  /**
-   * @argument onClose
-   * @type {Function}
-   * @default function(){}
-   */
-  onClose: fallbackIfUndefined(function(){}),
-
-  /**
-   * @argument onInput
-   * @type {Function}
-   * @default function(){}
-   */
-  onInput: fallbackIfUndefined(function(){}),
+  get infiniteScroll() {
+    return this.args.infiniteScroll === undefined || this.args.infiniteScroll;
+  }
 
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
 
-  /**
-   * @property _options
-   * @private
-   */
-  _options: null,
+  @tracked _options;
+  @tracked model;
 
-  /**
-   * @property model
-   * @private
-   */
-  model: null,
+  // constructor() {
+  //   super(...arguments);
 
-  init(){
-    this._super(...arguments);
-
-    assert('{{model-select}} requires a valid `modelName`.', !isEmpty(this.get('modelName')));
-    assert('{{model-select}} requires a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
-    assert('{{model-select}} requires `debounceDuration` to be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
-    assert('{{model-select}} `searchProperty` cannot be undefined or empty', !isEmpty(this.get('searchProperty')));
-  },
+    // assert('{{model-select}} requires a valid `modelName`.', !isEmpty(this.get('modelName')));
+    // assert('{{model-select}} requires a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
+    // assert('{{model-select}} requires `debounceDuration` to be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
+    // assert('{{model-select}} `searchProperty` cannot be undefined or empty', !isEmpty(this.get('searchProperty')));
+  // }
 
   /**
    * The model selected by the user
@@ -255,46 +108,58 @@ export default Component.extend({
    * @property _selectedModel
    * @private
    */
-  _selectedModel: computed('selectedModel', function(){
-    const selectedModel = this.get('selectedModel');
+  @computed('args.selectedModel')
+  get _selectedModel(){
+    const selectedModel = this.args.selectedModel;
 
     if(typeof selectedModel === "number" || typeof selectedModel === "string"){
-      const id = parseInt(this.get('selectedModel'), 10);
-      return !isNaN(id) ? this.get('store').findRecord(this.get('modelName'), id) : null;
+      const id = parseInt(selectedModel, 10);
+      return !isNaN(id) ? this.findRecord.perform(this.args.modelName, id) : null;
     } else {
       return selectedModel;
     }
+  }
 
-  }),
+  @dropTask({ withTestWaiter: true })
+  findRecord = function*(modelName, id) {
+    // this wrapper task is requried to avoid the following error upon fast changes
+    // of selectedModel:
+    // Error: Assertion Failed: You attempted to remove a function listener which
+    // did not exist on the instance, which means you may have attempted to remove
+    // it before it was added.
+    return yield this.store.findRecord(modelName, id);
+  }
 
-  searchModels: withTestWaiter(task(function* (term, options, initialLoad = false) {
+  @restartableTask({ withTestWaiter: true })
+  searchModels = function* (term, options, initialLoad = false) {
     let createOption;
 
-    if(this.get('withCreate') && term){
+    if(this.args.withCreate && term){
       createOption = {
         __value__: term,
         __isSuggestion__: true
       };
-      createOption[this.get('labelProperty')] = this.get('buildSuggestion')
-        ? this.get('buildSuggestion')(term)
+      createOption[this.args.labelProperty] = this.args.buildSuggestion
+        ? this.args.buildSuggestion(term)
         : `Add "${term}"...`;
-      this.set('_options', A([createOption]));
+      this._options = A([createOption]);
     }
 
     if(!initialLoad){
-      yield timeout(this.get('debounceDuration'));
+      yield timeout(this.debounceDuration);
     }
 
-    yield this.get('loadModels').perform(term, createOption);
-  }).restartable()),
+    yield this.loadModels.perform(term, createOption);
+  }
 
-  loadModels: withTestWaiter(task(function* (term, createOption) {
+  @restartableTask({ withTestWaiter: true })
+  loadModels = function* (term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
-    const query = assign({}, this.get('query'));
+    const query = assign({}, this.args.query);
 
     if(term){
-      const searchProperty = this.get('searchProperty');
-      const searchKey = this.get('searchKey') || this.get('labelProperty');
+      const searchProperty = this.args.searchProperty || 'search';
+      const searchKey = this.args.searchKey || this.args.labelProperty;
 
       const searchObj = get(query, `${searchProperty}`) || {};
       set(searchObj, searchKey, term);
@@ -303,61 +168,76 @@ export default Component.extend({
 
     let _options;
 
-    if(this.get('infiniteScroll')){
+    if(this.infiniteScroll){
       // ember-infinity configuration
-      query.perPage         = this.get('pageSize');
+      query.perPage         = this.pageSize;
 
-      query.perPageParam    = this.get('perPageParam');
-      query.pageParam       = this.get('pageParam');
-      query.totalPagesParam = this.get('totalPagesParam');
+      query.perPageParam    = this.perPageParam;
+      query.pageParam       = this.pageParam;
+      query.totalPagesParam = this.totalPagesParam;
 
-      this.set('model', this.get('infinity').model(this.get('modelName'), query));
+      this.model = this.infinity.model(this.args.modelName, query);
 
-      _options = yield this.get('model');
+      _options = yield this.model;
     } else {
-      set(query, this.get('pageParam'), 1);
-      set(query, this.get('perPageParam'), this.get('pageSize'));
+      set(query, this.pageParam, 1);
+      set(query, this.perPageParam, this.pageSize);
 
-      _options = yield this.get('store').query(this.get('modelName'), query);
+      _options = yield this.store.query(this.args.modelName, query);
     }
 
     if(createOption){
       _options.unshiftObjects([createOption]);
     }
 
-    this.set('_options', _options);
-  }).restartable()),
+    this._options = _options;
+  }
 
-  actions: {
-    loadDefaultOptions(){
-      if(this.get('loadDefaultOptions')) {
-        this.get('searchModels').perform(null, null, true);
-      }
-    },
-    onOpen(){
-      this.send('loadDefaultOptions');
-
-      this.get('onOpen')(...arguments);
-    },
-    onInput(term){
-      if(isEmpty(term)){
-        this.send('loadDefaultOptions');
-      }
-
-      this.get('onInput')( ...arguments);
-    },
-    onClose(){
-      this.get('searchModels').cancelAll();
-
-      this.get('onClose')(...arguments);
-    },
-    change(model, select){
-      if(!isEmpty(model) && get(model, '__isSuggestion__')){
-        this.get('onCreate')(model.__value__, select);
-      } else {
-        this.get('onChange')(model, select);
-      }
+  loadDefaultOptions(){
+    if(this.args.loadDefaultOptions === undefined || this.args.loadDefaultOptions) {
+      this.searchModels.perform(null, null, true);
     }
   }
 
-});
+  @action
+  onOpen() {
+    this.loadDefaultOptions();
+
+    if (this.args.onOpen) {
+      this.args.onOpen(...arguments);
+    }
+  }
+
+  @action
+  onInput(term) {
+    if(isEmpty(term)){
+      this.loadDefaultOptions();
+    }
+
+    if (this.args.onInput) {
+      this.args.onInput(...arguments);
+    }
+  }
+
+  @action
+  onClose() {
+    this.searchModels.cancelAll();
+
+    if (this.args.onClose) {
+      this.args.onClose(...arguments);
+    }
+  }
+
+  @action
+  change(model, select) {
+    if(!isEmpty(model) && model.__isSuggestion__) {
+      if (this.args.onCreate) {
+        this.args.onCreate(model.__value__, select);
+      }
+    } else {
+      if (this.args.onChange) {
+        this.args.onChange(model, select);
+      }
+    }
+  }
+}

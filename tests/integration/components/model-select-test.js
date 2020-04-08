@@ -45,7 +45,7 @@ module('Integration | Component | model-select', function(hooks) {
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
 
-    assert.dom('.ember-power-select-option').exists({ count: 0 });
+    assert.dom('.ember-power-select-option--no-matches-message').exists({ count: 1 });
   });
 
   test('it respects the search* and query parameters', async function(assert) {
@@ -180,7 +180,7 @@ module('Integration | Component | model-select', function(hooks) {
     assert.dom('.ember-power-select-selected-item').hasText(`Kathryne Raynor`);
 
     this.set('selected', 2);
-    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onChange=(action (mut selected))}}`);
+    await settled();
     assert.dom('.ember-power-select-selected-item').hasText(`Marlen Mayert`);
   });
 

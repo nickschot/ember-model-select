@@ -189,34 +189,41 @@ export default Component.extend({
   /**
    * Hook called when a model is selected.
    *
-   * @argument onchange
+   * @argument onChange
    * @type {Function}
    * @default function(){}
    */
-  onchange: fallbackIfUndefined(function(){}),
+  onChange: fallbackIfUndefined(function(){}),
 
   /**
    * Hook called when a model is created.
    *
-   * @argument oncreate
+   * @argument onCreate
    * @type {Function}
    * @default function(){}
    */
-  oncreate: fallbackIfUndefined(function(){}),
+  onCreate: fallbackIfUndefined(function(){}),
 
   /**
-   * @argument onopen
+   * @argument onOpen
    * @type {Function}
    * @default function(){}
    */
-  onopen: fallbackIfUndefined(function(){}),
+  onOpen: fallbackIfUndefined(function(){}),
 
   /**
-   * @argument onclose
+   * @argument onClose
    * @type {Function}
    * @default function(){}
    */
-  onclose: fallbackIfUndefined(function(){}),
+  onClose: fallbackIfUndefined(function(){}),
+
+  /**
+   * @argument onInput
+   * @type {Function}
+   * @default function(){}
+   */
+  onInput: fallbackIfUndefined(function(){}),
 
   // NOTE: apart from the arguments above, ember-model-select supports the full
   // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
@@ -330,25 +337,25 @@ export default Component.extend({
     onOpen(){
       this.send('loadDefaultOptions');
 
-      this.get('onopen')(...arguments);
+      this.get('onOpen')(...arguments);
     },
     onInput(term){
       if(isEmpty(term)){
         this.send('loadDefaultOptions');
       }
 
-      this.get('oninput', ...arguments);
+      this.get('onInput')( ...arguments);
     },
     onClose(){
       this.get('searchModels').cancelAll();
 
-      this.get('onclose')(...arguments);
+      this.get('onClose')(...arguments);
     },
     change(model, select){
       if(!isEmpty(model) && get(model, '__isSuggestion__')){
-        this.get('oncreate')(model.__value__, select);
+        this.get('onCreate')(model.__value__, select);
       } else {
-        this.get('onchange')(model, select);
+        this.get('onChange')(model, select);
       }
     }
   }

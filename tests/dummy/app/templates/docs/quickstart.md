@@ -8,16 +8,17 @@ ember install ember-model-select
 
 2. **Add a model select to your template**
 
-You need to pass in the name of your model, the property on the model to use as the label and the selected model. Furthermore you can set the search key (and if necessary property) so it conforms to your API. 
+You need to pass in the name of your model, the property on the model to use as the label and the selected model. Furthermore you can set the search key (and if necessary property) so it conforms to your API.
 
 ```handlebars
 {{model-select
   modelName="user"
   labelProperty="name"
   selectedModel=user
-  onchange=(action (mut user))
-  
+  onChange=(action (mut user))
+
   allowClear=true
+  searchEnabled=true
   searchKey="search"
 }}
 ```

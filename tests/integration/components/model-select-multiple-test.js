@@ -30,7 +30,7 @@ module('Integration | Component | model-select-multiple', function(hooks) {
 
     this.set('selected', null);
 
-    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onchange=(action (mut selected))}}`);
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onChange=(action (mut selected))}}`);
 
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 1);
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 2);
@@ -46,7 +46,7 @@ module('Integration | Component | model-select-multiple', function(hooks) {
 
     this.set('selected', null);
 
-    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onchange=(action (mut selected))}}`);
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onChange=(action (mut selected))}}`);
 
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 1);
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 2);
@@ -60,20 +60,20 @@ module('Integration | Component | model-select-multiple', function(hooks) {
   test('it shows an Add "<term>"... option when withCreate is true', async function(assert) {
     assert.expect(2);
 
-    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true}}`);
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true searchEnabled=true}}`);
     await selectSearch('.ember-model-select-multiple-trigger', 'test');
 
     assert.dom('.ember-power-select-option').exists({ count: 1 });
     assert.dom('.ember-power-select-option').hasText(`Add "test"...`);
   });
 
-  test('it fires the oncreate hook when the create option is selected', async function(assert) {
+  test('it fires the onCreate hook when the create option is selected', async function(assert) {
     assert.expect(2);
 
     let handleCreate = sinon.spy();
     this.actions = { handleCreate };
 
-    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true oncreate=(action 'handleCreate')}}`);
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true onCreate=(action 'handleCreate') searchEnabled=true}}`);
     await selectSearch('.ember-model-select-multiple-trigger', 'test');
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 1);
 

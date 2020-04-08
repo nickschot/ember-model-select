@@ -1,70 +1,74 @@
-{{#power-select
-  afterOptionsComponent=afterOptionsComponent
-  allowClear=allowClear
-  animationEnabled=animationEnabled
-  ariaDescribedBy=ariaDescribedBy
-  ariaInvalid=ariaInvalid
-  ariaLabel=ariaLabel
-  ariaLabelledBy=ariaLabelledBy
-  beforeOptionsComponent=beforeOptionsComponent
-  buildSelection=buildSelection
-  calculatePosition=calculatePosition
-  closeOnSelect=closeOnSelect
-  defaultHighlighted=defaultHighlighted
-  destination=destination
-  disabled=disabled
-  dropdownClass=dropdownClass
-  extra=extra
-  groupComponent=groupComponent
-  highlightOnHover=highlightOnHover
-  horizontalPosition=horizontalPosition
-  initiallyOpened=initiallyOpened
-  loadingMessage=loadingMessage
-  eventType=eventType
-  matcher=matcher
-  matchTriggerWidth=matchTriggerWidth
-  noMatchesMessage=noMatchesMessage
-  onblur=onblur
-  onchange=(action "change")
-  onclose=(action "onClose")
-  onfocus=onfocus
-  oninput=(action "onInput")
-  onkeydown=onkeydown
-  onopen=(action "onOpen")
-  options=_options
-  optionsComponent=(component optionsComponent infiniteScroll=infiniteScroll infiniteModel=model withCreate=withCreate)
-  placeholder=placeholder
-  placeholderComponent=placeholderComponent
-  preventScroll=preventScroll
-  renderInPlace=renderInPlace
-  scrollTo=scrollTo
-  search=(perform searchModels)
-  searchEnabled=searchEnabled
-  searchField=searchField
-  searchMessage=searchMessage
-  searchPlaceholder=searchPlaceholder
-  selected=_selectedModel
-  selectedItemComponent=selectedItemComponent
-  tabindex=tabindex
-  triggerClass=triggerClass
-  triggerComponent=triggerComponent
-  triggerId=triggerId
-  triggerRole=triggerRole
-  typeAheadMatcher=typeAheadMatcher
-  verticalPosition=verticalPosition
-
-  withCreate=withCreate
-as |model|
-}}
+<PowerSelect
+  @afterOptionsComponent={{afterOptionsComponent}}
+  @allowClear={{allowClear}}
+  @animationEnabled={{animationEnabled}}
+  @ariaDescribedBy={{ariaDescribedBy}}
+  @ariaInvalid={{ariaInvalid}}
+  @ariaLabel={{ariaLabel}}
+  @ariaLabelledBy={{ariaLabelledBy}}
+  @beforeOptionsComponent={{beforeOptionsComponent}}
+  @buildSelection={{buildSelection}}
+  @calculatePosition={{calculatePosition}}
+  @closeOnSelect={{closeOnSelect}}
+  @defaultHighlighted={{defaultHighlighted}}
+  @destination={{destination}}
+  @disabled={{disabled}}
+  @dropdownClass={{dropdownClass}}
+  @extra={{extra}}
+  @groupComponent={{groupComponent}}
+  @highlightOnHover={{highlightOnHover}}
+  @horizontalPosition={{horizontalPosition}}
+  @initiallyOpened={{initiallyOpened}}
+  @loadingMessage={{loadingMessage}}
+  @eventType={{eventType}}
+  @matcher={{matcher}}
+  @matchTriggerWidth={{matchTriggerWidth}}
+  @noMatchesMessage={{noMatchesMessage}}
+  @onBlur={{onBlur}}
+  @onChange={{action "change"}}
+  @onClose={{action "onClose"}}
+  @onFocus={{onFocus}}
+  @onInput={{action "onInput"}}
+  @onKeydown={{onKeydown}}
+  @onOpen={{action "onOpen"}}
+  @options={{_options}}
+  @optionsComponent={{component
+    optionsComponent
+    infiniteScroll=infiniteScroll
+    infiniteModel=model
+    withCreate=withCreate}}
+  @placeholder={{placeholder}}
+  @placeholderComponent={{placeholderComponent}}
+  @preventScroll={{preventScroll}}
+  @renderInPlace={{renderInPlace}}
+  @scrollTo={{scrollTo}}
+  @search={{perform searchModels}}
+  @searchEnabled={{searchEnabled}}
+  @searchField={{searchField}}
+  @searchMessage={{searchMessage}}
+  @searchPlaceholder={{searchPlaceholder}}
+  @selected={{_selectedModel}}
+  @selectedItemComponent={{selectedItemComponent}}
+  @tabindex={{tabindex}}
+  @triggerClass={{triggerClass}}
+  @triggerComponent={{triggerComponent}}
+  @triggerId={{triggerId}}
+  @triggerRole={{triggerRole}}
+  @typeAheadMatcher={{typeAheadMatcher}}
+  @verticalPosition={{verticalPosition}}
+  @withCreate={{withCreate}}
+  ...attributes
+  as |model|
+>
   {{#if hasBlock}}
     {{yield model}}
   {{else}}
     {{get model labelProperty}}
   {{/if}}
-{{/power-select}}
+</PowerSelect>
 
 {{#if loadModels.isRunning}}
   <div class="ember-model-select__loading">
-    {{model-select/spinner}}
+    <ModelSelect::Spinner />
   </div>
 {{/if}}

@@ -7,9 +7,10 @@
       modelName="user"
       labelProperty="name"
       selectedModel=user1
-      onchange=(action (mut user1))
-      
+      onChange=(action (mut user1))
+
       allowClear=true
+      searchEnabled=true
       searchProperty="filter"
       searchKey="search"
     }}
@@ -19,7 +20,7 @@
 {{/docs-demo}}
 
 ## Single Select with Create
-There is also a `withCreate` option which can be enabled by passing `withCreate=true`. The `oncreate` hook is called with the search term. An optional `buildSuggestion` function can be passed to construct the text shown in the create option. This defaults to `Add "term"...`.
+There is also a `withCreate` option which can be enabled by passing `withCreate=true`. The `onCreate` hook is called with the search term. An optional `buildSuggestion` function can be passed to construct the text shown in the create option. This defaults to `Add "term"...`.
 
 {{#docs-demo as |demo|}}
   {{#demo.example name='single-select-with-create.hbs'}}
@@ -27,12 +28,13 @@ There is also a `withCreate` option which can be enabled by passing `withCreate=
       modelName="user"
       labelProperty="name"
       selectedModel=user2
-      onchange=(action (mut user2))
-      
+      onChange=(action (mut user2))
+
       withCreate=true
-      oncreate=(action "createUser")
-      
+      onCreate=(action "createUser")
+
       allowClear=true
+      searchEnabled=true
       searchProperty="filter"
       searchKey="search"
     }}
@@ -41,7 +43,7 @@ There is also a `withCreate` option which can be enabled by passing `withCreate=
   {{demo.snippet 'single-select-with-create.hbs'}}
 {{/docs-demo}}
 
-## Single Select with Custom Option display 
+## Single Select with Custom Option display
 The model-select can also be used with a block form. Each of the models is yielded as `model`.
 {{#docs-demo as |demo|}}
   {{#demo.example name='single-select-with-block.hbs'}}
@@ -49,9 +51,10 @@ The model-select can also be used with a block form. Each of the models is yield
       modelName="user"
       labelProperty="name"
       selectedModel=user3
-      onchange=(action (mut user3))
-      
+      onChange=(action (mut user3))
+
       allowClear=true
+      searchEnabled=true
       searchProperty="filter"
       searchKey="search"
     as |model|}}

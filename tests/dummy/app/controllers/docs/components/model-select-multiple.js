@@ -9,7 +9,7 @@ export default Controller.extend({
       }
 
       const user = this.store.createRecord('user', { name });
-      this.users2.pushObject(user);
+      this.users2.push(user);
       user.save();
     }
   }

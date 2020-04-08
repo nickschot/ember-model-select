@@ -31,8 +31,8 @@
     "ember-concurrency": "^1.1.0",
     "ember-concurrency-test-waiter": "^0.3.1",
     "ember-get-config": "^0.2.4",
-    "ember-infinity": "^1.4.9",
-    "ember-power-select": "^2.2.1"
+    "ember-infinity": "^2.1.1",
+    "ember-power-select": "^3.0.4"
   },
   "devDependencies": {
     "@ember/jquery": "^0.6.0",

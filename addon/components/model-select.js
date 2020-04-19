@@ -14,9 +14,13 @@ import { restartableTask, dropTask } from 'ember-concurrency-decorators';
 import getConfigOption from '../utils/get-config-option';
 
 /**
- * The main {{model-select}} component.
+ * The main component.
+ *
  *
  * @class ModelSelectComponent
+ * @extends {Component}
+ *
+ * @yield {object} model
  */
 export default class ModelSelectComponent extends Component{
   @service store;

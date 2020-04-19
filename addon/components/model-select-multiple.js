@@ -2,7 +2,9 @@ import { action } from '@ember/object';
 import PowerSelectMultipleComponent from 'ember-power-select/components/power-select-multiple';
 
 /**
- * {{model-select-multiple}} component. This is a wrapper around the normal model-select component. The same arguments apply.
+ * This is a wrapper around the normal model-select component. The same arguments apply.
+ *
+ * @yield {object} model
  *
  * @class ModelSelectMultipleComponent
  */

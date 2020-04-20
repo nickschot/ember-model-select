@@ -16,6 +16,9 @@ import getConfigOption from '../utils/get-config-option';
 /**
  * The main component.
  *
+ * NOTE: apart from the arguments listed explicitely here, ember-model-select supports the full
+ * ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
+ *
  *
  * @class ModelSelectComponent
  * @extends {Component}
@@ -27,6 +30,64 @@ export default class ModelSelectComponent extends Component{
   @service infinity;
 
   /**
+   * Name of the ember-data model.
+   *
+   * @argument modelName
+   * @type {String}
+   */
+
+  /**
+   * Selected model or its id.
+   *
+   * @argument selectedModel
+   * @type {EmberData.Model|String|Number}
+   */
+
+  /**
+   * Name of property on model to use as label.
+   *
+   * @argument labelProperty
+   * @type {String}
+   */
+
+  /**
+   * …
+   *
+   * @argument searchProperty
+   * @type {String}
+   * @default 'search'
+   */
+  get searchProperty() {
+    return this.args.searchProperty || getConfigOption('searchProperty', 'search');
+  }
+
+  /**
+   * …
+   *
+   * @argument searchKey
+   * @type {String}
+   */
+
+  /**
+   * Whether to start loading models when dropdown is opened (but no search is entered, yet).
+   *
+   * @argument loadDefaultOptions
+   * @type {Boolean}
+   * @default true
+   */
+
+  /**
+   * Whether to use ember-infinity for infinite scrolling.
+   *
+   * @argument infiniteScroll
+   * @type {Boolean}
+   * @default true
+   */
+  get infiniteScroll() {
+    return this.args.infiniteScroll === undefined || this.args.infiniteScroll;
+  }
+
+  /**
    * The amount of records loaded at once when `infiniteScroll` is enabled.
    *
    * @argument pageSize
@@ -34,8 +95,15 @@ export default class ModelSelectComponent extends Component{
    * @default 25
    */
   get pageSize() {
-    return this.args.pageSize || 25;
+    return this.args.pageSize || getConfigOption('pageSize', 25);
   }
+
+  /**
+   * Additional parameters for data query.
+   *
+   * @argument query
+   * @type {Object}
+   */
 
   /**
    * Debounce duration in ms used when searching.
@@ -45,11 +113,30 @@ export default class ModelSelectComponent extends Component{
    * @default 250
    */
   get debounceDuration() {
-    return this.args.debounceDuration || 250;
+    return this.args.debounceDuration || getConfigOption('debounceDuration', 250);
   }
 
-  // ember-infinity options
   /**
+   * Whether to allow creation of entries in case search yields no results.
+   *
+   * @argument withCreate
+   * @type {Boolean}
+   * @default false
+   */
+
+  /**
+   * Text to show suggesting creation of new entry.
+   *
+   * @argument buildSuggestion
+   * @type {Function}
+   * @default 'Add "${term}"...'
+   */
+
+  /**
+   * Ember-infinity argument.
+   *
+   * See: https://github.com/ember-infinity/ember-infinity#json-requestresponse-customization
+   *
    * @argument perPageParam
    * @type {String}
    * @default 'page[size]'
@@ -59,6 +146,10 @@ export default class ModelSelectComponent extends Component{
   }
 
   /**
+   * Ember-infinity argument.
+   *
+   * See: https://github.com/ember-infinity/ember-infinity#json-requestresponse-customization
+   *
    * @argument pageParam
    * @type {String}
    * @default 'page[number]'
@@ -68,6 +159,10 @@ export default class ModelSelectComponent extends Component{
   }
 
   /**
+   * Ember-infinity argument.
+   *
+   * See: https://github.com/ember-infinity/ember-infinity#json-requestresponse-customization
+   *
    * @argument totalPagesParam
    * @type {String}
    * @default 'meta.total'
@@ -76,9 +171,11 @@ export default class ModelSelectComponent extends Component{
     return this.args.totalPagesParam || getConfigOption('totalPagesParam', 'meta.total');
   }
 
-  // ember-power-select options
-
   /**
+   * Ember-power-select-option.
+   *
+   * See: https://ember-power-select.com/docs/api-reference/
+   *
    * @argument optionsComponent
    * @type {Component}
    * @default 'model-select/options'
@@ -87,12 +184,13 @@ export default class ModelSelectComponent extends Component{
     return this.args.optionsComponent || 'model-select/options';
   }
 
-  get infiniteScroll() {
-    return this.args.infiniteScroll === undefined || this.args.infiniteScroll;
-  }
+  /**
+   * Called upon creation of new entry.
+   *
+   * @argument onCreate
+   * @type {Action}
+   */
 
-  // NOTE: apart from the arguments above, ember-model-select supports the full
-  // ember-power-select API which can be found: https://ember-power-select.com/docs/api-reference
 
   @tracked _options;
   @tracked model;
@@ -162,7 +260,7 @@ export default class ModelSelectComponent extends Component{
     const query = assign({}, this.args.query);
 
     if(term){
-      const searchProperty = this.args.searchProperty || 'search';
+      const searchProperty = this.searchProperty;
       const searchKey = this.args.searchKey || this.args.labelProperty;
 
       const searchObj = get(query, `${searchProperty}`) || {};

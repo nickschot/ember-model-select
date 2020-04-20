@@ -31,18 +31,25 @@ A plugin to integrate ember-model-select with ember-bootstrap forms can be found
 
 2. **global configuration**
 
-It is very likely you will need to set for example the `searchProperty` and `searchKey` to conform to your API. If you do not want to pass certain options to every instantiation of model-select you can override the `{{model-select}}` and `{{model-select-multiple}}` components.
-
-To do so you can create a component as follows:
+It is very likely you will need to set for example the `searchProperty` and `searchKey` to conform to your API. If you do not want to pass certain options to every instantiation of model-select you can set them in `config/environment.js`:
 
 ```javascript
-// app/components/model-select.js
-import ModelSelectComponent from 'ember-model-select/components/model-select';
+'use strict';
 
-export default ModelSelectComponent.extend({
-  searchProperty: 'search',
-  searchKey: 'filter'
-});
+module.exports = function(environment) {
+  let ENV = {
+    …
+
+    'ember-model-select': {
+      searchProperty: 'search',
+      pageSize: 25,
+      debounceDuration: 250,
+      perPageParam: 'page[size]',
+      pageParam: 'page[number]',
+      totalPagesParam: 'meta.total',
+    }
+  };
+
+  return ENV;
+};
 ```
-
-You can do the same for `model-select-multiple`.

@@ -34,6 +34,7 @@ export default class ModelSelectComponent extends Component{
    *
    * @argument modelName
    * @type {String}
+   * @required
    */
 
   /**
@@ -48,10 +49,11 @@ export default class ModelSelectComponent extends Component{
    *
    * @argument labelProperty
    * @type {String}
+   * @required
    */
 
   /**
-   * …
+   * Name of the key in which search queries are passed.
    *
    * @argument searchProperty
    * @type {String}
@@ -62,7 +64,7 @@ export default class ModelSelectComponent extends Component{
   }
 
   /**
-   * …
+   * Optional key to search on. Will default to `labelProperty` if unset.
    *
    * @argument searchKey
    * @type {String}
@@ -77,7 +79,7 @@ export default class ModelSelectComponent extends Component{
    */
 
   /**
-   * Whether to use ember-infinity for infinite scrolling.
+   * Whether or not to use infinite scroll.
    *
    * @argument infiniteScroll
    * @type {Boolean}
@@ -99,7 +101,7 @@ export default class ModelSelectComponent extends Component{
   }
 
   /**
-   * Additional parameters for data query.
+   * Additional parameters for data query. Can be used to sort etc.
    *
    * @argument query
    * @type {Object}
@@ -125,7 +127,7 @@ export default class ModelSelectComponent extends Component{
    */
 
   /**
-   * Text to show suggesting creation of new entry.
+   * Function which outputs the label to be shown for the create option when `withCreate` is set to `true`.
    *
    * @argument buildSuggestion
    * @type {Function}

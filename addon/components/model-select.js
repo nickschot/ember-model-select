@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 
 // import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
-import { computed, get, set } from '@ember/object';
+import { computed, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { assign } from '@ember/polyfills';

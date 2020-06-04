@@ -1,4 +1,13 @@
 
+## 1.0.0-beta.1 (2020-06-04)
+
+#### :boom: Breaking Change
+* [#78](https://github.com/nickschot/ember-model-select/pull/78) Update to ember-power-select@4 and Ember Octane/Glimmer Components ([@ttill](https://github.com/ttill))
+
+#### Committers: 1
+- Till Theato ([@ttill](https://github.com/ttill))
+
+
 ## 0.2.1 (2019-10-03)
 
 #### :bug: Bug Fix

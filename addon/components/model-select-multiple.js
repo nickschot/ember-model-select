@@ -1,26 +1,23 @@
+import { action } from '@ember/object';
 import PowerSelectMultipleComponent from 'ember-power-select/components/power-select-multiple';
-import layout from '../templates/components/model-select-multiple';
-import fallbackIfUndefined from '../utils/computed-fallback-if-undefined';
 
 /**
- * {{model-select-multiple}} component. This is a wrapper around the normal model-select component. The same arguments apply.
+ * This is a wrapper around the normal model-select component. The same arguments apply.
+ *
+ * @yield {object} model
  *
  * @class ModelSelectMultipleComponent
  */
-export default PowerSelectMultipleComponent.extend({
-  layout,
+export default class ModelSelectMultipleComponent extends PowerSelectMultipleComponent {
 
-  triggerClass: fallbackIfUndefined('ember-model-select-multiple-trigger'),
+  @action
+  change(option, select) {
+    const suggestion = option.find(item => item.__isSuggestion__);
 
-  actions: {
-    change(option, select){
-      const suggestion = option.find(item => item.__isSuggestion__);
-
-      if(suggestion){
-        this.get('oncreate')(suggestion.__value__, select);
-      } else {
-        this.get('onchange')(option, select);
-      }
+    if(suggestion){
+      this.args.onCreate(suggestion.__value__, select);
+    } else {
+      this.args.onChange(option, select);
     }
   }
-});
+}

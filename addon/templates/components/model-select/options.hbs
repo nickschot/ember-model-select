@@ -1,56 +1,29 @@
-{{! template-lint-disable no-unnecessary-concat }}
-
-{{!-- Default ember-power-select/components/power-select/options template --}}
-{{#if select.loading}}
-  {{#if loadingMessage}}
-    <li class="ember-power-select-option ember-power-select-option--loading-message" role="option">{{loadingMessage}}</li>
-  {{/if}}
-{{/if}}
-{{#each options as |opt index|}}
-  {{#if (ember-power-select-is-group opt)}}
-    {{#component
-      groupComponent
-      group=(readonly opt)
-      select=(readonly select)
-      extra=(readonly extra)
-    }}
-      {{#component
-        optionsComponent
-        options=(readonly opt.options)
-        select=(readonly select)
-        groupIndex=(concat groupIndex index ".")
-        optionsComponent=(readonly optionsComponent)
-        groupComponent=(readonly groupComponent)
-        extra=(readonly extra)
-        role="group"
-        class="ember-power-select-options"
-      as |option|
-      }}
-        {{yield option select}}
-      {{/component}}
-    {{/component}}
-  {{else}}
-    <li
-      class="ember-power-select-option"
-      aria-selected="{{ember-power-select-is-selected opt select.selected}}"
-      aria-disabled={{ember-power-select-true-string-if-present opt.disabled}}
-      aria-current="{{eq opt select.highlighted}}"
-      data-option-index="{{groupIndex}}{{index}}"
-      role="option"
+<ul role="listbox" ...attributes>
+  <li>
+    <PowerSelect::Options
+      @loadingMessage={{@loadingMessage}}
+      @select={{@select}}
+      @options={{@options}}
+      @groupIndex={{@groupIndex}}
+      @optionsComponent={{@optionsComponent}}
+      @extra={{@extra}}
+      @highlightOnHover={{@highlightOnHover}}
+      @groupComponent={{@groupComponent}}
+      as |option select|
     >
-      {{yield opt select}}
+      {{yield option select}}
+    </PowerSelect::Options>
+  </li>
+
+  {{#if this.showLoader}}
+    <li>
+      <InfinityLoader
+        @infinityModel={{@infiniteModel}}
+        @hideOnInfinity={{true}}
+        @scrollable={{concat "#ember-basic-dropdown-content-" @select.uniqueId}}
+      >
+        <ModelSelect::Spinner />
+      </InfinityLoader>
     </li>
   {{/if}}
-{{/each}}
-
-{{!-- Add infinity-loader for infinite-scroll support --}}
-{{#if showLoader}}
-  {{#infinity-loader
-    tagName="li"
-    infinityModel=infiniteModel
-    hideOnInfinity=true
-    scrollable=(concat "#ember-basic-dropdown-content-" select.uniqueId)
-  }}
-    {{model-select/spinner}}
-  {{/infinity-loader}}
-{{/if}}
+</ul>

@@ -50,3 +50,12 @@ $ember-model-select__spinner-duration: 1s !default;
     align-items: center;
   }
 }
+
+.ember-power-select-options {
+  > li > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+  }
+}

@@ -1,81 +1,88 @@
-{{#model-select
-  modelName=modelName
-  selectedModel=selectedModel
-  labelProperty=labelProperty
-  searchProperty=searchProperty
-  searchKey=searchKey
-  loadDefaultOptions=loadDefaultOptions
-  infiniteScroll=infiniteScroll
-  pageSize=pageSize
-  query=query
-  debounceDuration=debounceDuration
-  withCreate=withCreate
-  buildSuggestion=buildSuggestion
-  perPageParam=perPageParam
-  pageParam=pageParam
-  totalPagesParam=totalPagesParam
-  oncreate=oncreate
+<ModelSelect
+  {{!-- model-select arguments --}}
+  @modelName={{@modelName}}
+  @selectedModel={{@selectedModel}}
+  @labelProperty={{@labelProperty}}
+  @searchProperty={{@searchProperty}}
+  @searchKey={{@searchKey}}
+  @loadDefaultOptions={{@loadDefaultOptions}}
+  @infiniteScroll={{@infiniteScroll}}
+  @pageSize={{@pageSize}}
+  @query={{@query}}
+  @debounceDuration={{this.debounceDuration}}
+  @withCreate={{@withCreate}}
+  @buildSuggestion={{@buildSuggestion}}
+  @perPageParam={{@perPageParam}}
+  @pageParam={{@pageParam}}
+  @totalPagesParam={{@totalPagesParam}}
+  @onCreate={{@onCreate}}
 
-  _triggerTagName=_triggerTagName
-  triggerRole=triggerRole
-  afterOptionsComponent=afterOptionsComponent
-  allowClear=allowClear
-  ariaDescribedBy=ariaDescribedBy
-  ariaInvalid=ariaInvalid
-  ariaLabel=ariaLabel
-  ariaLabelledBy=ariaLabelledBy
-  beforeOptionsComponent=beforeOptionsComponent
-  buildSelection=(action "buildSelection")
-  calculatePosition=calculatePosition
-  class=class
-  closeOnSelect=closeOnSelect
-  defaultHighlighted=defaultHighlighted
-  destination=destination
-  dir=dir
-  disabled=disabled
-  dropdownClass=dropdownClass
-  extra=extra
-  groupComponent=groupComponent
-  horizontalPosition=horizontalPosition
-  initiallyOpened=initiallyOpened
-  loadingMessage=loadingMessage
-  matcher=matcher
-  matchTriggerWidth=matchTriggerWidth
-  noMatchesMessage=noMatchesMessage
-  onblur=onblur
-  onchange=(action "change")
-  onclose=onclose
-  onfocus=(action "handleFocus")
-  oninput=oninput
-  onkeydown=(action "handleKeydown")
-  onopen=(action "handleOpen")
-  options=options
-  optionsComponent=optionsComponent
-  placeholder=placeholder
-  placeholderComponent=placeholderComponent
-  preventScroll=preventScroll
-  registerAPI=(readonly registerAPI)
-  renderInPlace=renderInPlace
-  required=required
-  scrollTo=scrollTo
-  search=search
-  searchEnabled=searchEnabled
-  searchField=labelProperty
-  searchMessage=searchMessage
-  searchPlaceholder=searchPlaceholder
-  selected=selected
-  selectedItemComponent=selectedItemComponent
-  tabindex=computedTabIndex
-  eventType=eventType
-  title=title
-  triggerClass=concatenatedTriggerClass
-  triggerComponent=(component triggerComponent tabindex=tabindex)
-  triggerId=triggerId
-  verticalPosition=verticalPosition
-as |model|}}
-  {{#if hasBlock}}
+  {{!-- overwritten arguments --}}
+  @onChange={{this.change}}
+  @searchField={{@labelProperty}}
+  @triggerClass="ember-model-select-multiple-trigger {{@triggerClass}}"
+
+
+  {{!-- power-select-multiple defaults --}}
+  @triggerRole={{@triggerRole}}
+  @ariaDescribedBy={{@ariaDescribedBy}}
+  @ariaInvalid={{@ariaInvalid}}
+  @ariaLabel={{@ariaLabel}}
+  @ariaLabelledBy={{@ariaLabelledBy}}
+  @afterOptionsComponent={{@afterOptionsComponent}}
+  @allowClear={{@allowClear}}
+  @beforeOptionsComponent={{or @beforeOptionsComponent null}}
+  @buildSelection={{or @buildSelection this.defaultBuildSelection}}
+  @calculatePosition={{@calculatePosition}}
+  @closeOnSelect={{@closeOnSelect}}
+  @defaultHighlighted={{@defaultHighlighted}}
+  @destination={{@destination}}
+  @disabled={{@disabled}}
+  @dropdownClass={{@dropdownClass}}
+  @extra={{@extra}}
+  @groupComponent={{@groupComponent}}
+  @horizontalPosition={{@horizontalPosition}}
+  @initiallyOpened={{@initiallyOpened}}
+  @loadingMessage={{@loadingMessage}}
+  @matcher={{@matcher}}
+  @matchTriggerWidth={{@matchTriggerWidth}}
+  @noMatchesMessage={{@noMatchesMessage}}
+  @onBlur={{@onBlur}}
+  {{!-- @onChange={{@onChange}} --}}
+  @onClose={{@onClose}}
+  @onFocus={{this.handleFocus}}
+  @onInput={{@onInput}}
+  @onKeydown={{this.handleKeydown}}
+  @onOpen={{this.handleOpen}}
+  @options={{@options}}
+  @optionsComponent={{@optionsComponent}}
+  @placeholder={{@placeholder}}
+  @placeholderComponent={{@placeholderComponent}}
+  @preventScroll={{@preventScroll}}
+  @registerAPI={{@registerAPI}}
+  @renderInPlace={{@renderInPlace}}
+  @required={{@required}}
+  @scrollTo={{@scrollTo}}
+  @search={{@search}}
+  @searchEnabled={{@searchEnabled}}
+  {{!-- @searchField={{@searchField}} --}}
+  @searchMessage={{@searchMessage}}
+  @searchPlaceholder={{@searchPlaceholder}}
+  {{!-- @selected={{@selected}} --}}
+  @selectedItemComponent={{@selectedItemComponent}}
+  @eventType={{@eventType}}
+  @title={{@title}}
+  {{!-- @triggerClass="ember-power-select-multiple-trigger {{@triggerClass}}" --}}
+  @triggerComponent={{component (or @triggerComponent "power-select-multiple/trigger") tabindex=@tabindex}}
+  @triggerId={{@triggerId}}
+  @verticalPosition={{@verticalPosition}}
+  @tabindex={{this.computedTabIndex}}
+
+  ...attributes as |model|
+>
+  {{#if (has-block)}}
     {{yield model}}
   {{else}}
-    {{get model labelProperty}}
+    {{get model @labelProperty}}
   {{/if}}
-{{/model-select}}
+</ModelSelect>

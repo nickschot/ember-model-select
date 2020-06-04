@@ -41,11 +41,11 @@ module('Integration | Component | model-select', function(hooks) {
 
     defaultScenario(this.server);
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter"}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" searchEnabled=true}}`);
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
 
-    assert.dom('.ember-power-select-option').exists({ count: 0 });
+    assert.dom('.ember-power-select-option--no-matches-message').exists({ count: 1 });
   });
 
   test('it respects the search* and query parameters', async function(assert) {
@@ -80,7 +80,7 @@ module('Integration | Component | model-select', function(hooks) {
       return schema.users.all();
     });
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" searchKey="name" query=(hash filter=(hash id_not_in="1,2,3"))}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" searchKey="name" query=(hash filter=(hash id_not_in="1,2,3")) searchEnabled=true}}`);
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
   });
@@ -93,7 +93,7 @@ module('Integration | Component | model-select', function(hooks) {
     let handleClick = sinon.spy();
     this.actions = { handleClick };
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' onchange=(action 'handleClick')}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' onChange=(action 'handleClick')}}`);
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
     assert.ok(handleClick.calledOnce, 'onChange hook has been called');
@@ -134,20 +134,20 @@ module('Integration | Component | model-select', function(hooks) {
   test('it shows an Add "<term>"... option when withCreate is true', async function(assert) {
     assert.expect(2);
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true searchEnabled=true}}`);
     await selectSearch('.ember-model-select', 'test');
 
     assert.dom('.ember-power-select-option').exists({ count: 1 });
     assert.dom('.ember-power-select-option').hasText(`Add "test"...`);
   });
 
-  test('it fires the oncreate hook when the create option is selected', async function(assert) {
+  test('it fires the onCreate hook when the create option is selected', async function(assert) {
     assert.expect(2);
 
     let handleCreate = sinon.spy();
     this.actions = { handleCreate };
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true oncreate=(action 'handleCreate')}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true onCreate=(action 'handleCreate') searchEnabled=true}}`);
     await selectSearch('.ember-model-select', 'test');
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
@@ -162,7 +162,7 @@ module('Integration | Component | model-select', function(hooks) {
 
     this.set('selected', null);
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onchange=(action (mut selected))}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onChange=(action (mut selected))}}`);
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
     assert.ok(!isEmpty(this.selected), 'selected item has been set');
@@ -176,11 +176,11 @@ module('Integration | Component | model-select', function(hooks) {
     defaultScenario(this.server);
 
     this.set('selected', '1');
-    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onchange=(action (mut selected))}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onChange=(action (mut selected))}}`);
     assert.dom('.ember-power-select-selected-item').hasText(`Kathryne Raynor`);
 
     this.set('selected', 2);
-    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onchange=(action (mut selected))}}`);
+    await settled();
     assert.dom('.ember-power-select-selected-item').hasText(`Marlen Mayert`);
   });
 

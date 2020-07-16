@@ -1,4 +1,18 @@
 
+## 1.0.0-beta.2 (2020-07-16)
+
+#### :rocket: Enhancement
+* [#87](https://github.com/nickschot/ember-model-select/pull/87) Add argument to specify a "source" as an alternative to the ember-data store ([@joegaudet](https://github.com/joegaudet))
+
+#### :house: Internal
+* [#84](https://github.com/nickschot/ember-model-select/pull/84) update addon-docs to latest version ([@nickschot](https://github.com/nickschot))
+* [#83](https://github.com/nickschot/ember-model-select/pull/83) fix addon-docs generating incorrect URL's for versioned documentation… ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 2
+- Joe Gaudet ([@joegaudet](https://github.com/joegaudet))
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 1.0.0-beta.1 (2020-06-04)
 
 #### :boom: Breaking Change

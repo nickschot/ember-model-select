@@ -27,6 +27,19 @@ import getConfigOption from '../utils/get-config-option';
  */
 export default class ModelSelectComponent extends Component{
   @service store;
+
+  /**
+   * Source to query, either an ember data model or the store
+   * useful when using ember-data-has-many-query.
+   *
+   * @argument source
+   * @type {Model}
+   * @default
+   */
+  get source() {
+    return this.args.source || this.store;
+  }
+
   @service infinity;
 
   /**
@@ -287,7 +300,7 @@ export default class ModelSelectComponent extends Component{
       set(query, this.pageParam, 1);
       set(query, this.perPageParam, this.pageSize);
 
-      _options = yield this.store.query(this.args.modelName, query);
+      _options = yield this.source.query(this.args.modelName, query);
     }
 
     if(createOption){

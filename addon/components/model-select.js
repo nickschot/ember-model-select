@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 
 // import { assert} from '@ember/debug';
 import { isEmpty} from '@ember/utils';
-import { computed, get, set } from '@ember/object';
+import { computed, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { assign } from '@ember/polyfills';
@@ -82,6 +82,18 @@ export default class ModelSelectComponent extends Component{
    * @argument searchKey
    * @type {String}
    */
+
+  /**
+   * Whether or not to nest search query param
+   * (`&searchProperty[searchKey]=…` vs `&searchProperty=…`)
+   *
+   * @argument nestSearchParam
+   * @type {Boolean}
+   * @default true
+   */
+  get nestSearchParam() {
+    return this.args.nestSearchParam === undefined || this.args.nestSearchParam;
+  }
 
   /**
    * Whether to start loading models when dropdown is opened (but no search is entered, yet).
@@ -276,11 +288,15 @@ export default class ModelSelectComponent extends Component{
 
     if(term){
       const searchProperty = this.searchProperty;
-      const searchKey = this.args.searchKey || this.args.labelProperty;
+      if (this.nestSearchParam) {
+        const searchKey = this.args.searchKey || this.args.labelProperty;
 
-      const searchObj = get(query, `${searchProperty}`) || {};
-      set(searchObj, searchKey, term);
-      set(query, searchProperty, searchObj);
+        const searchObj = query[searchProperty] || {};
+        searchObj[searchKey] = term;
+        query[searchProperty] = searchObj;
+      } else {
+        query[searchProperty] = term;
+      }
     }
 
     let _options;

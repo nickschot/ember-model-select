@@ -1,4 +1,4 @@
-import { faker } from 'ember-cli-mirage';
+import faker from 'faker';
 
 export default function(server) {
   faker.seed(123);

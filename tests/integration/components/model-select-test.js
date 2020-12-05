@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import sinon from 'sinon';
 import { render, settled, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { setupMirage } from 'ember-cli-mirage/test-support';
 import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import { clickTrigger, typeInSearch } from 'ember-power-select/test-support/helpers';
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';

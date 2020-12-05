@@ -225,7 +225,8 @@ export default class ModelSelectComponent extends Component{
    * @property _selectedModel
    * @private
    */
-  @computed('args.selectedModel')
+  // eslint-disable-next-line ember/require-computed-property-dependencies
+  @computed('args.{selectedModel,modelName}')
   get _selectedModel(){
     const selectedModel = this.args.selectedModel;
 

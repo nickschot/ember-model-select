@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import sinon from 'sinon';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { setupMirage } from 'ember-cli-mirage/test-support';
 import {selectChoose, selectSearch} from 'ember-power-select/test-support';
 import { clickTrigger, removeMultipleOption } from 'ember-power-select/test-support/helpers';
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';
@@ -17,7 +17,9 @@ module('Integration | Component | model-select-multiple', function(hooks) {
 
     defaultScenario(this.server);
 
-    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name'}}`);
+    this.noop = () => {};
+
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' onChange=this.noop}}`);
     await clickTrigger();
 
     assert.dom('.ember-power-select-option').exists({ count: 25 });
@@ -91,6 +93,6 @@ module('Integration | Component | model-select-multiple', function(hooks) {
     await clickTrigger('.ember-model-select');
 
     assert.dom('.ember-power-select-option').exists({ count: 25 });
-    assert.dom('.ember-power-select-option:first-child').hasText('Test: Kathryne Raynor');
+    assert.dom('.ember-power-select-option:first-child').hasText(`Test: ${this.server.schema.users.first().name}`);
   });
 });

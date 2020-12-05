@@ -1,5 +1,5 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  name: DS.attr('string')
-});
+export default class User extends Model {
+  @attr() name;
+}

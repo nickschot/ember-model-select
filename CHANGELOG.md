@@ -1,4 +1,13 @@
 
+## 1.0.0-beta.3 (2020-12-05)
+
+#### :boom: Breaking Change
+* [#93](https://github.com/nickschot/ember-model-select/pull/93) Upgrade to ember-cli 3.22, use co-location for components ([@nickschot](https://github.com/nickschot))
+
+#### Committers: 1
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
+
 ## 1.0.0-beta.2 (2020-07-16)
 
 #### :rocket: Enhancement

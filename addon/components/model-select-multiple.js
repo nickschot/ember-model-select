@@ -1,5 +1,5 @@
-import { action } from '@ember/object';
 import PowerSelectMultipleComponent from 'ember-power-select/components/power-select-multiple';
+import { action } from '@ember/object';
 
 /**
  * This is a wrapper around the normal model-select component. The same arguments apply.

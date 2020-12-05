@@ -93,6 +93,6 @@ module('Integration | Component | model-select-multiple', function(hooks) {
     await clickTrigger('.ember-model-select');
 
     assert.dom('.ember-power-select-option').exists({ count: 25 });
-    assert.dom('.ember-power-select-option:first-child').hasText('Test: Kathryne Raynor');
+    assert.dom('.ember-power-select-option:first-child').hasText(`Test: ${this.server.schema.users.first().name}`);
   });
 });

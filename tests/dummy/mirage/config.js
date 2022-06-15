@@ -1,4 +1,7 @@
-export default function() {
+import { discoverEmberDataModels } from "ember-cli-mirage";
+import { createServer } from 'miragejs';
+
+export default function(config) {
 
   // These comments are here to help you get started. Feel free to delete them.
 
@@ -24,9 +27,17 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.get('/users');
-  this.get('/users/:id');
-  this.post('/users', 'user');
+  const finalConfig = {
+    ...config,
+    models: { ...discoverEmberDataModels(), ...config.models },
+    routes() {
+      this.get('/users');
+      this.get('/users/:id');
+      this.post('/users', 'user');
 
-  this.passthrough();
+      this.passthrough();
+    },
+  };
+
+  return createServer(finalConfig);
 }

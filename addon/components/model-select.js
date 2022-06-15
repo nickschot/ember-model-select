@@ -8,10 +8,9 @@ import { A } from '@ember/array';
 import { assign } from '@ember/polyfills';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-
-import { timeout } from 'ember-concurrency';
-import { restartableTask, dropTask } from 'ember-concurrency-decorators';
+import { task, timeout } from 'ember-concurrency';
 import getConfigOption from '../utils/get-config-option';
+import { waitFor } from '@ember/test-waiters';
 
 /**
  * The main component.
@@ -238,7 +237,8 @@ export default class ModelSelectComponent extends Component{
     }
   }
 
-  @dropTask({ withTestWaiter: true })
+  @task({ drop: true })
+  @waitFor
   findRecord = function*(modelName, id) {
     // this wrapper task is requried to avoid the following error upon fast changes
     // of selectedModel:
@@ -248,7 +248,8 @@ export default class ModelSelectComponent extends Component{
     return yield this.store.findRecord(modelName, id);
   }
 
-  @restartableTask({ withTestWaiter: true })
+  @task({ restartable: true })
+  @waitFor
   searchModels = function* (term, options, initialLoad = false) {
     let createOption;
 
@@ -270,7 +271,8 @@ export default class ModelSelectComponent extends Component{
     yield this.loadModels.perform(term, createOption);
   }
 
-  @restartableTask({ withTestWaiter: true })
+  @task({ restartable: true })
+  @waitFor
   loadModels = function* (term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
     const query = assign({}, this.args.query);

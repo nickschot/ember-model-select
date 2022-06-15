@@ -1,1 +1,1 @@
-export { default } from 'ember-model-select/utils/get-config-option';
+export { default } from '@eflexsystems/ember-model-select/utils/get-config-option';

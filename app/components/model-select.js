@@ -1,1 +1,1 @@
-export { default } from 'ember-model-select/components/model-select';
+export { default } from '@eflexsystems/ember-model-select/components/model-select';

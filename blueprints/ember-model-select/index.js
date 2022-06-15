@@ -14,7 +14,7 @@ module.exports = {
 
   afterInstall() {
     let dependencies = this.project.dependencies();
-    let importStatement = '\n@import "ember-model-select";\n';
+    let importStatement = '\n@import "@eflexsystems/ember-model-select";\n';
 
     if ('ember-cli-sass' in dependencies) {
       let stylePath = path.join('app', 'styles');

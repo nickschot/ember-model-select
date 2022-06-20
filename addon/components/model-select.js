@@ -1,6 +1,4 @@
 import Component from '@glimmer/component';
-
-// import { assert} from '@ember/debug';
 import { isEmpty } from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';

@@ -4,7 +4,6 @@ import { isEmpty } from '@ember/utils';
 import { get } from '@ember/object';
 import { dasherize } from '@ember/string';
 import { pluralize } from 'ember-inflector';
-import config from 'ember-get-config';
 
 /**
  * findNestedRelationship
@@ -127,7 +126,7 @@ export default JSONAPISerializer.extend({
     let data = json.data;
 
     if (filters.length) {
-      filters.forEach((filter, index) => {
+      filters.forEach((filter) => {
         if (this.ignoreFilters.indexOf(filter.property) !== -1) {
           return;
         }
@@ -458,7 +457,7 @@ export default JSONAPISerializer.extend({
     return path;
   },
 
-  _getAttributePath(property, record) {
+  _getAttributePath(property) {
     // ensure param is underscored
     property = dasherize(property);
     // define full path
@@ -491,7 +490,7 @@ export default JSONAPISerializer.extend({
     });
   },
 
-  _findRecordPath(property, record) {
+  _findRecordPath(property) {
     let path;
     // ensure param is underscored
     property = dasherize(property);

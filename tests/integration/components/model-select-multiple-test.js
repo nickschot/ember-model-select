@@ -23,7 +23,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     this.noop = () => {};
 
     await render(
-      hbs`{{model-select-multiple modelName='user' labelProperty='name' onChange=this.noop}}`
+      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @onChange={{this.noop}} />`
     );
     await clickTrigger();
 
@@ -38,7 +38,12 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     this.set('selected', null);
 
     await render(
-      hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onChange=(action (mut selected))}}`
+      hbs`<ModelSelectMultiple
+        @modelName='user'
+        @labelProperty='name'
+        @selectedModel={{this.selected}}
+        @onChange={{fn (mut this.selected)}}
+      />`
     );
 
     await selectChoose(
@@ -68,7 +73,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     this.set('selected', null);
 
     await render(
-      hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onChange=(action (mut selected))}}`
+      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
     );
 
     await selectChoose(
@@ -95,7 +100,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     assert.expect(2);
 
     await render(
-      hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true searchEnabled=true}}`
+      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @searchEnabled={{true}} />`
     );
     await selectSearch('.ember-model-select-multiple-trigger', 'test');
 
@@ -106,11 +111,16 @@ module('Integration | Component | model-select-multiple', function (hooks) {
   test('it fires the onCreate hook when the create option is selected', async function (assert) {
     assert.expect(2);
 
-    let handleCreate = sinon.spy();
-    this.actions = { handleCreate };
+    this.handleCreate = sinon.spy();
 
     await render(
-      hbs`{{model-select-multiple modelName='user' labelProperty='name' searchProperty="filter" withCreate=true onCreate=(action 'handleCreate') searchEnabled=true}}`
+      hbs`<ModelSelectMultiple
+        @modelName='user'
+        @labelProperty='name'
+        @searchProperty="filter"
+        @withCreate={{true}}
+        @onCreate={{this.handleCreate}}
+        @searchEnabled={{true}} />`
     );
     await selectSearch('.ember-model-select-multiple-trigger', 'test');
     await selectChoose(
@@ -119,9 +129,12 @@ module('Integration | Component | model-select-multiple', function (hooks) {
       1
     );
 
-    assert.ok(handleCreate.calledOnce, 'onCreate hook has been called once');
     assert.ok(
-      handleCreate.calledWith('test'),
+      this.handleCreate.calledOnce,
+      'onCreate hook has been called once'
+    );
+    assert.ok(
+      this.handleCreate.calledWith('test'),
       'onCreate hook has been called with the correct argument'
     );
   });
@@ -132,7 +145,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`{{#model-select-multiple modelName='user' labelProperty='name' as |model|}}Test: {{model.name}}{{/model-select-multiple}}`
+      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' as |model|>Test: {{model.name}}</ModelSelectMultiple>`
     );
     await clickTrigger('.ember-model-select');
 

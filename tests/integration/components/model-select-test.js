@@ -22,7 +22,7 @@ module('Integration | Component | model-select', function (hooks) {
 
     defaultScenario(this.server);
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name'}}`);
+    await render(hbs`<ModelSelect @modelName='user' @labelProperty='name' />`);
     await clickTrigger('.ember-model-select');
 
     assert.dom('.ember-power-select-option').exists({ count: 25 });
@@ -34,7 +34,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' pageSize=10}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @pageSize={{10}} />`
     );
     await clickTrigger('.ember-model-select');
 
@@ -47,7 +47,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" searchEnabled=true}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @searchEnabled={{true}} />`
     );
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
@@ -100,7 +100,13 @@ module('Integration | Component | model-select', function (hooks) {
     });
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" searchKey="name" query=(hash filter=(hash id_not_in="1,2,3")) searchEnabled=true}}`
+      hbs`<ModelSelect
+        @modelName='user'
+        @labelProperty='name'
+        @searchProperty="filter"
+        @searchKey="name"
+        @query={{hash filter=(hash id_not_in="1,2,3")}}
+        @searchEnabled={{true}} />`
     );
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
@@ -111,15 +117,14 @@ module('Integration | Component | model-select', function (hooks) {
 
     defaultScenario(this.server);
 
-    let handleClick = sinon.spy();
-    this.actions = { handleClick };
+    this.handleClick = sinon.spy();
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' onChange=(action 'handleClick')}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @onChange={{this.handleClick}} />`
     );
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
-    assert.ok(handleClick.calledOnce, 'onChange hook has been called');
+    assert.ok(this.handleClick.calledOnce, 'onChange hook has been called');
   });
 
   test('it loads more options when scrolling down', async function (assert) {
@@ -128,7 +133,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' renderInPlace=true}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @renderInPlace={{true}} />`
     );
     await clickTrigger('.ember-model-select');
 
@@ -147,7 +152,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' renderInPlace=true infiniteScroll=false}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @renderInPlace={{true}} @infiniteScroll={{false}} />`
     );
     await clickTrigger('.ember-model-select');
 
@@ -162,7 +167,7 @@ module('Integration | Component | model-select', function (hooks) {
     assert.expect(2);
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true searchEnabled=true}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @searchEnabled={{true}} />`
     );
     await selectSearch('.ember-model-select', 'test');
 
@@ -173,18 +178,20 @@ module('Integration | Component | model-select', function (hooks) {
   test('it fires the onCreate hook when the create option is selected', async function (assert) {
     assert.expect(2);
 
-    let handleCreate = sinon.spy();
-    this.actions = { handleCreate };
+    this.handleCreate = sinon.spy();
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' searchProperty="filter" withCreate=true onCreate=(action 'handleCreate') searchEnabled=true}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @onCreate={{this.handleCreate}} @searchEnabled={{true}} />`
     );
     await selectSearch('.ember-model-select', 'test');
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
-    assert.ok(handleCreate.calledOnce, 'onCreate hook has been called once');
     assert.ok(
-      handleCreate.calledWith('test'),
+      this.handleCreate.calledOnce,
+      'onCreate hook has been called once'
+    );
+    assert.ok(
+      this.handleCreate.calledWith('test'),
       'onCreate hook has been called with the correct argument'
     );
   });
@@ -197,7 +204,7 @@ module('Integration | Component | model-select', function (hooks) {
     this.set('selected', null);
 
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onChange=(action (mut selected))}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
     );
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
@@ -215,7 +222,7 @@ module('Integration | Component | model-select', function (hooks) {
 
     this.set('selected', '1');
     await render(
-      hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onChange=(action (mut selected))}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
     );
     assert
       .dom('.ember-power-select-selected-item')
@@ -234,7 +241,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`{{#model-select modelName='user' labelProperty='name' as |model|}}Test: {{model.name}}{{/model-select}}`
+      hbs`<ModelSelect @modelName='user' @labelProperty='name' as |model|>Test: {{model.name}}</ModelSelect>`
     );
     await clickTrigger('.ember-model-select');
 

@@ -1,8 +1,7 @@
-import { discoverEmberDataModels } from "ember-cli-mirage";
+import { discoverEmberDataModels } from 'ember-cli-mirage';
 import { createServer } from 'miragejs';
 
-export default function(config) {
-
+export default function (config) {
   // These comments are here to help you get started. Feel free to delete them.
 
   /*

@@ -1,10 +1,10 @@
-import { JSONAPISerializer } from "miragejs";
-import { A } from "@ember/array";
-import { isEmpty } from "@ember/utils";
-import { get } from "@ember/object";
-import { dasherize } from "@ember/string";
-import { pluralize } from "ember-inflector";
-import config from "ember-get-config";
+import { JSONAPISerializer } from 'miragejs';
+import { A } from '@ember/array';
+import { isEmpty } from '@ember/utils';
+import { get } from '@ember/object';
+import { dasherize } from '@ember/string';
+import { pluralize } from 'ember-inflector';
+import config from 'ember-get-config';
 
 /**
  * findNestedRelationship
@@ -20,11 +20,16 @@ function findNestedRelationship(record, relationships, path) {
     // property = pathSegments.pop(),
     firstRelationship = pathSegments.shift(),
     // first relationship will be in the data object
-    firstRelationshipId = parseInt(get(record, `relationships.${firstRelationship}.data.id`));
+    firstRelationshipId = parseInt(
+      get(record, `relationships.${firstRelationship}.data.id`)
+    );
 
   // access first relationships object from the includes array
   firstRelationship = relationships.find((relationship) => {
-    return parseInt(relationship.id) === firstRelationshipId && relationship.type === pluralize(firstRelationship);
+    return (
+      parseInt(relationship.id) === firstRelationshipId &&
+      relationship.type === pluralize(firstRelationship)
+    );
   });
 
   if (!firstRelationship) {
@@ -39,7 +44,6 @@ function findNestedRelationship(record, relationships, path) {
     lastRelationship;
 
   while (pathSegments.length > 0) {
-
     let nextRelationshipModel = pathSegments.shift(),
       nestedPath = `relationships.${nextRelationshipModel}.data.id`,
       nextRelationshipId = get(currentRelationship, nestedPath);
@@ -49,11 +53,13 @@ function findNestedRelationship(record, relationships, path) {
     }
 
     currentRelationship = relationships.find((relationship) => {
-      return parseInt(relationship.id) === nextRelationshipId && relationship.type === pluralize(nextRelationshipModel);
+      return (
+        parseInt(relationship.id) === nextRelationshipId &&
+        relationship.type === pluralize(nextRelationshipModel)
+      );
     });
 
     lastRelationship = currentRelationship;
-
   }
 
   if (lastRelationship) {
@@ -65,9 +71,9 @@ function findNestedRelationship(record, relationships, path) {
 
 export default JSONAPISerializer.extend({
   searchByFields: A(['name']),
-  searchKey: "search",
-  sortKey: "sort",
-  filterKey: "filter",
+  searchKey: 'search',
+  sortKey: 'sort',
+  filterKey: 'filter',
   ignoreFilters: A([]),
   filterHook: null,
 
@@ -146,12 +152,12 @@ export default JSONAPISerializer.extend({
               let attribute = get(record, attributePath);
 
               // Convert bool to string
-              if (typeof attribute === "boolean") {
+              if (typeof attribute === 'boolean') {
                 attribute = attribute.toString();
               }
 
               // Convert number to string
-              if (typeof attribute === "number") {
+              if (typeof attribute === 'number') {
                 attribute = attribute.toString();
               }
 
@@ -160,8 +166,8 @@ export default JSONAPISerializer.extend({
               }
             }
             // Is this a related belongs to id?
-            else if (filter.property.endsWith("-id")) {
-              let relationship = filter.property.replace("-id", ""),
+            else if (filter.property.endsWith('-id')) {
+              let relationship = filter.property.replace('-id', ''),
                 path = `relationships.${relationship}.data.id`;
 
               // check the related model is present in the response
@@ -173,9 +179,9 @@ export default JSONAPISerializer.extend({
               }
             }
             // Is this a related hasMany to id(s)?
-            else if (filter.property.endsWith("-ids")) {
+            else if (filter.property.endsWith('-ids')) {
               // Has Many Relationship
-              let relationship = filter.property.replace("-ids", ""),
+              let relationship = filter.property.replace('-ids', ''),
                 path = `relationships.${pluralize(relationship)}.data`;
 
               // check the related model is present in the response
@@ -189,13 +195,13 @@ export default JSONAPISerializer.extend({
               }
             }
             // Is this a related attribute?
-            else if (filter.property.includes(".")) {
-              let segments = filter.property.split("."),
+            else if (filter.property.includes('.')) {
+              let segments = filter.property.split('.'),
                 // last item will be the property
                 relationshipProperty = segments[segments.length - 1];
               // check this path exists in the includes property of our response data
 
-              if (relationshipProperty !== "id") {
+              if (relationshipProperty !== 'id') {
                 relationshipProperty = `attributes.${relationshipProperty}`;
               }
 
@@ -274,7 +280,7 @@ export default JSONAPISerializer.extend({
 
     if (sort && data.length > 0) {
       // does this sort param start with "-"
-      if (sort.indexOf("-") === 0) {
+      if (sort.indexOf('-') === 0) {
         // sort decending
         desc = true;
         // remove prefixed '-'
@@ -311,11 +317,11 @@ export default JSONAPISerializer.extend({
    */
   paginate(res, request) {
     if (
-      request.queryParams["page[number]"] &&
-      request.queryParams["page[size]"]
+      request.queryParams['page[number]'] &&
+      request.queryParams['page[size]']
     ) {
-      const page = parseInt(request.queryParams["page[number]"]),
-        size = parseInt(request.queryParams["page[size]"]),
+      const page = parseInt(request.queryParams['page[number]']),
+        size = parseInt(request.queryParams['page[size]']),
         total = res ? res.data.length : 0,
         pages = Math.ceil(total / size);
 
@@ -367,7 +373,7 @@ export default JSONAPISerializer.extend({
 
         if (value) {
           // make sure it's a string before we split it
-          values = (value + "").split(",");
+          values = (value + '').split(',');
         }
         if (!isEmpty(values)) {
           filters.pushObject({
@@ -426,7 +432,7 @@ export default JSONAPISerializer.extend({
   },
 
   _isAttribute(path) {
-    return path.split(".").length === 1;
+    return path.split('.').length === 1;
   },
 
   _isAttributeKey(attribute, record) {
@@ -434,18 +440,18 @@ export default JSONAPISerializer.extend({
   },
 
   _hasIncludedRelationship(model, included) {
-    return A(included).filterBy("type", pluralize(model)).length > 0;
+    return A(included).filterBy('type', pluralize(model)).length > 0;
   },
 
   _isRelatedAttribute(path) {
-    return path.split(".").length === 2;
+    return path.split('.').length === 2;
   },
 
   _getRelatedIdPath(property) {
     // ensure param is underscored
     property = dasherize(property);
     // destructure property
-    const relatedModel = property.split(".")[0];
+    const relatedModel = property.split('.')[0];
     // define full path
     const path = `relationships.${relatedModel}.data.id`;
 
@@ -464,7 +470,7 @@ export default JSONAPISerializer.extend({
     // ensure param is underscored
     property = dasherize(property);
     // destructure property
-    property = property.split(".")[0];
+    property = property.split('.')[0];
     return property;
   },
 
@@ -472,7 +478,7 @@ export default JSONAPISerializer.extend({
     // ensure param is underscored
     property = dasherize(property);
     // destructure property
-    property = property.split(".")[1];
+    property = property.split('.')[1];
     // define full path
     const path = `attributes.${property}`;
 
@@ -490,7 +496,7 @@ export default JSONAPISerializer.extend({
     // ensure param is underscored
     property = dasherize(property);
     // destructure property
-    const [a, b] = property.split(".");
+    const [a, b] = property.split('.');
     // work out if this is a related property or not
     // and return the key
     if (!isEmpty(b)) {

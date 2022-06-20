@@ -4,6 +4,6 @@ module.exports = {
   extends: 'octane',
   rules: {
     'no-inline-styles': false,
-    'attribute-indentation': false
-  }
+    'attribute-indentation': false,
+  },
 };

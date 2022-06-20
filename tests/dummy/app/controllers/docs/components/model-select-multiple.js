@@ -1,11 +1,11 @@
 import Controller from '@ember/controller';
-import { A } from "@ember/array";
+import { A } from '@ember/array';
 import { action } from '@ember/object';
 
 export default class ModelSelectMultipleController extends Controller {
   @action
-  createMultipleUser(name){
-    if(!Array.isArray(this.users2)){
+  createMultipleUser(name) {
+    if (!Array.isArray(this.users2)) {
       this.set('users2', A([]));
     }
 

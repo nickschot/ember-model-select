@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'dummy',
     environment,
@@ -13,8 +13,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -23,8 +23,8 @@ module.exports = function(environment) {
     },
 
     'ember-model-select': {
-      totalPagesParam: 'meta.pages'
-    }
+      totalPagesParam: 'meta.pages',
+    },
   };
 
   if (environment === 'development') {
@@ -52,7 +52,7 @@ module.exports = function(environment) {
     ENV.rootURL = 'ADDON_DOCS_ROOT_URL';
     // here you can enable a production-specific feature
     ENV['ember-cli-mirage'] = {
-      enabled: true
+      enabled: true,
     };
   }
 

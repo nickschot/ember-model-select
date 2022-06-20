@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { isEmpty } from '@ember/utils';
+// eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
@@ -230,7 +231,7 @@ export default class ModelSelectComponent extends Component {
    * @property _selectedModel
    * @private
    */
-  // eslint-disable-next-line ember/require-computed-property-dependencies
+  // eslint-disable-next-line ember/require-computed-property-dependencies, ember/no-computed-properties-in-native-classes
   @computed('args.{selectedModel,modelName}')
   get _selectedModel() {
     const selectedModel = this.args.selectedModel;

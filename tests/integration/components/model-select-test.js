@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import sinon from 'sinon';
-import { render, settled, click } from '@ember/test-helpers';
+import { click, find, render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { selectChoose, selectSearch } from 'ember-power-select/test-support';
@@ -143,7 +143,7 @@ module('Integration | Component | model-select', function (hooks) {
     );
     await clickTrigger('.ember-model-select');
 
-    this.element.querySelector('.ember-power-select-options').scrollTop = 999;
+    find('.ember-power-select-options').scrollTop = 999;
 
     //TODO: see if we can do this in a neater way
     await timeout(500);
@@ -162,7 +162,7 @@ module('Integration | Component | model-select', function (hooks) {
     );
     await clickTrigger('.ember-model-select');
 
-    this.element.querySelector('.ember-power-select-options').scrollTop = 999;
+    find('.ember-power-select-options').scrollTop = 999;
 
     await settled();
 

@@ -5,7 +5,6 @@ module.exports = {
   parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2018,
-    requireConfigFile: false,
     sourceType: 'module',
     ecmaFeatures: {
       legacyDecorators: true,
@@ -34,6 +33,13 @@ module.exports = {
         './blueprints/*/index.js',
         './config/**/*.js',
         './tests/dummy/config/**/*.js',
+        'compile-css.js',
+      ],
+      excludedFiles: [
+        'addon/**',
+        'addon-test-support/**',
+        'app/**',
+        'tests/dummy/app/**',
       ],
       parserOptions: {
         sourceType: 'script',

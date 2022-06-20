@@ -99,13 +99,19 @@ module('Integration | Component | model-select', function (hooks) {
       return schema.users.all();
     });
 
+    this.set('query', {
+      filter: {
+        id_not_in: '1,2,3',
+      },
+    });
+
     await render(
       hbs`<ModelSelect
         @modelName='user'
         @labelProperty='name'
         @searchProperty="filter"
         @searchKey="name"
-        @query={{hash filter=(hash id_not_in="1,2,3")}}
+        @query={{this.query}}
         @searchEnabled={{true}} />`
     );
     await clickTrigger('.ember-model-select');

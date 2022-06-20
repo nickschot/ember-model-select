@@ -72,6 +72,7 @@ module('Integration | Component | model-select', function (hooks) {
           'page[size]': '25',
         };
 
+        // eslint-disable-next-line qunit/no-conditional-assertions
         assert.deepEqual(
           queryParams,
           expectedQueryParams,
@@ -84,6 +85,7 @@ module('Integration | Component | model-select', function (hooks) {
           'page[size]': '25',
         };
 
+        // eslint-disable-next-line qunit/no-conditional-assertions
         assert.deepEqual(
           queryParams,
           expectedQueryParams,
@@ -203,7 +205,7 @@ module('Integration | Component | model-select', function (hooks) {
 
     await click('.ember-power-select-clear-btn');
 
-    assert.equal(this.selected, null, 'selected item has been cleared');
+    assert.strictEqual(this.selected, null, 'selected item has been cleared');
   });
 
   test('it accepts an id passed to `selectedModel`', async function (assert) {

@@ -291,7 +291,7 @@ export default JSONAPISerializer.extend({
         let path = this._getAttributePath(sort, data[0]);
 
         // sort by property
-        data = A(data).sortBy(path);
+        data = data.sort((a, b) => get(a, path) - get(b, path));
       } else if (this._isRelatedAttribute(sort)) {
         // sort by related
         data = this._sortByIncludedProperty(data, json.included, sort);
@@ -299,7 +299,7 @@ export default JSONAPISerializer.extend({
 
       // reverse sort order?
       if (desc) {
-        data = A(data).reverseObjects();
+        data = data.reverse();
       }
     }
     return data;
@@ -375,7 +375,7 @@ export default JSONAPISerializer.extend({
           values = (value + '').split(',');
         }
         if (!isEmpty(values)) {
-          filters.pushObject({
+          filters.push({
             property,
             values,
           });
@@ -439,7 +439,7 @@ export default JSONAPISerializer.extend({
   },
 
   _hasIncludedRelationship(model, included) {
-    return A(included).filterBy('type', pluralize(model)).length > 0;
+    return included.filter((item) => item.type === pluralize(model)).length > 0;
   },
 
   _isRelatedAttribute(path) {

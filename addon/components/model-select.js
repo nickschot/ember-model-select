@@ -318,7 +318,7 @@ export default class ModelSelectComponent extends Component {
     }
 
     if (createOption) {
-      _options.unshiftObjects([createOption]);
+      _options.unshift(createOption);
     }
 
     this._options = _options;

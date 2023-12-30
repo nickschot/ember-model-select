@@ -50,7 +50,7 @@ The model-select can also be used with a block form. Each of the models is yield
     <ModelSelect
       @modelName="user"
       @labelProperty="name"
-      @selectedModel={{user3}}
+      @selectedModel={{this.user3}}
       @onChange={{fn (mut this.user3)}}
 
       @allowClear={{true}}

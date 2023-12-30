@@ -96,7 +96,7 @@ devDependencies:
     version: 2.1.0
   ember-cli-mirage:
     specifier: ^2.4.0
-    version: 2.4.0(@babel/core@7.23.7)(@ember/test-helpers@2.9.4)(ember-data@3.28.13)(ember-qunit@6.2.0)
+    version: 2.4.0(@babel/core@7.23.7)(@ember/test-helpers@2.9.4)(ember-data@3.28.13)(ember-qunit@5.1.5)
   ember-cli-sass:
     specifier: ^11.0.1
     version: 11.0.1
@@ -119,8 +119,8 @@ devDependencies:
     specifier: ^7.0.0
     version: 7.0.0
   ember-qunit:
-    specifier: ^6.2.0
-    version: 6.2.0(@ember/test-helpers@2.9.4)(ember-source@4.12.3)(qunit@2.20.0)(webpack@5.89.0)
+    specifier: ^5.1.5
+    version: 5.1.5(@ember/test-helpers@2.9.4)(qunit@2.20.0)
   ember-resolver:
     specifier: ^10.0.0
     version: 10.1.1(@ember/string@3.1.1)(ember-source@4.12.3)
@@ -140,8 +140,8 @@ devDependencies:
     specifier: ^5.7.2
     version: 5.13.0
   ember-try:
-    specifier: ^2.0.0
-    version: 2.0.0
+    specifier: ^3.0.0
+    version: 3.0.0
   eslint:
     specifier: ^8.37.0
     version: 8.56.0
@@ -6957,7 +6957,7 @@ packages:
     engines: {node: ^4.5 || 6.* || >= 7.*}
     dev: true
 
-  /ember-cli-mirage@2.4.0(@babel/core@7.23.7)(@ember/test-helpers@2.9.4)(ember-data@3.28.13)(ember-qunit@6.2.0):
+  /ember-cli-mirage@2.4.0(@babel/core@7.23.7)(@ember/test-helpers@2.9.4)(ember-data@3.28.13)(ember-qunit@5.1.5):
     resolution: {integrity: sha512-cy8B+IZV07V6xgnFzktKUsntTQvIqPSS3u4+XaLdNW91yOowLsN2BsuQldN3eCnwswgE3a9eGNGS4I0BD4llNA==}
     engines: {node: '>= 10.*'}
     peerDependencies:
@@ -6983,7 +6983,7 @@ packages:
       ember-destroyable-polyfill: 2.0.3(@babel/core@7.23.7)
       ember-get-config: 0.3.0
       ember-inflector: 4.0.2
-      ember-qunit: 6.2.0(@ember/test-helpers@2.9.4)(ember-source@4.12.3)(qunit@2.20.0)(webpack@5.89.0)
+      ember-qunit: 5.1.5(@ember/test-helpers@2.9.4)(qunit@2.20.0)
       lodash-es: 4.17.21
       miragejs: 0.1.48
     transitivePeerDependencies:
@@ -7721,30 +7721,28 @@ packages:
       - supports-color
     dev: false
 
-  /ember-qunit@6.2.0(@ember/test-helpers@2.9.4)(ember-source@4.12.3)(qunit@2.20.0)(webpack@5.89.0):
-    resolution: {integrity: sha512-mC+0bp8DwWzJLn8SW3GS8KDZIkl4yLsNYwMi5Dw6+aFllq7FM2crd/dfY4MuOIHK7GKdjtmWJTMGnjSpeSayaw==}
-    engines: {node: 14.* || 16.* || >= 18}
+  /ember-qunit@5.1.5(@ember/test-helpers@2.9.4)(qunit@2.20.0):
+    resolution: {integrity: sha512-2cFA4oMygh43RtVcMaBrr086Tpdhgbn3fVZ2awLkzF/rnSN0D0PSRpd7hAD7OdBPerC/ZYRwzVyGXLoW/Zes4A==}
+    engines: {node: 10.* || 12.* || >= 14.*}
     peerDependencies:
-      '@ember/test-helpers': ^2.9.3
-      ember-source: '>=3.28'
+      '@ember/test-helpers': ^2.4.0
       qunit: ^2.13.0
     dependencies:
       '@ember/test-helpers': 2.9.4(@babel/core@7.23.7)(ember-source@4.12.3)
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 3.0.2
       common-tags: 1.8.2
-      ember-auto-import: 2.7.2(webpack@5.89.0)
+      ember-auto-import: 1.12.2
       ember-cli-babel: 7.26.11
       ember-cli-test-loader: 3.1.0
-      ember-source: 4.12.3(@babel/core@7.23.7)(@glimmer/component@1.1.2)(webpack@5.89.0)
       qunit: 2.20.0
-      resolve-package-path: 4.0.3
+      resolve-package-path: 3.1.0
       silent-error: 1.1.1
-      validate-peer-dependencies: 2.2.0
+      validate-peer-dependencies: 1.2.0
     transitivePeerDependencies:
-      - '@glint/template'
       - supports-color
-      - webpack
+      - webpack-cli
+      - webpack-command
     dev: true
 
   /ember-resolver@10.1.1(@ember/string@3.1.1)(ember-source@4.12.3):
@@ -8023,9 +8021,9 @@ packages:
       - encoding
     dev: true
 
-  /ember-try@2.0.0:
-    resolution: {integrity: sha512-2N7Vic45sbAegA5fhdfDjVbEVS4r+ze+tTQs2/wkY+8fC5yAGHfCM5ocyoTfBN5m7EhznC3AyMsOy4hLPzHFSQ==}
-    engines: {node: 10.* || 12.* || >= 14.*}
+  /ember-try@3.0.0:
+    resolution: {integrity: sha512-ZYVKYWMnrHSD3vywo7rV76kPCOC9ATIEnGGG/PEKfCcFE0lB26jltRDnOrhORfLKq0JFp62fFxC/4940U+MwRQ==}
+    engines: {node: 16.* || >= 18.*}
     dependencies:
       chalk: 4.1.2
       cli-table3: 0.6.3
@@ -8033,9 +8031,10 @@ packages:
       debug: 4.3.4
       ember-try-config: 4.0.0
       execa: 4.1.0
-      fs-extra: 9.1.0
+      fs-extra: 6.0.1
       resolve: 1.22.8
       rimraf: 3.0.2
+      semver: 7.5.4
       walk-sync: 2.2.0
     transitivePeerDependencies:
       - encoding
@@ -14835,14 +14834,6 @@ packages:
     resolution: {integrity: sha512-nd2HUpKc6RWblPZQ2GDuI65sxJ2n/UqZwSBVtj64xlWjMx0m7ZB2m9b2JS3v1f+n9VWH/dd1CMhkHfP6pIdckA==}
     dependencies:
       resolve-package-path: 3.1.0
-      semver: 7.5.4
-    dev: true
-
-  /validate-peer-dependencies@2.2.0:
-    resolution: {integrity: sha512-8X1OWlERjiUY6P6tdeU9E0EwO8RA3bahoOVG7ulOZT5MqgNDUO/BQoVjYiHPcNe+v8glsboZRIw9iToMAA2zAA==}
-    engines: {node: '>= 12'}
-    dependencies:
-      resolve-package-path: 4.0.3
       semver: 7.5.4
     dev: true
 

@@ -7,7 +7,7 @@ module('Integration | Component | model-select/spinner', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders the spinner element', async function (assert) {
-    await render(hbs`{{model-select/spinner}}`);
+    await render(hbs`<ModelSelect::Spinner />`);
 
     assert.dom('.ember-model-select__spinner').exists();
   });

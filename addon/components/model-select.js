@@ -10,7 +10,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 import { timeout } from 'ember-concurrency';
-import { restartableTask, dropTask } from 'ember-concurrency-decorators';
+import { restartableTask, dropTask } from 'ember-concurrency';
 import getConfigOption from '../utils/get-config-option';
 
 /**
@@ -238,8 +238,8 @@ export default class ModelSelectComponent extends Component{
     }
   }
 
-  @dropTask({ withTestWaiter: true })
-  findRecord = function*(modelName, id) {
+  @dropTask
+  *findRecord(modelName, id) {
     // this wrapper task is requried to avoid the following error upon fast changes
     // of selectedModel:
     // Error: Assertion Failed: You attempted to remove a function listener which
@@ -248,8 +248,8 @@ export default class ModelSelectComponent extends Component{
     return yield this.store.findRecord(modelName, id);
   }
 
-  @restartableTask({ withTestWaiter: true })
-  searchModels = function* (term, options, initialLoad = false) {
+  @restartableTask
+  *searchModels(term, options, initialLoad = false) {
     let createOption;
 
     if(this.args.withCreate && term){
@@ -270,8 +270,8 @@ export default class ModelSelectComponent extends Component{
     yield this.loadModels.perform(term, createOption);
   }
 
-  @restartableTask({ withTestWaiter: true })
-  loadModels = function* (term, createOption) {
+  @restartableTask
+  *loadModels (term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
     const query = assign({}, this.args.query);
 

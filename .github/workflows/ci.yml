@@ -66,6 +66,10 @@ jobs:
       fail-fast: false
       matrix:
         try-scenario:
+          - power-select-4
+          - power-select-5
+          - power-select-6
+          - power-select-7
           - ember-lts-3.28
           - ember-lts-4.4
           - ember-lts-4.8

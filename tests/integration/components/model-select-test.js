@@ -203,7 +203,7 @@ module('Integration | Component | model-select', function (hooks) {
 
     await click('.ember-power-select-clear-btn');
 
-    assert.equal(this.selected, null, 'selected item has been cleared');
+    assert.strictEqual(this.selected, null, 'selected item has been cleared');
   });
 
   test('it accepts an id passed to `selectedModel`', async function (assert) {

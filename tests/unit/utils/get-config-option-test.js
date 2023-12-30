@@ -8,6 +8,6 @@ module('Unit | Utility | get-config-option', function (hooks) {
   test('it returns the passed default when the global option is not set', function (assert) {
     assert.expect(1);
 
-    assert.equal(getConfigOption('perPageParam', 'foo'), 'foo');
+    assert.strictEqual(getConfigOption('perPageParam', 'foo'), 'foo');
   });
 });

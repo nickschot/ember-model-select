@@ -52,7 +52,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
       2
     );
 
-    assert.equal(this.selected.length, 2, 'two options have been selected');
+    assert.strictEqual(this.selected.length, 2, 'two options have been selected');
     assert.dom('.ember-power-select-multiple-option').exists({ count: 2 });
   });
 
@@ -83,7 +83,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
       this.selected[0].get('name')
     );
 
-    assert.equal(this.selected.length, 1, 'one option has been selected');
+    assert.strictEqual(this.selected.length, 1, 'one option has been selected');
     assert.dom('.ember-power-select-multiple-option').exists({ count: 1 });
   });
 

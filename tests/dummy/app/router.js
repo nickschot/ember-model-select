@@ -11,7 +11,7 @@ Router.map(function () {
     this.route('usage');
     this.route('quickstart');
 
-    this.route('components', function (){
+    this.route('components', function () {
       this.route('model-select');
       this.route('model-select-multiple');
     });

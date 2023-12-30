@@ -2,5 +2,5 @@ import JSONAPISerializer from 'ember-mirage-sauce/mirage-serializers/json-api-se
 import { A } from '@ember/array';
 
 export default JSONAPISerializer.extend({
-  searchByFields: A(['name'])
+  searchByFields: A(['name']),
 });

@@ -33,6 +33,7 @@
     "prepare": "node ./compile-css.js"
   },
   "dependencies": {
+    "@embroider/util": "^1.12.1",
     "@ember/test-waiters": "^2.4.5",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",

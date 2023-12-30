@@ -12,6 +12,9 @@ dependencies:
   '@ember/test-waiters':
     specifier: ^2.4.5
     version: 2.4.5
+  '@embroider/util':
+    specifier: 1.12.1
+    version: 1.12.1(ember-source@4.12.3)
   '@glimmer/component':
     specifier: ^1.1.2
     version: 1.1.2(@babel/core@7.23.7)

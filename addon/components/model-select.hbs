@@ -34,7 +34,7 @@
     @onOpen={{this.onOpen}}
     @options={{this._options}}
     @optionsComponent={{component
-      this.optionsComponent
+      (ensure-safe-component this.optionsComponent)
       infiniteScroll=this.infiniteScroll
       infiniteModel=this.model
       withCreate=this.withCreate}}
@@ -52,7 +52,7 @@
     @selectedItemComponent={{@selectedItemComponent}}
     @tabindex={{@tabindex}}
     @triggerClass={{@triggerClass}}
-    @triggerComponent={{@triggerComponent}}
+    @triggerComponent={{ensure-safe-component @triggerComponent}}
     @triggerId={{@triggerId}}
     @triggerRole={{@triggerRole}}
     @typeAheadMatcher={{@typeAheadMatcher}}

@@ -61,7 +61,7 @@
     ...attributes
     as |model|
   >
-    {{#if hasBlock}}
+    {{#if (has-block)}}
       {{yield model}}
     {{else}}
       {{get model @labelProperty}}

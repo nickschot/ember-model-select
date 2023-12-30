@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 
-// import { assert} from '@ember/debug';
-import { isEmpty} from '@ember/utils';
+import { isEmpty } from '@ember/utils';
+// eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
@@ -10,7 +10,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 import { timeout } from 'ember-concurrency';
-import { restartableTask, dropTask } from 'ember-concurrency-decorators';
+import { restartableTask, dropTask } from 'ember-concurrency';
 import getConfigOption from '../utils/get-config-option';
 
 /**
@@ -25,7 +25,7 @@ import getConfigOption from '../utils/get-config-option';
  *
  * @yield {object} model
  */
-export default class ModelSelectComponent extends Component{
+export default class ModelSelectComponent extends Component {
   @service store;
 
   /**
@@ -73,7 +73,9 @@ export default class ModelSelectComponent extends Component{
    * @default 'search'
    */
   get searchProperty() {
-    return this.args.searchProperty || getConfigOption('searchProperty', 'search');
+    return (
+      this.args.searchProperty || getConfigOption('searchProperty', 'search')
+    );
   }
 
   /**
@@ -128,7 +130,9 @@ export default class ModelSelectComponent extends Component{
    * @default 250
    */
   get debounceDuration() {
-    return this.args.debounceDuration || getConfigOption('debounceDuration', 250);
+    return (
+      this.args.debounceDuration || getConfigOption('debounceDuration', 250)
+    );
   }
 
   /**
@@ -157,7 +161,9 @@ export default class ModelSelectComponent extends Component{
    * @default 'page[size]'
    */
   get perPageParam() {
-    return this.args.perPageParam || getConfigOption('perPageParam', 'page[size]');
+    return (
+      this.args.perPageParam || getConfigOption('perPageParam', 'page[size]')
+    );
   }
 
   /**
@@ -183,7 +189,10 @@ export default class ModelSelectComponent extends Component{
    * @default 'meta.total'
    */
   get totalPagesParam() {
-    return this.args.totalPagesParam || getConfigOption('totalPagesParam', 'meta.total');
+    return (
+      this.args.totalPagesParam ||
+      getConfigOption('totalPagesParam', 'meta.total')
+    );
   }
 
   /**
@@ -206,17 +215,16 @@ export default class ModelSelectComponent extends Component{
    * @type {Action}
    */
 
-
   @tracked _options;
   @tracked model;
 
   // constructor() {
   //   super(...arguments);
 
-    // assert('{{model-select}} requires a valid `modelName`.', !isEmpty(this.get('modelName')));
-    // assert('{{model-select}} requires a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
-    // assert('{{model-select}} requires `debounceDuration` to be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
-    // assert('{{model-select}} `searchProperty` cannot be undefined or empty', !isEmpty(this.get('searchProperty')));
+  // assert('{{model-select}} requires a valid `modelName`.', !isEmpty(this.get('modelName')));
+  // assert('{{model-select}} requires a valid `labelProperty`.', !isEmpty(this.get('labelProperty')));
+  // assert('{{model-select}} requires `debounceDuration` to be an Integer.', !isEmpty(this.get('debounceDuration')) && Number.isInteger(this.get('debounceDuration')));
+  // assert('{{model-select}} `searchProperty` cannot be undefined or empty', !isEmpty(this.get('searchProperty')));
   // }
 
   /**
@@ -225,21 +233,26 @@ export default class ModelSelectComponent extends Component{
    * @property _selectedModel
    * @private
    */
-  // eslint-disable-next-line ember/require-computed-property-dependencies
+  // eslint-disable-next-line ember/require-computed-property-dependencies, ember/no-computed-properties-in-native-classes
   @computed('args.{selectedModel,modelName}')
-  get _selectedModel(){
+  get _selectedModel() {
     const selectedModel = this.args.selectedModel;
 
-    if(typeof selectedModel === "number" || typeof selectedModel === "string"){
+    if (
+      typeof selectedModel === 'number' ||
+      typeof selectedModel === 'string'
+    ) {
       const id = parseInt(selectedModel, 10);
-      return !isNaN(id) ? this.findRecord.perform(this.args.modelName, id) : null;
+      return !isNaN(id)
+        ? this.findRecord.perform(this.args.modelName, id)
+        : null;
     } else {
       return selectedModel;
     }
   }
 
-  @dropTask({ withTestWaiter: true })
-  findRecord = function*(modelName, id) {
+  @dropTask
+  *findRecord(modelName, id) {
     // this wrapper task is requried to avoid the following error upon fast changes
     // of selectedModel:
     // Error: Assertion Failed: You attempted to remove a function listener which
@@ -248,14 +261,14 @@ export default class ModelSelectComponent extends Component{
     return yield this.store.findRecord(modelName, id);
   }
 
-  @restartableTask({ withTestWaiter: true })
-  searchModels = function* (term, options, initialLoad = false) {
+  @restartableTask
+  *searchModels(term, options, initialLoad = false) {
     let createOption;
 
-    if(this.args.withCreate && term){
+    if (this.args.withCreate && term) {
       createOption = {
         __value__: term,
-        __isSuggestion__: true
+        __isSuggestion__: true,
       };
       createOption[this.args.labelProperty] = this.args.buildSuggestion
         ? this.args.buildSuggestion(term)
@@ -263,19 +276,19 @@ export default class ModelSelectComponent extends Component{
       this._options = A([createOption]);
     }
 
-    if(!initialLoad){
+    if (!initialLoad) {
       yield timeout(this.debounceDuration);
     }
 
     yield this.loadModels.perform(term, createOption);
   }
 
-  @restartableTask({ withTestWaiter: true })
-  loadModels = function* (term, createOption) {
+  @restartableTask
+  *loadModels(term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
     const query = assign({}, this.args.query);
 
-    if(term){
+    if (term) {
       const searchProperty = this.searchProperty;
       const searchKey = this.args.searchKey || this.args.labelProperty;
 
@@ -286,12 +299,12 @@ export default class ModelSelectComponent extends Component{
 
     let _options;
 
-    if(this.infiniteScroll){
+    if (this.infiniteScroll) {
       // ember-infinity configuration
-      query.perPage         = this.pageSize;
+      query.perPage = this.pageSize;
 
-      query.perPageParam    = this.perPageParam;
-      query.pageParam       = this.pageParam;
+      query.perPageParam = this.perPageParam;
+      query.pageParam = this.pageParam;
       query.totalPagesParam = this.totalPagesParam;
 
       this.model = this.infinity.model(this.args.modelName, query);
@@ -304,15 +317,18 @@ export default class ModelSelectComponent extends Component{
       _options = yield this.source.query(this.args.modelName, query);
     }
 
-    if(createOption){
+    if (createOption) {
       _options.unshiftObjects([createOption]);
     }
 
     this._options = _options;
   }
 
-  loadDefaultOptions(){
-    if(this.args.loadDefaultOptions === undefined || this.args.loadDefaultOptions) {
+  loadDefaultOptions() {
+    if (
+      this.args.loadDefaultOptions === undefined ||
+      this.args.loadDefaultOptions
+    ) {
       this.searchModels.perform(null, null, true);
     }
   }
@@ -328,7 +344,7 @@ export default class ModelSelectComponent extends Component{
 
   @action
   onInput(term) {
-    if(isEmpty(term)){
+    if (isEmpty(term)) {
       this.loadDefaultOptions();
     }
 
@@ -348,7 +364,7 @@ export default class ModelSelectComponent extends Component{
 
   @action
   change(model, select) {
-    if(!isEmpty(model) && model.__isSuggestion__) {
+    if (!isEmpty(model) && model.__isSuggestion__) {
       if (this.args.onCreate) {
         this.args.onCreate(model.__value__, select);
       }

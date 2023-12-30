@@ -1,0 +1,10 @@
+# unconventional files
+/blueprints/*/files/
+
+# compiled output
+/dist/
+
+# addons
+/.node_modules.ember-try/
+
+/vendor/ember-model-select.css

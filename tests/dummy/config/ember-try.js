@@ -8,6 +8,42 @@ module.exports = async function () {
     usePnpm: true,
     scenarios: [
       {
+        name: 'power-select-4',
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.28.12',
+            'ember-power-select': '^4.0.0',
+          },
+        },
+      },
+      {
+        name: 'power-select-5',
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.28.12',
+            'ember-power-select': '^5.0.0',
+          },
+        },
+      },
+      {
+        name: 'power-select-6',
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.28.12',
+            'ember-power-select': '^6.0.0',
+          },
+        },
+      },
+      {
+        name: 'power-select-7',
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.28.12',
+            'ember-power-select': '^7.0.0',
+          },
+        },
+      },
+      {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {

@@ -19,7 +19,7 @@
     "build": "ember build --environment=production",
     "changelog": "npx lerna-changelog --from=v0.1.0-alpha.7 > CHANGELOG.md",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
-    "lint:css": "stylelint \"**/*.css\"",
+    "lint:css": "stylelint \"**/*.css\" --allow-empty-input",
     "lint:css:fix": "concurrently \"npm:lint:css -- --fix\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
     "lint:hbs": "ember-template-lint .",

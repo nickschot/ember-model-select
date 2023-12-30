@@ -12,6 +12,7 @@ import {
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';
 import { timeout } from 'ember-concurrency';
 import { isEmpty } from '@ember/utils';
+import { set } from '@ember/object';
 
 module('Integration | Component | model-select', function (hooks) {
   setupRenderingTest(hooks);
@@ -195,7 +196,7 @@ module('Integration | Component | model-select', function (hooks) {
 
     defaultScenario(this.server);
 
-    this.set('selected', null);
+    this.selected = null;
 
     await render(
       hbs`<ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
@@ -214,7 +215,8 @@ module('Integration | Component | model-select', function (hooks) {
 
     defaultScenario(this.server);
 
-    this.set('selected', '1');
+    this.selected = '1';
+
     await render(
       hbs`<ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
     );
@@ -222,7 +224,7 @@ module('Integration | Component | model-select', function (hooks) {
       .dom('.ember-power-select-selected-item')
       .hasText(this.server.schema.users.find(1).name);
 
-    this.set('selected', 2);
+    set(this, 'selected', 2);
     await settled();
     assert
       .dom('.ember-power-select-selected-item')

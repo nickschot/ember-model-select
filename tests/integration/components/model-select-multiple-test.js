@@ -23,7 +23,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     this.noop = () => {};
 
     await render(
-      hbs`{{model-select-multiple modelName='user' labelProperty='name' onChange=this.noop}}`
+      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @onChange={{this.noop}} />`
     );
     await clickTrigger();
 
@@ -35,7 +35,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
 
     defaultScenario(this.server);
 
-    this.set('selected', null);
+    this.selected = null;
 
     await render(
       hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
@@ -65,7 +65,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
 
     defaultScenario(this.server);
 
-    this.set('selected', null);
+    this.selected = null;
 
     await render(
       hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`

@@ -1,5 +1,5 @@
-import { getWithDefault } from '@ember/object';
 import config from 'ember-get-config';
+import { get } from '@ember/object';
 
 /**
  *  Get's the passed configuration option from the `ember-model-select`
@@ -13,5 +13,9 @@ import config from 'ember-get-config';
  * @hide
  */
 export default function getConfigOption(key, defaultValue) {
-  return getWithDefault(config, `ember-model-select.${key}`, defaultValue);
+  let value = get(config, `ember-model-select.${key}`);
+  if (value !== undefined) {
+    return value;
+  }
+  return defaultValue;
 }

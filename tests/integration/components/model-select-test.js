@@ -162,7 +162,7 @@ module('Integration | Component | model-select', function(hooks) {
 
     this.set('selected', null);
 
-    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onChange=(action (mut selected))}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=this.selected onChange=(fn (mut this.selected))}}`);
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
     assert.ok(!isEmpty(this.selected), 'selected item has been set');
@@ -178,7 +178,7 @@ module('Integration | Component | model-select', function(hooks) {
     defaultScenario(this.server);
 
     this.set('selected', '1');
-    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=selected onChange=(action (mut selected))}}`);
+    await render(hbs`{{model-select modelName='user' labelProperty='name' allowClear=true selectedModel=this.selected onChange=(fn (mut this.selected))}}`);
     assert.dom('.ember-power-select-selected-item').hasText(this.server.schema.users.find(1).name);
 
     this.set('selected', 2);

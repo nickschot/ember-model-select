@@ -32,7 +32,7 @@ module('Integration | Component | model-select-multiple', function(hooks) {
 
     this.set('selected', null);
 
-    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onChange=(action (mut selected))}}`);
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=this.selected onChange=(fn (mut this.selected))}}`);
 
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 1);
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 2);
@@ -48,7 +48,7 @@ module('Integration | Component | model-select-multiple', function(hooks) {
 
     this.set('selected', null);
 
-    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=selected onChange=(action (mut selected))}}`);
+    await render(hbs`{{model-select-multiple modelName='user' labelProperty='name' selectedModel=this.selected onChange=(fn (mut this.selected))}}`);
 
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 1);
     await selectChoose('.ember-model-select-multiple-trigger', '.ember-power-select-option', 2);

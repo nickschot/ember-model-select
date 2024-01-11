@@ -6659,7 +6659,7 @@ packages:
       ember-fetch: 8.1.2
       ember-get-config: 1.1.0
       ember-keyboard: 7.0.1(@babel/core@7.23.7)
-      ember-modal-dialog: github.com/yapplabs/ember-modal-dialog/31ffee4c657ebe96b1f80adbc39c0339b52236e2(ember-source@4.12.3)
+      ember-modal-dialog: git@github.com+yapplabs/ember-modal-dialog/31ffee4c657ebe96b1f80adbc39c0339b52236e2(ember-source@4.12.3)
       ember-responsive: 4.0.2
       ember-router-generator: 2.0.0
       ember-router-scroll: 4.1.2(@babel/core@7.23.7)
@@ -9070,8 +9070,8 @@ packages:
       inherits: 2.0.4
       readable-stream: 2.3.8
 
-  /follow-redirects@1.15.3:
-    resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
+  /follow-redirects@1.15.4:
+    resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -9893,7 +9893,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.3
+      follow-redirects: 1.15.4
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -15395,9 +15395,9 @@ packages:
       - supports-color
     dev: true
 
-  github.com/yapplabs/ember-modal-dialog/31ffee4c657ebe96b1f80adbc39c0339b52236e2(ember-source@4.12.3):
-    resolution: {tarball: https://codeload.github.com/yapplabs/ember-modal-dialog/tar.gz/31ffee4c657ebe96b1f80adbc39c0339b52236e2}
-    id: github.com/yapplabs/ember-modal-dialog/31ffee4c657ebe96b1f80adbc39c0339b52236e2
+  git@github.com+yapplabs/ember-modal-dialog/31ffee4c657ebe96b1f80adbc39c0339b52236e2(ember-source@4.12.3):
+    resolution: {commit: 31ffee4c657ebe96b1f80adbc39c0339b52236e2, repo: git@github.com:yapplabs/ember-modal-dialog.git, type: git}
+    id: git@github.com+yapplabs/ember-modal-dialog/31ffee4c657ebe96b1f80adbc39c0339b52236e2
     name: ember-modal-dialog
     version: 4.0.0-alpha.1
     engines: {node: 12.* || 14.* || >= 16}

@@ -1,3 +1,9 @@
+import { get } from '@ember/helper';
+import perform from 'ember-concurrency/helpers/perform';
+import ModelSelectSpinner from 'ember-model-select/components/model-select/spinner';
+import PowerSelect from 'ember-power-select/components/power-select';
+import or from 'ember-truth-helpers/helpers/or';
+
 import Component from '@glimmer/component';
 
 import { isEmpty } from '@ember/utils';
@@ -374,4 +380,82 @@ export default class ModelSelectComponent extends Component {
       }
     }
   }
+
+
+  <template><div class="ember-model-select">
+  <PowerSelect
+  @afterOptionsComponent={{@afterOptionsComponent}}
+  @allowClear={{@allowClear}}
+  @animationEnabled={{@animationEnabled}}
+  @ariaDescribedBy={{@ariaDescribedBy}}
+  @ariaInvalid={{@ariaInvalid}}
+  @ariaLabel={{@ariaLabel}}
+  @ariaLabelledBy={{@ariaLabelledBy}}
+  @beforeOptionsComponent={{@beforeOptionsComponent}}
+  @buildSelection={{@buildSelection}}
+  @calculatePosition={{@calculatePosition}}
+  @closeOnSelect={{@closeOnSelect}}
+  @defaultHighlighted={{@defaultHighlighted}}
+  @destination={{@destination}}
+  @disabled={{@disabled}}
+  @dropdownClass={{or @dropdownClass "ember-model-select__dropdown"}}
+  @extra={{@extra}}
+  @groupComponent={{@groupComponent}}
+  @highlightOnHover={{@highlightOnHover}}
+  @horizontalPosition={{@horizontalPosition}}
+  @initiallyOpened={{@initiallyOpened}}
+  @loadingMessage={{@loadingMessage}}
+  @eventType={{@eventType}}
+  @matcher={{@matcher}}
+  @matchTriggerWidth={{@matchTriggerWidth}}
+  @noMatchesMessage={{@noMatchesMessage}}
+  @onBlur={{@onBlur}}
+  @onChange={{this.change}}
+  @onClose={{this.onClose}}
+  @onFocus={{@onFocus}}
+  @onInput={{this.onInput}}
+  @onKeydown={{@onKeydown}}
+  @onOpen={{this.onOpen}}
+  @options={{this._options}}
+  @optionsComponent={{component
+    this.optionsComponent
+    infiniteScroll=this.infiniteScroll
+    infiniteModel=this.model
+    withCreate=this.withCreate}}
+  @placeholder={{@placeholder}}
+  @placeholderComponent={{@placeholderComponent}}
+  @preventScroll={{@preventScroll}}
+  @renderInPlace={{@renderInPlace}}
+  @scrollTo={{@scrollTo}}
+  @search={{perform this.searchModels}}
+  @searchEnabled={{@searchEnabled}}
+  @searchField={{@searchField}}
+  @searchMessage={{@searchMessage}}
+  @searchPlaceholder={{@searchPlaceholder}}
+  @selected={{this._selectedModel}}
+  @selectedItemComponent={{@selectedItemComponent}}
+  @tabindex={{@tabindex}}
+  @triggerClass={{@triggerClass}}
+  @triggerComponent={{@triggerComponent}}
+  @triggerId={{@triggerId}}
+  @triggerRole={{@triggerRole}}
+  @typeAheadMatcher={{@typeAheadMatcher}}
+  @verticalPosition={{@verticalPosition}}
+  @withCreate={{@withCreate}}
+  ...attributes
+  as |model|
+  >
+  {{#if (has-block)}}
+    {{yield model}}
+  {{else}}
+    {{get model @labelProperty}}
+  {{/if}}
+  </PowerSelect>
+
+  {{#if this.loadModels.isRunning}}
+  <div class="ember-model-select__loading">
+    <ModelSelectSpinner />
+  </div>
+  {{/if}}
+  </div></template>
 }

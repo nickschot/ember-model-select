@@ -1,3 +1,6 @@
+import { fn } from '@ember/helper';
+import ModelSelectMultiple from 'ember-model-select/components/model-select-multiple';
+
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import sinon from 'sinon';
@@ -22,8 +25,13 @@ module('Integration | Component | model-select-multiple', function (hooks) {
 
     this.noop = () => {};
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @onChange={{this.noop}} />`
+      <template><ModelSelectMultiple @modelName='user' @labelProperty='name' @onChange={{self.noop}} /></template>
     );
     await clickTrigger();
 
@@ -37,8 +45,13 @@ module('Integration | Component | model-select-multiple', function (hooks) {
 
     this.selected = null;
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
+      <template><ModelSelectMultiple @modelName='user' @labelProperty='name' @selectedModel={{self.selected}} @onChange={{fn (mut self.selected)}} /></template>
     );
 
     await selectChoose(
@@ -67,8 +80,13 @@ module('Integration | Component | model-select-multiple', function (hooks) {
 
     this.selected = null;
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
+      <template><ModelSelectMultiple @modelName='user' @labelProperty='name' @selectedModel={{self.selected}} @onChange={{fn (mut self.selected)}} /></template>
     );
 
     await selectChoose(
@@ -95,7 +113,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     assert.expect(2);
 
     await render(
-      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @searchEnabled={{true}} />`
+      <template><ModelSelectMultiple @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @searchEnabled={{true}} /></template>
     );
     await selectSearch('.ember-model-select-multiple-trigger', 'test');
 
@@ -108,8 +126,13 @@ module('Integration | Component | model-select-multiple', function (hooks) {
 
     this.handleCreate = sinon.spy();
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelectMultiple @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @onCreate={{this.handleCreate}} @searchEnabled={{true}} />`
+      <template><ModelSelectMultiple @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @onCreate={{self.handleCreate}} @searchEnabled={{true}} /></template>
     );
     await selectSearch('.ember-model-select-multiple-trigger', 'test');
     await selectChoose(
@@ -134,7 +157,7 @@ module('Integration | Component | model-select-multiple', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`<ModelSelectMultiple @modelName="user" @labelProperty="name" as |model|>Test: {{model.name}}</ModelSelectMultiple>`
+      <template><ModelSelectMultiple @modelName="user" @labelProperty="name" as |model|>Test: {{model.name}}</ModelSelectMultiple></template>
     );
     await clickTrigger('.ember-model-select');
 

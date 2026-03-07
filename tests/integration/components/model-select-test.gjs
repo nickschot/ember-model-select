@@ -1,3 +1,6 @@
+import { fn, hash } from '@ember/helper';
+import ModelSelect from 'ember-model-select/components/model-select';
+
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import sinon from 'sinon';
@@ -23,7 +26,9 @@ module('Integration | Component | model-select', function (hooks) {
 
     defaultScenario(this.server);
 
-    await render(hbs`<ModelSelect @modelName='user' @labelProperty='name' />`);
+    await render(
+        <template><ModelSelect @modelName='user' @labelProperty='name' /></template>
+    );
     await clickTrigger('.ember-model-select');
 
     assert.dom('.ember-power-select-option').exists({ count: 25 });
@@ -35,7 +40,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @pageSize={{10}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @pageSize={{10}} /></template>
     );
     await clickTrigger('.ember-model-select');
 
@@ -48,7 +53,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @searchEnabled={{true}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @searchEnabled={{true}} /></template>
     );
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
@@ -101,7 +106,7 @@ module('Integration | Component | model-select', function (hooks) {
     });
 
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @searchKey="name" @query={{hash filter=(hash id_not_in="1,2,3")}} @searchEnabled={{true}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @searchKey="name" @query={{hash filter=(hash id_not_in="1,2,3")}} @searchEnabled={{true}} /></template>
     );
     await clickTrigger('.ember-model-select');
     await typeInSearch('asdasdasd');
@@ -114,8 +119,13 @@ module('Integration | Component | model-select', function (hooks) {
 
     this.handleClick = sinon.spy();
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @onChange={{this.handleClick}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @onChange={{self.handleClick}} /></template>
     );
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
@@ -128,7 +138,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @renderInPlace={{true}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @renderInPlace={{true}} /></template>
     );
     await clickTrigger('.ember-model-select');
 
@@ -147,7 +157,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @renderInPlace={{true}} @infiniteScroll={{false}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @renderInPlace={{true}} @infiniteScroll={{false}} /></template>
     );
     await clickTrigger('.ember-model-select');
 
@@ -162,7 +172,7 @@ module('Integration | Component | model-select', function (hooks) {
     assert.expect(2);
 
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @searchEnabled={{true}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @searchEnabled={{true}} /></template>
     );
     await selectSearch('.ember-model-select', 'test');
 
@@ -175,8 +185,13 @@ module('Integration | Component | model-select', function (hooks) {
 
     this.handleCreate = sinon.spy();
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @onCreate={{this.handleCreate}} @searchEnabled={{true}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @searchProperty="filter" @withCreate={{true}} @onCreate={{self.handleCreate}} @searchEnabled={{true}} /></template>
     );
     await selectSearch('.ember-model-select', 'test');
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
@@ -198,8 +213,13 @@ module('Integration | Component | model-select', function (hooks) {
 
     this.selected = null;
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{self.selected}} @onChange={{fn (mut self.selected)}} /></template>
     );
     await selectChoose('.ember-model-select', '.ember-power-select-option', 1);
 
@@ -217,8 +237,13 @@ module('Integration | Component | model-select', function (hooks) {
 
     this.selected = '1';
 
+    const self = this;
+
+
+
+
     await render(
-      hbs`<ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{this.selected}} @onChange={{fn (mut this.selected)}} />`
+        <template><ModelSelect @modelName='user' @labelProperty='name' @allowClear={{true}} @selectedModel={{self.selected}} @onChange={{fn (mut self.selected)}} /></template>
     );
     assert
       .dom('.ember-power-select-selected-item')
@@ -237,7 +262,7 @@ module('Integration | Component | model-select', function (hooks) {
     defaultScenario(this.server);
 
     await render(
-      hbs`<ModelSelect @modelName="user" @labelProperty="name" as |model|>Test: {{model.name}}</ModelSelect>`
+        <template><ModelSelect @modelName="user" @labelProperty="name" as |model|>Test: {{model.name}}</ModelSelect></template>
     );
     await clickTrigger('.ember-model-select');
 

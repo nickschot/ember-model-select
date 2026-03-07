@@ -1,4 +1,4 @@
-<svg
+<template><svg
   class="ember-model-select__spinner"
   width="25"
   height="25"
@@ -8,4 +8,4 @@
 >
   <circle cx="19" cy="19" r="17" stroke-width="3.9px"/>
   <path d="M36,19c0,-9.388 -7.612,-17 -17,-17" stroke-width="3.9px"/>
-</svg>
+</svg></template>

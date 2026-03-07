@@ -116,7 +116,7 @@
   },
   "homepage": "https://nickschot.github.io/ember-model-select",
   "volta": {
-    "node": "16.20.2",
+    "node": "20.20.1",
     "pnpm": "8.13.1"
   }
 }

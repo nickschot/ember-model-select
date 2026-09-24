@@ -103,7 +103,8 @@
   },
   "resolutions": {
     "@embroider/macros": "1.13.4",
-    "@embroider/util": "1.12.1"
+    "@embroider/util": "1.12.1",
+    "broccoli-plugin@5": "^4.0.7"
   },
   "engines": {
     "node": ">= 20"

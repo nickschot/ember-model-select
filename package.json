@@ -106,7 +106,7 @@
     "@embroider/util": "1.12.1"
   },
   "engines": {
-    "node": "16.* || >= 18"
+    "node": ">= 20"
   },
   "ember": {
     "edition": "octane"
@@ -116,7 +116,7 @@
   },
   "homepage": "https://nickschot.github.io/ember-model-select",
   "volta": {
-    "node": "16.20.2",
+    "node": "20.20.2",
     "pnpm": "8.13.1"
   }
 }

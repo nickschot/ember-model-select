@@ -300,6 +300,10 @@ export default class ModelSelectComponent extends Component {
     let _options;
 
     if (this.infiniteScroll) {
+      if (this._selectedModel) {
+        this._options = null;
+      }
+
       // ember-infinity configuration
       query.perPage = this.pageSize;
 

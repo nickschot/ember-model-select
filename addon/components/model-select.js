@@ -5,7 +5,6 @@ import { isEmpty } from '@ember/utils';
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
-import { assign } from '@ember/polyfills';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
@@ -286,7 +285,7 @@ export default class ModelSelectComponent extends Component {
   @restartableTask
   *loadModels(term, createOption) {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
-    const query = assign({}, this.args.query);
+    const query = { ...this.args.query };
 
     if (term) {
       const searchProperty = this.searchProperty;

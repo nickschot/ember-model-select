@@ -98,9 +98,6 @@
     "stylelint-prettier": "^3.0.0",
     "webpack": "^5.89.0"
   },
-  "peerDependencies": {
-    "ember-source": "^3.28.0 || ^4.0.0"
-  },
   "resolutions": {
     "@embroider/macros": "1.13.4",
     "@embroider/util": "1.12.1",

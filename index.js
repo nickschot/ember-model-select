@@ -10,7 +10,11 @@ module.exports = {
 
       this._super.included.apply(this, arguments);
 
-      let hasSass = !!app.registry.availablePlugins['ember-cli-sass'];
+      // ember-cli 5 removed registry.availablePlugins; project.addonPackages
+      // lists the app's addons in every supported ember-cli version.
+      const addons =
+        app.project?.addonPackages || app.registry?.availablePlugins || {};
+      let hasSass = !!addons['ember-cli-sass'];
 
       // Don't include the precompiled css file if the user uses a supported CSS preprocessor
       if (!hasSass) {

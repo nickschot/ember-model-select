@@ -1,4 +1,6 @@
-@import "ember-power-select/variables";
+// Mirrors the ember-power-select default, which is no longer importable from
+// here since ember-power-select became a v2 addon (8.0+).
+$ember-power-select-trigger-default-border-radius: 4px !default;
 
 $power-select-search-input-height: calc(2.25rem + 2px) !default;
 $ember-model-select__spinner-color: #007bff !default;

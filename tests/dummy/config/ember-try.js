@@ -9,10 +9,20 @@ module.exports = async function () {
     scenarios: [
       {
         name: 'power-select-4',
+        env: {
+          // ember-basic-dropdown 3 (used by ember-power-select 4) can only find
+          // its test destination through the application template wrapper.
+          EMBER_OPTIONAL_FEATURES: JSON.stringify({
+            'application-template-wrapper': true,
+          }),
+        },
         npm: {
           devDependencies: {
             'ember-source': '~3.28.12',
             'ember-power-select': '^4.0.0',
+          },
+          ember: {
+            edition: 'classic',
           },
         },
       },
@@ -40,6 +50,38 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': '~3.28.12',
             'ember-power-select': '^7.0.0',
+          },
+        },
+      },
+      {
+        name: 'power-select-8.10',
+        npm: {
+          devDependencies: {
+            'ember-power-select': '~8.10.0',
+            'ember-basic-dropdown': '^8.0.0',
+            'ember-concurrency': '^4.0.0',
+          },
+        },
+      },
+      {
+        name: 'power-select-8',
+        npm: {
+          devDependencies: {
+            'ember-power-select': '^8.11.0',
+            'ember-basic-dropdown': '^8.9.0',
+            'ember-concurrency': '^4.0.4',
+          },
+        },
+      },
+      {
+        name: 'power-select-9',
+        npm: {
+          devDependencies: {
+            '@ember/test-helpers': '^5.0.0',
+            'ember-basic-dropdown': '^9.0.0',
+            'ember-concurrency': '^5.1.0',
+            'ember-power-select': '^9.0.0',
+            'ember-qunit': '^9.0.0',
           },
         },
       },

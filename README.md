@@ -13,9 +13,11 @@ Documentation
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.28 or above
+* Ember.js v3.28 or above (ember-power-select 9 requires v4.12 or above)
 * Ember CLI v3.28 or above
-* Node.js v16 or above
+* Node.js v20 or above
+* ember-power-select v4 up to and including v9
+* ember-concurrency v2.3 up to and including v5
 
 
 Installation
@@ -24,6 +26,28 @@ Installation
 ```
 ember install ember-model-select
 ```
+
+`ember-power-select`, `ember-concurrency` and `@glimmer/component` are peer
+dependencies, so make sure your app depends on versions that work together, e.g.:
+
+| ember-power-select | ember-basic-dropdown | ember-concurrency |
+| ------------------ | -------------------- | ----------------- |
+| 4.x – 7.x          | (included)           | 2.3+ or 3.x       |
+| 8.x                | 8.x                  | 4.x (5.x on 8.12+) |
+| 9.x                | 9.x                  | 5.1+              |
+
+ember-power-select 9 additionally requires `@glimmer/component` 2.x and
+`@ember/test-helpers` 5.x.
+
+### ember-power-select 8 and up
+
+ember-power-select 8+ and ember-basic-dropdown 8+ are v2 addons. Follow their
+installation guides; in short:
+
+- Render the dropdown wormhole in your application template:
+  `<BasicDropdownWormhole />`.
+- Import the ember-power-select styles yourself, and from ember-power-select 9
+  on, the ember-basic-dropdown styles as well.
 
 Related addons
 ------------------------------------------------------------------------------

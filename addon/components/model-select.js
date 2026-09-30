@@ -4,13 +4,13 @@ import { isEmpty } from '@ember/utils';
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { A } from '@ember/array';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
-import { timeout } from 'ember-concurrency';
-import { restartableTask, dropTask } from 'ember-concurrency';
+import { task, timeout } from 'ember-concurrency';
+import { waitForPromise } from '@ember/test-waiters';
 import getConfigOption from '../utils/get-config-option';
+import OptionsComponent from './model-select/options';
 
 /**
  * The main component.
@@ -201,10 +201,10 @@ export default class ModelSelectComponent extends Component {
    *
    * @argument optionsComponent
    * @type {Component}
-   * @default 'model-select/options'
+   * @default ModelSelect::Options
    */
   get optionsComponent() {
-    return this.args.optionsComponent || 'model-select/options';
+    return this.args.optionsComponent || OptionsComponent;
   }
 
   /**
@@ -215,7 +215,29 @@ export default class ModelSelectComponent extends Component {
    */
 
   @tracked _options;
+  @tracked _createOption;
   @tracked model;
+
+  /**
+   * The options passed to ember-power-select. ember-power-select 9 only accepts
+   * native arrays, so the (infinity) record array is converted here. Reading it
+   * through `toArray`/`slice` keeps it autotracked, so newly loaded pages show up.
+   *
+   * @property options
+   * @private
+   */
+  get options() {
+    const options = this._options;
+    let result = [];
+
+    if (Array.isArray(options)) {
+      result = options.slice();
+    } else if (options && typeof options.toArray === 'function') {
+      result = options.toArray();
+    }
+
+    return this._createOption ? [this._createOption, ...result] : result;
+  }
 
   // constructor() {
   //   super(...arguments);
@@ -250,40 +272,41 @@ export default class ModelSelectComponent extends Component {
     }
   }
 
-  @dropTask
-  *findRecord(modelName, id) {
-    // this wrapper task is requried to avoid the following error upon fast changes
-    // of selectedModel:
-    // Error: Assertion Failed: You attempted to remove a function listener which
-    // did not exist on the instance, which means you may have attempted to remove
-    // it before it was added.
-    return yield this.store.findRecord(modelName, id);
-  }
+  // this wrapper task is requried to avoid the following error upon fast changes
+  // of selectedModel:
+  // Error: Assertion Failed: You attempted to remove a function listener which
+  // did not exist on the instance, which means you may have attempted to remove
+  // it before it was added.
+  findRecord = task({ drop: true }, async (modelName, id) => {
+    return await waitForPromise(this.store.findRecord(modelName, id));
+  });
 
-  @restartableTask
-  *searchModels(term, options, initialLoad = false) {
-    let createOption;
+  searchModels = task(
+    { restartable: true },
+    async (term, options, initialLoad = false) => {
+      let createOption;
 
-    if (this.args.withCreate && term) {
-      createOption = {
-        __value__: term,
-        __isSuggestion__: true,
-      };
-      createOption[this.args.labelProperty] = this.args.buildSuggestion
-        ? this.args.buildSuggestion(term)
-        : `Add "${term}"...`;
-      this._options = A([createOption]);
+      if (this.args.withCreate && term) {
+        createOption = {
+          __value__: term,
+          __isSuggestion__: true,
+        };
+        createOption[this.args.labelProperty] = this.args.buildSuggestion
+          ? this.args.buildSuggestion(term)
+          : `Add "${term}"...`;
+        this._options = null;
+      }
+      this._createOption = createOption;
+
+      if (!initialLoad) {
+        await timeout(this.debounceDuration);
+      }
+
+      await this.loadModels.perform(term);
     }
+  );
 
-    if (!initialLoad) {
-      yield timeout(this.debounceDuration);
-    }
-
-    yield this.loadModels.perform(term, createOption);
-  }
-
-  @restartableTask
-  *loadModels(term, createOption) {
+  loadModels = task({ restartable: true }, async (term) => {
     // query might be an EmptyObject/{{hash}}, make it a normal Object
     const query = { ...this.args.query };
 
@@ -308,20 +331,18 @@ export default class ModelSelectComponent extends Component {
 
       this.model = this.infinity.model(this.args.modelName, query);
 
-      _options = yield this.model;
+      _options = await waitForPromise(this.model);
     } else {
       set(query, this.pageParam, 1);
       set(query, this.perPageParam, this.pageSize);
 
-      _options = yield this.source.query(this.args.modelName, query);
-    }
-
-    if (createOption) {
-      _options.unshiftObjects([createOption]);
+      _options = await waitForPromise(
+        this.source.query(this.args.modelName, query)
+      );
     }
 
     this._options = _options;
-  }
+  });
 
   loadDefaultOptions() {
     if (

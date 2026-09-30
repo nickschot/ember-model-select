@@ -33,16 +33,14 @@
     "prepare": "node ./compile-css.js"
   },
   "dependencies": {
-    "@ember/test-waiters": "^2.4.5",
-    "@glimmer/component": "^1.1.2",
+    "@ember/test-waiters": "^3.1.0 || ^4.0.0",
+    "@embroider/macros": "^1.16.0",
     "@glimmer/tracking": "^1.1.2",
     "ember-auto-import": "^2.13.1",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-htmlbars": "^6.3.0",
-    "ember-concurrency": "^2.3.7",
     "ember-get-config": "^2.1.1",
-    "ember-infinity": "^3.0.2",
-    "ember-power-select": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0"
+    "ember-infinity": "^3.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.21.3",
@@ -52,6 +50,7 @@
     "@ember/string": "^3.0.1",
     "@ember/test-helpers": "^2.9.4",
     "@embroider/test-setup": "^2.1.1",
+    "@glimmer/component": "^1.1.2",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.1",
     "ember-cli": "~4.12.0",
@@ -68,10 +67,12 @@
     "ember-cli-sass": "^11.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
+    "ember-concurrency": "^2.3.7",
     "ember-data": "~4.12.5",
     "ember-load-initializers": "^2.1.2",
     "ember-mirage-sauce": "^1.0.0",
     "ember-page-title": "^7.0.0",
+    "ember-power-select": "^7.2.0",
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^10.0.0",
     "ember-sinon": "^4.1.1",
@@ -98,9 +99,13 @@
     "stylelint-prettier": "^3.0.0",
     "webpack": "^5.89.0"
   },
+  "peerDependencies": {
+    "@glimmer/component": "^1.1.2 || ^2.0.0",
+    "ember-concurrency": "^2.3.0 || ^3.0.0 || ^4.0.0 || ^5.0.0",
+    "ember-power-select": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0"
+  },
   "resolutions": {
-    "@embroider/macros": "1.13.4",
-    "@embroider/util": "1.12.1",
+    "@embroider/macros": "1.21.1",
     "broccoli-plugin@5": "^4.0.7"
   },
   "engines": {

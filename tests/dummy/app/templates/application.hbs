@@ -1,4 +1,7 @@
 <div class="ember-view">
   <DocsHeader />
   {{outlet}}
+  {{#if this.renderWormhole}}
+    <div id="ember-basic-dropdown-wormhole"></div>
+  {{/if}}
 </div>

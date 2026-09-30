@@ -10,7 +10,7 @@ import {
   removeMultipleOption,
 } from 'ember-power-select/test-support';
 import { clickTrigger } from 'ember-power-select/test-support/helpers';
-import defaultScenario from '../../../../dummy/mirage/scenarios/default';
+import defaultScenario from 'dummy/mirage/scenarios/default';
 
 module('Integration | Component | model-select-multiple', function (hooks) {
   setupRenderingTest(hooks);

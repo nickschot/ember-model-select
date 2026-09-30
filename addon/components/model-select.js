@@ -9,6 +9,7 @@ import { tracked } from '@glimmer/tracking';
 
 import { task, timeout } from 'ember-concurrency';
 import { waitForPromise } from '@ember/test-waiters';
+import { ensureSafeComponent } from '@embroider/util';
 import getConfigOption from '../utils/get-config-option';
 import OptionsComponent from './model-select/options';
 
@@ -204,7 +205,10 @@ export default class ModelSelectComponent extends Component {
    * @default ModelSelect::Options
    */
   get optionsComponent() {
-    return this.args.optionsComponent || OptionsComponent;
+    return ensureSafeComponent(
+      this.args.optionsComponent || OptionsComponent,
+      this
+    );
   }
 
   /**

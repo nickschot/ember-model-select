@@ -8,6 +8,11 @@ overrides:
   '@embroider/macros': 1.21.1
   broccoli-plugin@5: ^4.0.7
 
+patchedDependencies:
+  ember-mirage-sauce@1.0.0:
+    hash: 75wcs6zvpzmvjsy5fckxd2b4je
+    path: patches/ember-mirage-sauce@1.0.0.patch
+
 dependencies:
   '@ember/test-waiters':
     specifier: ^3.1.0 || ^4.0.0
@@ -15,6 +20,9 @@ dependencies:
   '@embroider/macros':
     specifier: 1.21.1
     version: 1.21.1
+  '@embroider/util':
+    specifier: ^1.12.1
+    version: 1.12.1(ember-source@4.12.3)
   '@glimmer/tracking':
     specifier: ^1.1.2
     version: 1.1.2
@@ -54,8 +62,8 @@ devDependencies:
     specifier: ^2.9.4
     version: 2.9.4(@babel/core@7.23.7)(ember-source@4.12.3)
   '@embroider/test-setup':
-    specifier: ^2.1.1
-    version: 2.1.1
+    specifier: ^4.0.0
+    version: 4.0.0
   '@glimmer/component':
     specifier: ^1.1.2
     version: 1.1.2(@babel/core@7.23.7)
@@ -118,7 +126,7 @@ devDependencies:
     version: 2.1.2(@babel/core@7.23.7)
   ember-mirage-sauce:
     specifier: ^1.0.0
-    version: 1.0.0
+    version: 1.0.0(patch_hash=75wcs6zvpzmvjsy5fckxd2b4je)
   ember-page-title:
     specifier: ^7.0.0
     version: 7.0.0
@@ -173,6 +181,9 @@ devDependencies:
   loader.js:
     specifier: ^4.7.0
     version: 4.7.0
+  miragejs:
+    specifier: ^0.1.48
+    version: 0.1.48
   prettier:
     specifier: ^2.8.7
     version: 2.8.8
@@ -2019,9 +2030,20 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@embroider/test-setup@2.1.1:
-    resolution: {integrity: sha512-t81a2z2OEFAOZVbV7wkgiDuCyZ3ajD7J7J+keaTfNSRiXoQgeFFASEECYq1TCsH8m/R+xHMRiY59apF2FIeFhw==}
+  /@embroider/test-setup@4.0.0:
+    resolution: {integrity: sha512-1S3Ebk0CEh3XDqD93AWSwQZBCk+oGv03gtkaGgdgyXGIR7jrVyDgEnEuslN/hJ0cuU8TqhiXrzHMw7bJwIGhWw==}
     engines: {node: 12.* || 14.* || >= 16}
+    peerDependencies:
+      '@embroider/compat': ^3.4.8
+      '@embroider/core': ^3.4.8
+      '@embroider/webpack': ^4.0.0
+    peerDependenciesMeta:
+      '@embroider/compat':
+        optional: true
+      '@embroider/core':
+        optional: true
+      '@embroider/webpack':
+        optional: true
     dependencies:
       lodash: 4.17.21
       resolve: 1.22.8
@@ -2061,7 +2083,6 @@ packages:
       ember-source: 4.12.3(@babel/core@7.23.7)(@glimmer/component@1.1.2)(webpack@5.89.0)
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.56.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
@@ -7849,7 +7870,7 @@ packages:
       - supports-color
     dev: true
 
-  /ember-mirage-sauce@1.0.0:
+  /ember-mirage-sauce@1.0.0(patch_hash=75wcs6zvpzmvjsy5fckxd2b4je):
     resolution: {integrity: sha512-bPd//gxusZQhCLg8UoMsdaragil7GOHE7uvaEGwC30eO/TMCbsIvF2Z6z0i4E4jSkvlVIIEJjvIosnZDZ6TUGw==}
     engines: {node: 10.* || >= 12}
     dependencies:
@@ -7858,6 +7879,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+    patched: true
 
   /ember-modifier-manager-polyfill@1.2.0(@babel/core@7.23.7):
     resolution: {integrity: sha512-bnaKF1LLKMkBNeDoetvIJ4vhwRPKIIumWr6dbVuW6W6p4QV8ZiO+GdF8J7mxDNlog9CeL9Z/7wam4YS86G8BYA==}

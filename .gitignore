@@ -32,4 +32,5 @@
 /DEBUG/
 
 /.idea
+/.claude
 /vendor/ember-model-select.css

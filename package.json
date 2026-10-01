@@ -35,6 +35,7 @@
   "dependencies": {
     "@ember/test-waiters": "^3.1.0 || ^4.0.0",
     "@embroider/macros": "^1.16.0",
+    "@embroider/util": "^1.12.1",
     "@glimmer/tracking": "^1.1.2",
     "ember-auto-import": "^2.13.1",
     "ember-cli-babel": "^7.26.11",
@@ -49,8 +50,9 @@
     "@ember/optional-features": "^2.0.0",
     "@ember/string": "^3.0.1",
     "@ember/test-helpers": "^2.9.4",
-    "@embroider/test-setup": "^2.1.1",
+    "@embroider/test-setup": "^4.0.0",
     "@glimmer/component": "^1.1.2",
+    "babel-plugin-undeprecate-inject-from-at-ember-service": "^1.0.7",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.1",
     "ember-cli": "~4.12.0",
@@ -70,7 +72,7 @@
     "ember-concurrency": "^2.3.7",
     "ember-data": "~4.12.5",
     "ember-load-initializers": "^2.1.2",
-    "ember-mirage-sauce": "^1.0.0",
+    "ember-mirage-sauce": "1.0.1",
     "ember-page-title": "^7.0.0",
     "ember-power-select": "^7.2.0",
     "ember-qunit": "^5.1.5",
@@ -80,7 +82,7 @@
     "ember-source": "~4.12.0",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^5.7.2",
-    "ember-try": "^3.0.0",
+    "ember-try": "^4.0.0",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-ember": "^11.5.0",
@@ -89,6 +91,7 @@
     "eslint-plugin-qunit": "^7.3.4",
     "faker": "^5.1.0",
     "loader.js": "^4.7.0",
+    "miragejs": "^0.1.48",
     "prettier": "^2.8.7",
     "qunit": "^2.20.0",
     "qunit-dom": "^2.0.0",
@@ -121,5 +124,10 @@
   "volta": {
     "node": "20.20.2",
     "pnpm": "8.13.1"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "ember-mirage-sauce@1.0.1": "patches/ember-mirage-sauce@1.0.1.patch"
+    }
   }
 }

@@ -207,7 +207,8 @@ module('Integration | Component | model-select', function (hooks) {
 
     await click('.ember-power-select-clear-btn');
 
-    assert.strictEqual(this.selected, null, 'selected item has been cleared');
+    // ember-power-select 9 clears to `undefined` instead of `null`
+    assert.true(isEmpty(this.selected), 'selected item has been cleared');
   });
 
   test('it accepts an id passed to `selectedModel`', async function (assert) {

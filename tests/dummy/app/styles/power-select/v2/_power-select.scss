@@ -1,0 +1,4 @@
+// ember-power-select 8+ (v2 addon) ships its styles in the package itself and,
+// since 9.0, no longer includes the ember-basic-dropdown styles.
+@import "ember-basic-dropdown/ember-basic-dropdown";
+@import "ember-power-select/ember-power-select";

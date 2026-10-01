@@ -1,4 +1,10 @@
-@import "ember-power-select/variables";
+// Mirrors the ember-power-select default. Its variables live at a different path
+// per version (`ember-power-select/variables` through the app styles tree up to
+// 7.x, `ember-power-select/scss/variables` in the package from 8.0), and the
+// latter needs node_modules on the sass include path, so they can't be imported
+// here for every version. When the app imports the ember-power-select styles
+// first, their value takes precedence over this default.
+$ember-power-select-trigger-default-border-radius: 4px !default;
 
 $power-select-search-input-height: calc(2.25rem + 2px) !default;
 $ember-model-select__spinner-color: #007bff !default;

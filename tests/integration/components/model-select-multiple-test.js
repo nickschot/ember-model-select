@@ -4,11 +4,12 @@ import sinon from 'sinon';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { setupMirage } from 'ember-cli-mirage/test-support';
-import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import {
-  clickTrigger,
+  selectChoose,
+  selectSearch,
   removeMultipleOption,
-} from 'ember-power-select/test-support/helpers';
+} from 'ember-power-select/test-support';
+import { clickTrigger } from 'ember-power-select/test-support/helpers';
 import defaultScenario from '../../../../dummy/mirage/scenarios/default';
 
 module('Integration | Component | model-select-multiple', function (hooks) {

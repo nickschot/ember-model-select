@@ -9,9 +9,9 @@ overrides:
   broccoli-plugin@5: ^4.0.7
 
 patchedDependencies:
-  ember-mirage-sauce@1.0.0:
-    hash: 75wcs6zvpzmvjsy5fckxd2b4je
-    path: patches/ember-mirage-sauce@1.0.0.patch
+  ember-mirage-sauce@1.0.1:
+    hash: nvacz5nof7c32tgnedxjpjoueu
+    path: patches/ember-mirage-sauce@1.0.1.patch
 
 dependencies:
   '@ember/test-waiters':
@@ -128,8 +128,8 @@ devDependencies:
     specifier: ^2.1.2
     version: 2.1.2(@babel/core@7.23.7)
   ember-mirage-sauce:
-    specifier: ^1.0.0
-    version: 1.0.0(patch_hash=75wcs6zvpzmvjsy5fckxd2b4je)
+    specifier: 1.0.1
+    version: 1.0.1(patch_hash=nvacz5nof7c32tgnedxjpjoueu)
   ember-page-title:
     specifier: ^7.0.0
     version: 7.0.0
@@ -7893,8 +7893,8 @@ packages:
       - supports-color
     dev: true
 
-  /ember-mirage-sauce@1.0.0(patch_hash=75wcs6zvpzmvjsy5fckxd2b4je):
-    resolution: {integrity: sha512-bPd//gxusZQhCLg8UoMsdaragil7GOHE7uvaEGwC30eO/TMCbsIvF2Z6z0i4E4jSkvlVIIEJjvIosnZDZ6TUGw==}
+  /ember-mirage-sauce@1.0.1(patch_hash=nvacz5nof7c32tgnedxjpjoueu):
+    resolution: {integrity: sha512-B6jpt2vRWkP7to1cFR3ew+hvwcMQ52ZISe87Hx7YQgqR7bHcrC8NlI1pqoQrqwWw9bp0BMzot7J1798H7UTP/A==}
     engines: {node: 10.* || >= 12}
     dependencies:
       ember-cli-babel: 7.26.11

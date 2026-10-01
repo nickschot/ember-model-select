@@ -5,7 +5,7 @@ diff --git a/app/serializers/foo.js b/app/serializers/foo.js
 deleted file mode 100644
 index ff2bf99e7eb073b72f3a92e89c269e8c17537f1f..0000000000000000000000000000000000000000
 diff --git a/package.json b/package.json
-index 74c2737935a3348a1809eb674d228b5f3b6a3f33..59848e67d2a3095a701495a9fac0d5c9342506dd 100644
+index 2dbe0079e994471447169c805b44fcfdc9557d1b..6102d691bc7103aa44f4ac368b3e15b0cb679082 100644
 --- a/package.json
 +++ b/package.json
 @@ -29,6 +29,10 @@

@@ -72,7 +72,7 @@
     "ember-concurrency": "^2.3.7",
     "ember-data": "~4.12.5",
     "ember-load-initializers": "^2.1.2",
-    "ember-mirage-sauce": "^1.0.0",
+    "ember-mirage-sauce": "1.0.1",
     "ember-page-title": "^7.0.0",
     "ember-power-select": "^7.2.0",
     "ember-qunit": "^5.1.5",
@@ -127,7 +127,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "ember-mirage-sauce@1.0.0": "patches/ember-mirage-sauce@1.0.0.patch"
+      "ember-mirage-sauce@1.0.1": "patches/ember-mirage-sauce@1.0.1.patch"
     }
   }
 }

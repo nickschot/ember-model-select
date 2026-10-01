@@ -35,7 +35,7 @@
     @onOpen={{this.onOpen}}
     @options={{this.options}}
     @optionsComponent={{component
-      (ensure-safe-component this.optionsComponent)
+      this.optionsComponent
       infiniteScroll=this.infiniteScroll
       infiniteModel=this.model
       withCreate=this.withCreate}}

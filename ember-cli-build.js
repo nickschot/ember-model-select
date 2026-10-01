@@ -38,7 +38,6 @@ module.exports = function (defaults) {
     sassOptions: {
       includePaths: powerSelectStyles,
     },
-    ...undeprecateInjectOptions(),
   });
 
   /*
@@ -57,49 +56,3 @@ module.exports = function (defaults) {
     ],
   });
 };
-
-// Ember 7 removed `inject` from `@ember/service`, which ember-infinity still
-// uses. Following https://deprecations.emberjs.com/id/importing-inject-from-ember-service
-// we rewrite those imports to `service` in app code and in v2 addons (bundled
-// by ember-auto-import). `service` only exists from Ember 4.1, so this is only
-// enabled where it's needed.
-function undeprecateInjectOptions() {
-  const emberSourceDir = fs.realpathSync(
-    path.join(__dirname, 'node_modules', 'ember-source')
-  );
-  const emberMajor = parseInt(
-    JSON.parse(fs.readFileSync(path.join(emberSourceDir, 'package.json')))
-      .version,
-    10
-  );
-  if (emberMajor < 7) {
-    return {};
-  }
-
-  const plugin = require.resolve(
-    'babel-plugin-undeprecate-inject-from-at-ember-service'
-  );
-  return {
-    babel: {
-      plugins: [plugin],
-    },
-    autoImport: {
-      webpack: {
-        module: {
-          rules: [
-            {
-              test: (filename) =>
-                filename.endsWith('.js') &&
-                filename.includes('node_modules') &&
-                !filename.includes('/ember-source/'),
-              use: {
-                loader: 'babel-loader-8',
-                options: { plugins: [plugin] },
-              },
-            },
-          ],
-        },
-      },
-    },
-  };
-}

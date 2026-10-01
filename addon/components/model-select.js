@@ -3,18 +3,14 @@ import Component from '@glimmer/component';
 import { isEmpty } from '@ember/utils';
 // eslint-disable-next-line ember/no-computed-properties-in-native-classes
 import { computed, get, set } from '@ember/object';
-import * as emberService from '@ember/service';
+import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 import { task, timeout } from 'ember-concurrency';
 import { waitForPromise } from '@ember/test-waiters';
-import { ensureSafeComponent } from '@embroider/util';
 import getConfigOption from '../utils/get-config-option';
 import OptionsComponent from './model-select/options';
-
-// `service` was added in Ember 4.1 and `inject` was removed in Ember 7.
-const service = emberService.service ?? emberService.inject;
 
 /**
  * The main component.
@@ -208,10 +204,7 @@ export default class ModelSelectComponent extends Component {
    * @default ModelSelect::Options
    */
   get optionsComponent() {
-    return ensureSafeComponent(
-      this.args.optionsComponent || OptionsComponent,
-      this
-    );
+    return this.args.optionsComponent || OptionsComponent;
   }
 
   /**

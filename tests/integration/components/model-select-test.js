@@ -9,7 +9,7 @@ import {
   clickTrigger,
   typeInSearch,
 } from 'ember-power-select/test-support/helpers';
-import defaultScenario from '../../../../dummy/mirage/scenarios/default';
+import defaultScenario from 'dummy/mirage/scenarios/default';
 import { timeout } from 'ember-concurrency';
 import { isEmpty } from '@ember/utils';
 import { set } from '@ember/object';

@@ -77,7 +77,10 @@
   {{!-- @triggerClass="ember-power-select-multiple-trigger {{@triggerClass}}" --}}
   @triggerComponent={{if
     this.LegacyMultipleTrigger
-    (component (or @triggerComponent this.LegacyMultipleTrigger) tabindex=@tabindex)
+    (component
+      (ensure-safe-component (or @triggerComponent this.LegacyMultipleTrigger))
+      tabindex=@tabindex
+    )
     @triggerComponent
   }}
   @triggerId={{@triggerId}}

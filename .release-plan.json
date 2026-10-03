@@ -1,0 +1,34 @@
+{
+  "solution": {
+    "ember-model-select": {
+      "impact": "major",
+      "oldVersion": "1.0.0-beta.3",
+      "newVersion": "1.0.0",
+      "tagName": "latest",
+      "constraints": [
+        {
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
+        },
+        {
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :memo: Documentation"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
+        }
+      ],
+      "pkgJSONPath": "./package.json"
+    }
+  },
+  "description": "## Release (2026-10-03)\n\n* ember-model-select 1.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-model-select`\n  * [#132](https://github.com/nickschot/ember-model-select/pull/132) Support ember-power-select 8 and 9 ([@schot-bot](https://github.com/schot-bot))\n  * [#130](https://github.com/nickschot/ember-model-select/pull/130) Replace assign from @ember/polyfills with object spread ([@schot-bot](https://github.com/schot-bot))\n  * [#129](https://github.com/nickschot/ember-model-select/pull/129) Update to ember-infinity v3 & ember-auto-import v2 ([@nickschot](https://github.com/nickschot))\n  * [#120](https://github.com/nickschot/ember-model-select/pull/120) Drop node < 16 ([@nickschot](https://github.com/nickschot))\n  * [#119](https://github.com/nickschot/ember-model-select/pull/119) Drop ember < 3.28.0 ([@nickschot](https://github.com/nickschot))\n  * [#118](https://github.com/nickschot/ember-model-select/pull/118) Upgrade ember concurrency to v2 (also fixes CI etc.) ([@nickschot](https://github.com/nickschot))\n\n#### :rocket: Enhancement\n* `ember-model-select`\n  * [#136](https://github.com/nickschot/ember-model-select/pull/136) Fix the embroider and Ember 7 (release/beta/canary) ember-try scenarios - #133 ([@nickschot](https://github.com/nickschot))\n  * [#133](https://github.com/nickschot/ember-model-select/pull/133) Fix the embroider and Ember 7 (release/beta/canary) ember-try scenarios ([@schot-bot](https://github.com/schot-bot))\n  * [#132](https://github.com/nickschot/ember-model-select/pull/132) Support ember-power-select 8 and 9 ([@schot-bot](https://github.com/schot-bot))\n  * [#131](https://github.com/nickschot/ember-model-select/pull/131) Detect ember-cli-sass through project.addonPackages ([@schot-bot](https://github.com/schot-bot))\n  * [#121](https://github.com/nickschot/ember-model-select/pull/121) Support power-select v4, v5, v6 and v7 ([@nickschot](https://github.com/nickschot))\n\n#### :bug: Bug Fix\n* `ember-model-select`\n  * [#135](https://github.com/nickschot/ember-model-select/pull/135) Move @glimmer/tracking out of dependencies ([@nickschot](https://github.com/nickschot))\n\n#### :memo: Documentation\n* `ember-model-select`\n  * [#123](https://github.com/nickschot/ember-model-select/pull/123) Fix docs runtime error ([@nickschot](https://github.com/nickschot))\n\n#### :house: Internal\n* `ember-model-select`\n  * [#137](https://github.com/nickschot/ember-model-select/pull/137) Add release-plan setup ([@nickschot](https://github.com/nickschot))\n  * [#134](https://github.com/nickschot/ember-model-select/pull/134) Add .claude to .gitignore ([@nickschot](https://github.com/nickschot))\n  * [#122](https://github.com/nickschot/ember-model-select/pull/122) Update ember-data devdep to v4 ([@nickschot](https://github.com/nickschot))\n\n#### Committers: 2\n- Nick Schot ([@nickschot](https://github.com/nickschot))\n- [@schot-bot](https://github.com/schot-bot)\n"
+}

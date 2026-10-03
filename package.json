@@ -5,6 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
+  "homepage": "https://nickschot.github.io/ember-model-select",
   "repository": {
     "type": "git",
     "url": "https://github.com/nickschot/ember-model-select"
@@ -26,11 +27,15 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "prepare": "node ./compile-css.js",
     "start": "ember serve",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
-    "test:ember-compatibility": "ember try:each",
-    "prepare": "node ./compile-css.js"
+    "test:ember-compatibility": "ember try:each"
+  },
+  "resolutions": {
+    "@embroider/macros": "1.21.1",
+    "broccoli-plugin@5": "^4.0.7"
   },
   "dependencies": {
     "@ember/test-waiters": "^3.1.0 || ^4.0.0",
@@ -95,6 +100,7 @@
     "prettier": "^2.8.7",
     "qunit": "^2.20.0",
     "qunit-dom": "^2.0.0",
+    "release-plan": "^0.18.0",
     "sass": "^1.17.0",
     "stylelint": "^15.4.0",
     "stylelint-config-prettier": "^9.0.5",
@@ -107,20 +113,9 @@
     "ember-concurrency": "^2.3.0 || ^3.0.0 || ^4.0.0 || ^5.0.0",
     "ember-power-select": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0"
   },
-  "resolutions": {
-    "@embroider/macros": "1.21.1",
-    "broccoli-plugin@5": "^4.0.7"
-  },
   "engines": {
     "node": ">= 20"
   },
-  "ember": {
-    "edition": "octane"
-  },
-  "ember-addon": {
-    "configPath": "tests/dummy/config"
-  },
-  "homepage": "https://nickschot.github.io/ember-model-select",
   "volta": {
     "node": "20.20.2",
     "pnpm": "8.13.1"
@@ -129,5 +124,11 @@
     "patchedDependencies": {
       "ember-mirage-sauce@1.0.1": "patches/ember-mirage-sauce@1.0.1.patch"
     }
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "configPath": "tests/dummy/config"
   }
 }
